@@ -1,0 +1,48 @@
+<div class="d-flex justifiy-content-between">
+    <div class="col-sm-7" style="background-color: rgba(0, 133, 255, 0.05);height: 40rem;">
+        <div >
+            <!-- <img src="../../assets/Rectangle 1.png"> -->
+            
+            <div style="display: flex; justify-content: center;">
+                <img src="../../assets/Untitled-2 1.png">
+            </div>
+                
+        </div>
+    
+    </div>
+    <div class="col-sm-5">
+        <div class="formtext">
+                <form [formGroup]="loginform">
+                    <h1 class="cloudshare">CloudShare</h1>
+    
+                        <mat-form-field appearance="outline">      
+                            <input matInput placeholder="Username" formControlName="uname">
+                            <mat-icon matSuffix></mat-icon>
+                        </mat-form-field>
+                       
+                        
+                        <mat-form-field appearance="outline">     
+                            <input matInput placeholder="Password" type="password" formControlName="passwd">
+                            <mat-icon matSuffix></mat-icon>
+                        </mat-form-field>
+                 
+                        <mat-form-field appearance="outline">                
+                            <mat-select (click)="getroles" formControlName="mode">
+                                <mat-option *ngFor="let item of select" [value]="item.ID">
+                                    {{item.Role}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                  
+                   
+                    <div>
+                        <button mat-button type="submit" class="button" (click)="submit()">Login </button>
+                    </div>
+    
+                   
+                </form>
+    
+            </div>
+    </div>
+    
+    </div>
