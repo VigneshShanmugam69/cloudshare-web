@@ -35,7 +35,6 @@ export class DashboardComponent {
   //accounts
   buckets: any;
   name: any;
-  obj: any;
   objects: any[] = [];
   displayedColumns: string[] = ['position', 'name', 'format', 'datetime'];
 
@@ -51,7 +50,7 @@ export class DashboardComponent {
 
   // list the buckets
   account() {
-    this.auth.getbuckets().subscribe((res: any) => {
+    this.auth.getBuckets().subscribe((res: any) => {
       this.buckets = res;
     })
   }
@@ -59,7 +58,7 @@ export class DashboardComponent {
   // list the objects from the selecting bucket
   objectList(val: any) {
     let payload = { "Bucket": val }
-    this.auth.listobjects(payload).subscribe((res: any) => {
+    this.auth.listObjects(payload).subscribe((res: any) => {
       this.objects = res
     })
 

@@ -6,18 +6,16 @@ import { environment } from 'src/environments/environment.development';
 })
 
 export class AuthService {
-  listObjects(payload: { Bucket: any; }) {
-    throw new Error('Method not implemented.');
-  }
+
   readonly APIUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  getbuckets() {
+  getBuckets() {
     return this.http.get(this.APIUrl + 'listbuckets')
 
   }
 
-  listobjects(val: any) {
+  listObjects(val: any) {
     console.log(val)
     return this.http.post(this.APIUrl + 'getobjects', val)
   }
