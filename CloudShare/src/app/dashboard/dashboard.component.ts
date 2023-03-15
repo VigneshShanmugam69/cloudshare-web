@@ -1,7 +1,8 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AuthService } from './dashboard.service';
+import { environment } from 'src/environments/environment.development';
 
 interface propertiesnood {
   name: string;
@@ -35,31 +36,31 @@ export class DashboardComponent {
   buckets: any;
   name: any;
   obj: any;
-  dataSource1: any[] = [];
+  objects: any[] = [];
   displayedColumns: string[] = ['position', 'name', 'format', 'datetime'];
 
   treeControl = new NestedTreeControl<propertiesnood>(node => node.children);
   dataSource = new MatTreeNestedDataSource<propertiesnood>();
 
-  
+
   constructor(private auth: AuthService) {
     this.dataSource.data = TREE_DATA;
   }
 
   hasChild = (_: number, node: propertiesnood) => !!node.children && node.children.length > 0;
 
-
-  Account() {
+  // list the buckets
+  account() {
     this.auth.getbuckets().subscribe((res: any) => {
-      console.log("-->", res)
       this.buckets = res;
     })
   }
-  objectlist(val: any) {
-    let payload = {"Bucket":val}
+
+  // list the objects from the selecting bucket
+  objectList(val: any) {
+    let payload = { "Bucket": val }
     this.auth.listobjects(payload).subscribe((res: any) => {
-      console.log('----------',res)
-      this.dataSource1 = res
+      this.objects = res
     })
 
   }
