@@ -1,21 +1,21 @@
 <html>
 
-<body>
+<body class="background-color">
 
   <div class="topbar">
     <div class="top">
-      <button class="click" mat-button>Menu</button>
-      <button class="click" mat-button>Home</button>
-      <button class="click" mat-button>Edit</button>
-      <button class="click" mat-button>Automation</button>
-      <button class="click" mat-button>Help</button>
+      <button class="topbar-button" mat-button routerLink="/admindashboard">Menu</button>
+      <button class="topbar-button" mat-button>Home</button>
+      <button class="topbar-button" mat-button>Edit</button>
+      <button class="topbar-button" mat-button>Automation</button>
+      <button class="topbar-button" mat-button>Help</button>
     </div>
   </div>
   <div class="container">
     <div class="account">
       <!-- <div *ngFor="let item of items" class="example-item">{{item}}</div> -->
       <div class="top">
-        <button class="click1" mat-button (click)="Account()">Account-1</button>
+        <button class="bucketlist-button" mat-button (click)="account()">Account-1</button>
       </div>
 
     </div>
@@ -24,7 +24,7 @@
     <div class="bucketlist">
       <div *ngFor="let item of buckets" class="example-item">
         <ul>
-          <button class="click1" mat-button (click)="object()">
+          <button class="click1" (click)="objectList(item.Name)" mat-button>
             <li>{{item.Name}}</li>
           </button>
           <!-- <li>{{item.Name}}</li> -->
@@ -79,30 +79,30 @@
 
 
     <div class="tables">
-      <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+      <table mat-table [dataSource]="objects" class="mat-elevation-z8">
 
 
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{this.name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.no}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{this.name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.Key}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="format">
           <th mat-header-cell *matHeaderCellDef> format </th>
-          <td mat-cell *matCellDef="let element"> {{this.name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.Size}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="datetime">
           <th mat-header-cell *matHeaderCellDef> datetime </th>
-          <td mat-cell *matCellDef="let element"> {{this.name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.LastModified}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

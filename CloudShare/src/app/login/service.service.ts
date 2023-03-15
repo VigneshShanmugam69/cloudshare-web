@@ -1,5 +1,6 @@
 import { HttpClient,HttpClientModule  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class ServiceService {
   login(val: any){
     return this.http.post(this.APIUrl + 'verifyUser',val);
   }
-  roles(){
-    return this.http.get(this.APIUrl + 'getRole')
+  roles():Observable <any>{
+    let url = this.APIUrl +`getRole`
+    // return this.http.get(this.APIUrl + 'getRole')
+    return this.http.get(url)
+  
   }
 }
