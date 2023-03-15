@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{ServiceService} from '../service.service';
+import{ServiceService} from './service.service';
 import { Route, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  public select :any;
+  select :any[]=[];
   constructor(private shared:ServiceService ,private route:Router) { }
 
   ngOnInit(): void {
@@ -35,8 +35,11 @@ export class LoginComponent implements OnInit {
     if(res['IsVerified'] == true){
           
           this.loginform.reset();
-          this.route.navigate(['userdashboard'])
-          Swal.fire(res['message'])
+          Swal.fire(res['message']).then((result)=>{
+            this.route.navigate(['/userdashboard'])
+          })
+          
+          
           }
     else{
       Swal.fire(res['message'])
