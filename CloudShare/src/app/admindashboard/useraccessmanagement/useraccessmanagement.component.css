@@ -1,0 +1,231 @@
+.accountlists {
+    padding-left: 34px;
+    padding-top: 12px;
+
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 16px;
+    width: 100%;
+    height: 12%;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 37px rgba(200, 204, 212, 0.2);
+    color: #0085ff;
+}
+
+.profile {
+    flex: 1 1 auto;
+}
+
+.submit-button {
+    background-color: #0885ff;
+    border: none;
+    color: white;
+    padding: 7px 118px;
+    text-align: center;
+    margin-top: 439px;
+    margin-left: 70px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+
+.accounts {
+    overflow: auto;
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    left: 230px;
+    top: 110px;
+    border-radius: 6px 6px 0px 0px;
+    margin-top: -23px;
+    margin-left: 2px;
+
+    background: #ffffff;
+    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
+}
+
+.user-card {
+    overflow: auto;
+    position: absolute;
+    width: 424px;
+    height: 150px;
+    left: 442px;
+    top: 110px;
+    border-radius: 6px 6px 0px 0px;
+    margin-top: -23px;
+    margin-left: 2px;
+
+    background: #FfffFF;
+    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
+}
+
+.adduser-image {
+    margin-top: 37px;
+    margin-left: 46px;
+    height: 50px;
+    width: 50px;
+}
+
+.adduser-text {
+    position: absolute;
+    left: 37px;
+    top: 100px;
+}
+
+.updateuser-image {
+    margin-top: 37px;
+    margin-left: 81px;
+    height: 50px;
+    width: 50px;
+}
+
+.updateuser-text {
+    position: absolute;
+    left: 152px;
+    top: 100px;
+}
+
+.deleteuser-image {
+    margin-top: 37px;
+    margin-left: 78px;
+    height: 50px;
+    width: 50px;
+}
+
+.deleteuser-text {
+    position: absolute;
+    left: 292px;
+    top: 100px;
+}
+
+
+.adduserform {
+    overflow: auto;
+    position: absolute;
+    width: 424px;
+    height: 521px;
+    left: 882px;
+    top: 87px;
+    border-radius: 6px 6px 0px 0px;
+
+    background: #FfffFF;
+    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
+
+}
+
+.adduserfield {
+    position: absolute;
+    left: 70px;
+    top: 70px;
+
+
+}
+
+.mat-mdc-form-field {
+    --mat-mdc-form-field-floating-label-scale: 0.75;
+    flex-direction: column;
+    min-width: 30px;
+    text-align: left;
+    height: 65px;
+    width: 283px;
+    box-shadow: #0085FF;
+    color: #797878;
+
+
+}
+
+.adduser-title {
+    font-size: 30px;
+    font-weight: 550;
+    position: relative;
+    top: -30px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.mat-mdc-text-field-wrapper {
+    width: 100px;
+
+}
+
+.acountlist-button {
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+
+}
+
+.acountlist-button:hover {
+    color: #0085FF;
+}
+
+.tables {
+    border-radius: 4px;
+    position: absolute;
+    width: 635px;
+    height: 358px;
+    left: 233px;
+    top: 250px;
+    border-radius: 9px 9px 9px 9px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
+
+    scrollbar-width: light;
+    scrollbar-color: #0085ff;
+    overflow-y: scroll;
+}
+
+.example-viewport {
+    height: 10px;
+    width: 10px;
+    margin-left: 10px;
+
+}
+
+.example-item {
+    height: 10px;
+    margin-left: 28px;
+    margin-top: 22px;
+    font-size: small;
+}
+
+
+table {
+    width: 100%;
+    font-size: 12px;
+
+}
+
+.mdc-data-table_header-cell {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+}
+
+td,
+th {
+
+    border-color: #F1F1F3 !important;
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb {
+    width: 26px;
+    color: #0085FF;
+    border-radius: 13px;
+    background-clip: padding-box;
+    border: 10px solid transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 0 10px;
+}

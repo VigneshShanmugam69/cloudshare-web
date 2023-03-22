@@ -1,0 +1,25 @@
+<html>
+
+<Body class="background-color">
+
+    <mat-toolbar >
+        <div class="sidebar-opener" (click)="sidebarShow = !sidebarShow">
+            <mat-icon>menu </mat-icon>
+        </div>
+        <div class="sidebar-slider" [class.sidebar-slide-in]="sidebarShow">
+            <div class="sidebar-close" (click)="sidebarShow = !sidebarShow">
+                X
+            </div>
+            <div class="sidebar-content">
+                <button class="side-buttons" routerLink="/configuration">Configuration</button>
+                <br>
+                <button class="side-buttons"  routerLink="/useraccessmanagement">User access management</button> 
+                <br>
+                <button class="side-buttons" routerLink="/spacemanagement">Space management</button>
+                <br>
+                <button class="side-buttons" routerLink="/costmanagement" >Cost management</button>
+            </div>
+        </div>
+        <div class="profile"></div>
+        <mat-icon>account_circle </mat-icon>
+    </mat-toolbar> 
