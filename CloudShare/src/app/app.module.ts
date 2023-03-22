@@ -15,13 +15,25 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfigurationComponent } from './admindashboard/configuration/configuration.component';
+import { UseraccessmanagementComponent } from './admindashboard/useraccessmanagement/useraccessmanagement.component';
+import { SpacemanagementComponent } from './admindashboard/spacemanagement/spacemanagement.component';
+import { CostmanagementComponent } from './admindashboard/costmanagement/costmanagement.component';
+import { TopbarComponent } from './admindashboard/topbar/topbar.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    AdmindashboardComponent
+    AdmindashboardComponent,
+    ConfigurationComponent,
+    UseraccessmanagementComponent,
+    SpacemanagementComponent,
+    CostmanagementComponent,
+    TopbarComponent,
+    ChangepasswordComponent
   ],
   imports: [
     NgbModule,

@@ -1,5 +1,5 @@
 <div class="d-flex justifiy-content-between">
-    <div class="col-sm-7" style="background-color: rgba(0, 133, 255, 0.05);height: 40rem;">
+    <div class="col-sm-7" style="background-color: rgba(255, 255, 255, 0.05);height: 40rem;">
         <div>
             <!-- <img src="../../assets/Rectangle 1.png"> -->
 
@@ -26,15 +26,13 @@
                     <mat-icon matSuffix></mat-icon>
                 </mat-form-field>
 
-                <mat-form-field matInput appearance="outline">
-                    <mat-select matInput (click)="getroles" formControlName="mode">
+                <mat-form-field  appearance="outline">
+                    <mat-select matInput formControlName="mode" >
                         <mat-option *ngFor="let item of roles" [value]="item.ID">
                             {{item.Role}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-
-
                 <div>
                     <button mat-button type="submit" class="button" (click)="submit()">Login </button>
                 </div>

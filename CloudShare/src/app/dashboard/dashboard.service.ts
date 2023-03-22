@@ -20,4 +20,14 @@ export class AuthService {
     return this.http.post(this.APIUrl + 'getobjects', val)
   }
 
+  userLists() {
+    return this.http.get(this.APIUrl + 'listLocalUsers')
+
+  }
+
+  addUserFields(val:any){
+    return this.http.post(this.APIUrl + 'createLocalUser',val)
+  }
+
+
 }
