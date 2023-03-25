@@ -28,6 +28,10 @@ export class AuthService {
   addUserFields(val:any){
     return this.http.post(this.APIUrl + 'createLocalUser',val)
   }
+  resetNewPassword(val:any){
+    return this.http.put(this.APIUrl + 'resetPasswordByFirstLogin',val)
+  }
+
 
 
 }
