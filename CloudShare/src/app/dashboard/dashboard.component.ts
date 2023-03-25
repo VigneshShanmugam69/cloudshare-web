@@ -59,7 +59,7 @@ export class DashboardComponent {
   objectList(val: any) {
     let payload = { "Bucket": val }
     this.auth.listObjects(payload).subscribe((res: any) => {
-      this.objects = res
+      this.objects = res.Contents
     })
 
   }

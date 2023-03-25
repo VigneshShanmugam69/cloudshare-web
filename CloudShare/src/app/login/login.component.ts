@@ -3,6 +3,7 @@ import { ServiceService } from './service.service';
 import { Route, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { DatatransferService } from '../datatransfer.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   roles: any[] = [];
-  constructor(private shared: ServiceService, private route: Router) { }
+  constructor(private shared: ServiceService, private route: Router, private datatransfer:DatatransferService) { }
 
   ngOnInit(): void {
     this.getroles();
@@ -32,14 +33,19 @@ export class LoginComponent implements OnInit {
       }
 
       this.shared.login(payload).subscribe((res: any) => {
-        if (res['IsVerified'] == true) {
+        if (res['IsVerified'] == true && res.result['IsFirst'] == 1) {
+
+          this.loginform.reset();
+          this.datatransfer.sendUserDetails(res)
+          this.route.navigate(['/changepassword'])
+        }
+        else if (res['IsVerified'] == true && res.result['IsFirst'] == 0) {
 
           this.loginform.reset();
           Swal.fire(res['message']).then((result) => {
-            this.route.navigate(['/userdashboard'])
-          })
-
-
+            this.route.navigate(['/userdashboard']);
+          }
+          )
         }
         else {
           Swal.fire(res['message'])
