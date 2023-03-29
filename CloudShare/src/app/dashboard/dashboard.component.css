@@ -155,10 +155,10 @@ body {
 .example-tree .mat-nested-tree-node div[role=group] {
   padding-left: 20px;
 }
-
+/* 
 .example-tree div[role=group]>.mat-tree-node {
   padding-left: 40px;
-}
+} */
 
 .mat-tree-node {
   text-size-adjust: 12px;
@@ -235,4 +235,8 @@ table {
 td,
 th {
   border-color: #F1F1F3 !important;
+}
+.align{
+  overflow-y: auto;
+    white-space: nowrap;
 }

@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   listObjects(val: any) {
-    console.log(val)
+    //console.log(val)
     return this.http.post(this.APIUrl + 'getobjects', val)
   }
 
@@ -32,6 +32,21 @@ export class AuthService {
     return this.http.put(this.APIUrl + 'resetPasswordByFirstLogin',val)
   }
 
+  listOfProperties(val: any) {
+    console.log(val)
+    return this.http.post(this.APIUrl + 'properties', val)
+  }
+ tags(val: any) {
+  
+    return this.http.post(this.APIUrl + 'buckettags', val)
+  }
+ permission(val:any){
+    return this.http.post(this.APIUrl + 'bucketPermissions' ,val)
+  }
+  headers(val:any){
+    return this.http.post(this.APIUrl +'bucketHeaders',val)
+  }
+  
 
 
 }

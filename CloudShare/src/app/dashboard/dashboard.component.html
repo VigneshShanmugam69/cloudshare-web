@@ -20,7 +20,6 @@
 
     </div>
 
-
     <div class="bucketlist">
       <div *ngFor="let item of buckets" class="example-item">
         <ul>
@@ -36,9 +35,9 @@
     <div class="properties">
       <div class="property">
         <div>
-          <span style="color: #0085ff;">Properties </span>
+          <span style="color: #0085ff;"> </span>
         </div>
-        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+        <mat-tree *ngIf="enableTree" [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
             {{node.name}}
           </mat-tree-node>
@@ -51,14 +50,14 @@
               </button>
               {{node.name}}
             </div>
-            <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
+            <div class="align" [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
               <ng-container matTreeNodeOutlet></ng-container>
             </div>
           </mat-nested-tree-node>
           <div>
             <mat-checkbox color="primary"> primary theme</mat-checkbox>
             <br />
-            <mat-checkbox color="accent"> accent theme</mat-checkbox>
+            <mat-checkbox color="accent"> accent theme</mat-checkbox>āā
             <br />
             <mat-checkbox color="warn"> warn theme</mat-checkbox>
           </div>
