@@ -8,22 +8,47 @@ interface propertiesnood {
   name: string;
   children?: propertiesnood[];
 }
+
+interface propertiesnood1 {
+  name: string;
+  children?: any[];
+}
+
 let TREE_DATA: propertiesnood[] = [
   {
     name: 'Properties',
-    children: [{ name: `` }, { name: '' }, { name: '  ' }],
+    children: [{ name: `` }],
   },
   {
     name: 'Tags',
-    children: [{ name: `` }, { name: '' }, { name: '  ' }],
+    children: [{ name: `` }]
+    
   },
-  {
-    name: 'Permission',
-    children: [{ name: `` }, { name: '' }, { name: '  ' },{ name: '' },{ name: '' },],
-  },
+  
   {
     name: 'Headers',
-    children: [{ name: `` }, { name: '' }, { name: '  ' }, { name: '' }, { name: '  ' }],
+    children: [{ name: `` }],
+  },
+  {
+    name: 'permissions',
+    children: [
+      {
+        name: 'permission overview',
+        children: [{name: ''}, {name: ' '}],
+      },
+      {
+        name: 'objectownership',
+        children: [{name: ''}, {name: ''}],
+      },
+      {
+        name: 'Accesscontrollist',
+        children: [{name: ''}, {name: ''}],
+      },
+      {
+        name: 'cors',
+        children: [{name: ''}, {name: ''}],
+      },
+    ],
   },
 
 ];
@@ -67,73 +92,85 @@ export class DashboardComponent {
     let payload = { "Bucket": val }
     this.auth.listObjects(payload).subscribe((res: any) => {
       this.objects = res.Contents
-      console.log(this.objects)
-
+     
     })
-
-    console.log(payload);
-    this.enableTree = false;
-    this.auth.listOfProperties(payload).subscribe((res:any)=>{
+ //To list the properties in a Bucket
+      this.enableTree = false;
+      this.auth.listOfProperties(payload).subscribe((res:any)=>{
       this.properties = res.bucketName;
-     // console.log('property',res1);
-      //console.log('property1',this.properties);
-      
       var output = Object.entries(res).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
-console.log(output);
-      // console.log(output);
       TREE_DATA[0].children = output;
       this.dataSource.data = TREE_DATA;
       this.enableTree = true;
-  
-
-
-
-
-    this.enableTree = false;
-    this.auth.tags(payload).subscribe((res1:any)=>{
-      
-      // console.log('tags....',res1);
-      //console.log('property1',this.properties);
-      // this.tag = res1.TagSet;
-      // console.log(this.tag[0])
-      
+     
+     
+     //This for tags api integration
+      this.enableTree = false;
+     this.auth.tags(payload).subscribe((res1:any)=>{
       var out = Object.entries(res1.TagSet[0]).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
-
-      // console.log(out);
-      TREE_DATA[1].children = out;
+       TREE_DATA[1].children = out;
       this.dataSource.data = TREE_DATA;
       this.enableTree = true;
 
- //permission API
+ //this for headers API integration
 
       this.enableTree = false;
-      this.auth.permission(payload).subscribe((res:any)=>{
-        
-        // console.log('tags....',res1);
-        //console.log('property1',this.properties);
-        // this.tag = res1.TagSet;
-        // console.log(this.tag[0])
-        console.log('permission',res);
-        var out1 = Object.entries(res.result).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
-  
-         
+      this.auth.headers(payload).subscribe((res:any)=>{
+        var out1 = Object.entries(res.headers).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
         TREE_DATA[2].children = out1;
         this.dataSource.data = TREE_DATA;
         this.enableTree = true;
-      })
+     
 
-
-
+//permission  api integration
       this.enableTree = false;
-      this.auth.headers(payload).subscribe((response:any)=>{
-        console.log('headers',response);
-        var out2 = Object.entries(response.region).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
-        console.log('headersss',out2);
-         
-        TREE_DATA[3].children = out2;
-      })
-    })
- })       
-  }
+      this.auth.permissionOverView(payload).subscribe((response:any)=>{
+       
+        var out2 = Object.entries(response).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+        if(TREE_DATA[3].children){
+          TREE_DATA[3].children[0].children= out2;
+        }
+        this.dataSource.data=TREE_DATA
+        this.enableTree=true;
+        
+  //permission objectOwnership
+    
+      this.enableTree = false;
+      this.auth.objectOwnerShip(payload).subscribe((response:any)=>{
+       
+        var out2 = Object.entries(response).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
 
-}
+        if(TREE_DATA[3].children){
+          TREE_DATA[3].children[1].children= out2;
+        }
+        this.dataSource.data=TREE_DATA
+        this.enableTree=true;
+
+
+        this.enableTree = false;
+        this.auth.permission(payload).subscribe((response:any)=>{
+         
+          var out2 = Object.entries(response).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+  
+          if(TREE_DATA[3].children){
+            TREE_DATA[3].children[2].children= out2;
+          }
+          this.dataSource.data=TREE_DATA
+          this.enableTree=true;
+
+          this.enableTree = false;
+        this.auth.cors(payload).subscribe((response:any)=>{
+         
+          var out2 = Object.entries(response).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+  
+          if(TREE_DATA[3].children){
+            TREE_DATA[3].children[3].children= out2;
+          }
+          this.dataSource.data=TREE_DATA
+          this.enableTree=true;
+          
+        })
+          
+        })}) })})
+      }) })
+      }}
