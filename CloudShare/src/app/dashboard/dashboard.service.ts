@@ -46,7 +46,17 @@ export class AuthService {
   headers(val:any){
     return this.http.post(this.APIUrl +'bucketHeaders',val)
   }
-  
+  permissionOverView(val:any){
+
+    return this.http.post(this.APIUrl +'bucketPolicyStatus',val)
+  }
+  objectOwnerShip(val:any){
+    return this.http.post(this.APIUrl +'objectownership',val)
+  }
+  cors(val:any){
+    return this.http.post(this.APIUrl +'crossOrigin',val)
+  }
+
 
 
 }
