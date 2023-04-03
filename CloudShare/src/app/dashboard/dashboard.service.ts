@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
+import { Observable, observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +16,8 @@ export class AuthService {
 
   }
 
-  listObjects(val: any) {
-    //console.log(val)
+  listObjects(val: any): Observable<any> {
+    // console.log(val)
     return this.http.post(this.APIUrl + 'getobjects', val)
   }
 
@@ -25,26 +26,28 @@ export class AuthService {
 
   }
 
-  addUserFields(val:any){
-    return this.http.post(this.APIUrl + 'createLocalUser',val)
+  addUserFields(val: any) {
+    return this.http.post(this.APIUrl + 'createLocalUser', val)
   }
-  resetNewPassword(val:any){
-    return this.http.put(this.APIUrl + 'resetPasswordByFirstLogin',val)
+  resetNewPassword(val: any) {
+    return this.http.put(this.APIUrl + 'resetPasswordByFirstLogin', val)
+  }
+  folderObjects(val: any) {
+    return this.http.post(this.APIUrl + 'getfolderobjects', val)
   }
 
   listOfProperties(val: any) {
-    console.log(val)
     return this.http.post(this.APIUrl + 'properties', val)
   }
- tags(val: any) {
-  
+  tags(val: any) {
+
     return this.http.post(this.APIUrl + 'buckettags', val)
   }
- permission(val:any){
-    return this.http.post(this.APIUrl + 'bucketPermissions' ,val)
+  permission(val: any) {
+    return this.http.post(this.APIUrl + 'bucketPermissions', val)
   }
-  headers(val:any){
-    return this.http.post(this.APIUrl +'bucketHeaders',val)
+  headers(val: any) {
+    return this.http.post(this.APIUrl + 'bucketHeaders', val)
   }
   permissionOverView(val:any){
 

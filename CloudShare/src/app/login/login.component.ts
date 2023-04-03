@@ -11,7 +11,8 @@ import { DatatransferService } from '../datatransfer.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  
+  hide = true;
   roles: any[] = [];
   constructor(private shared: ServiceService, private route: Router, private datatransfer:DatatransferService) { }
 

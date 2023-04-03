@@ -1,46 +1,31 @@
-<div class="d-flex justifiy-content-between">
-    <div class="col-sm-7" style="background-color: rgba(255, 255, 255, 0.05);height: 40rem;">
-        <div>
-            <!-- <img src="../../assets/Rectangle 1.png"> -->
 
-            <div style="display: flex; justify-content: center;">
-                <img src="../../assets/loginpage_image.png">
+<body class="background-color">
+    <form class="loginform" [formGroup]="loginform">
+        <div  class="loginfield">
+            <div class="login-title">
+                <span>Log in</span>
             </div>
-
-        </div>
-
-    </div>
-    <div class="col-sm-5">
-        <div class="formtext">
-            <form [formGroup]="loginform">
-                <h1 class="cloudshare">CloudShare</h1>
-
+            <div>
                 <mat-form-field appearance="outline">
-                    <input matInput placeholder="Username" formControlName="uname">
-                    <mat-icon matSuffix></mat-icon>
+                    <mat-label>User name</mat-label>
+                    <input formControlName="uname" matInput placeholder="Enter your user name">
                 </mat-form-field>
-
-
+            </div>
+            <div>
                 <mat-form-field appearance="outline">
-                    <input matInput placeholder="Password" type="password" formControlName="passwd">
-                    <mat-icon matSuffix></mat-icon>
+                    <mat-label>Password </mat-label>
+                    <input formControlName="passwd" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
                 </mat-form-field>
-
-                <mat-form-field  appearance="outline">
-                    <mat-select matInput formControlName="mode" >
-                        <mat-option *ngFor="let item of roles" [value]="item.ID">
-                            {{item.Role}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <div>
-                    <button mat-button type="submit" class="button" (click)="submit()">Login </button>
-                </div>
-
-
-            </form>
-
+  
+                <select formControlName="mode" class="form-select" aria-label="Default select example">
+                <option selected>Select role</option>
+                <option value="1">user</option>
+                <option value="2">admin</option>
+              </select>
+            </div>
+            <div>
+                <button class="submit-button" (click)="submit()">submit</button>
+            </div>
         </div>
-    </div>
-
-</div>
+</form>
+</body>

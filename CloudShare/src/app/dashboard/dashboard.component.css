@@ -235,6 +235,7 @@ table {
 td,
 th {
   border-color: #F1F1F3 !important;
+  width: 10px!important;
 }
 .align{
   overflow-y: auto;
