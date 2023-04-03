@@ -88,7 +88,6 @@ export class DashboardComponent {
   account() {
     this.auth.getBuckets().subscribe((res: any) => {
       this.buckets = res;
-      console.log(this.buckets, "check")
     })
   }
 
@@ -97,19 +96,16 @@ export class DashboardComponent {
   objectList(val: any) {
     this.bucketname = val
     let payload = { "Bucket": val }
-    console.log(val)
     this.auth.listObjects(payload).subscribe((res: any) => {
       this.folders = res.CommonPrefixes
       this.objects = res.Contents
       this.objectlists = this.folders.concat(this.objects)
-      console.log(this.objectlists)
 
       //To list the properties in a Bucket
       this.enableTree = false;
       this.auth.listOfProperties(payload).subscribe((res: any) => {
         var output = Object.entries(res).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
         TREE_DATA[0].children = output;
-        console.log(output)
         this.propertiesinfo.data = TREE_DATA;
         this.enableTree = true;
 
@@ -117,7 +113,6 @@ export class DashboardComponent {
         //This for tags api integration
         this.enableTree = false;
         this.auth.tags(payload).subscribe((res1: any) => {
-          console.log('tages'+res1.TagSet[0])
           var out = Object.entries(res1.TagSet[0]).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
           TREE_DATA[1].children = out;
           this.propertiesinfo.data = TREE_DATA;
@@ -127,7 +122,6 @@ export class DashboardComponent {
 
           this.enableTree = false;
           this.auth.headers(payload).subscribe((res: any) => {
-            console.log('Headers'+res.Result)
             var out1 = Object.entries(res.Result[0]).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
             TREE_DATA[2].children = out1;
             this.propertiesinfo.data = TREE_DATA;
