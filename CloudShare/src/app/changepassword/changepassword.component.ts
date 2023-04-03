@@ -12,7 +12,8 @@ import { CustomValidators } from './confirmpasssword';
   styleUrls: ['./changepassword.component.css']
 })
 export class ChangepasswordComponent implements OnInit {
-
+  
+  hide = true;
   uname: string | undefined;
   constructor(private auth: AuthService, private datatransfer: DatatransferService, private route: Router) { }
 
