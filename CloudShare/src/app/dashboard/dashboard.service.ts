@@ -35,6 +35,17 @@ export class AuthService {
   folderObjects(val: any) {
     return this.http.post(this.APIUrl + 'getfolderobjects', val)
   }
+  getObjectTag(val: any) {
+    return this.http.post(this.APIUrl + 'getObjectTag', val)
+  }
+  objectheader(val: any) {
+    return this.http.post(this.APIUrl + 'getHeadObjects', val)
+  }
+  objectPermission(val: any) {
+    return this.http.post(this.APIUrl + 'getAccessControlList', val)
+  }
+
+
 
   listOfProperties(val: any) {
     return this.http.post(this.APIUrl + 'properties', val)
@@ -49,17 +60,17 @@ export class AuthService {
   headers(val: any) {
     return this.http.post(this.APIUrl + 'bucketHeaders', val)
   }
-  permissionOverView(val:any){
+  permissionOverView(val: any) {
 
-    return this.http.post(this.APIUrl +'bucketPolicyStatus',val)
+    return this.http.post(this.APIUrl + 'bucketPolicyStatus', val)
   }
-  objectOwnerShip(val:any){
-    return this.http.post(this.APIUrl +'objectownership',val)
+  objectOwnerShip(val: any) {
+    return this.http.post(this.APIUrl + 'objectownership', val)
   }
-  cors(val:any){
-    return this.http.post(this.APIUrl +'crossOrigin',val)
+  cors(val: any) {
+    return this.http.post(this.APIUrl + 'crossOrigin', val)
   }
-
-
-
+  getFolderProperties(val: any) {
+    return this.http.post(this.APIUrl + 'getfolderproperties', val)
+  }
 }
