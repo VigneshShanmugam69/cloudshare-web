@@ -34,6 +34,7 @@
 
     <div class="properties">
       <div class="property">
+        
         <div>
           <span style="color: #0085ff;"> </span>
         </div>
@@ -79,24 +80,23 @@
 
     <div class="tables">
       <div>
-        
-        <table mat-table [dataSource]="objectlists" [dataSource]="folderObjectlists" class="mat-elevation-z8">
+        <table mat-table [dataSource]="objectlists" [dataSource]="folderObjectlists"class="mat-elevation-z8">
 
           <ng-container matColumnDef="name">
-            <th  mat-header-cell *matHeaderCellDef> Name </th>
-            <td  mat-cell *matCellDef="let element" (click)="folderObjectslist(element.Prefix)"> {{element.Prefix}} {{element.Key}}</td>
+            <th   mat-header-cell *matHeaderCellDef> Name </th>
+            <td class="col-sm-2" mat-cell *matCellDef="let element" (click)="folderObjectslist(element.Prefix || element.Key)"> {{element.Prefix}} {{element.Key}}</td>
           </ng-container>
   
   
-          <ng-container matColumnDef="format">
-            <th mat-header-cell *matHeaderCellDef> format </th>
-            <td   mat-cell *matCellDef="let element"> {{element.Size}}  </td>
+          <ng-container matColumnDef="Size">
+            <th mat-header-cell *matHeaderCellDef> Size </th>
+            <td mat-cell *matCellDef="let element"> {{element.Size}}  </td>
           </ng-container>
   
   
           <ng-container matColumnDef="datetime">
             <th  mat-header-cell *matHeaderCellDef> datetime </th>
-            <td  mat-cell *matCellDef="let element"> {{element.LastModified}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.LastModified}} </td>
           </ng-container>
   
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
