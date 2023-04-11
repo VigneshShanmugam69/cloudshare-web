@@ -9,6 +9,14 @@ interface propertiesnood {
   children?: propertiesnood[];
 }
 
+export interface PeriodicElement {
+  Key: string;
+ 
+  value: string;
+}
+
+
+
 let TREE_DATA: propertiesnood[] = [
   {
     name: 'Properties',
@@ -76,6 +84,14 @@ export class DashboardComponent {
   folderorobjectname: any;
   Key: any;
   objectsname: any;
+  // dataSource1:any;
+
+  PropertiesdisplayedColumns: string[] = ['Key','value'];
+  dataSource:any[]=[];
+  property: any;
+  pro: any;
+  isLoading: boolean = false;
+  
 
 
   constructor(private auth: AuthService) {
@@ -102,9 +118,9 @@ export class DashboardComponent {
       this.objectlists = this.folders.concat(this.Objects)
 
 
-      //To list the properties in a Bucket
       this.enableTree = false;
       this.auth.listOfProperties(payload).subscribe((res: any) => {
+        console.log(res)
         var output = Object.entries(res).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
         TREE_DATA[0].children = output;
         this.propertiesinfo.data = TREE_DATA;
@@ -124,6 +140,7 @@ export class DashboardComponent {
           this.enableTree = false;
           this.auth.headers(payload).subscribe((res: any) => {
             var out1 = Object.entries(res.Result).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+            console.log("headers",out1)
             TREE_DATA[2].children = out1;
             this.propertiesinfo.data = TREE_DATA;
             this.enableTree = true;
@@ -184,9 +201,9 @@ export class DashboardComponent {
         })
       })
     })
-  }
 
 
+}
   //listing objects from the folder
   folderObjectslist(val: any) {
     this.foldername = val
@@ -243,6 +260,21 @@ export class DashboardComponent {
       })
     }
   }
+  propety() {
+    this.isLoading = true;
+    console.log(this.bucketname)
+    let payload = { "Bucket": this.bucketname }
+    this.auth.listOfProperties(payload).subscribe((res: any) => {
+      var out2 = Object.entries(res).map(([key, value]) => ({ key: String(key) + ': ' ,value: String(value) }));
+      console.log("key",out2)
+      this.pro = out2
+      this.dataSource=this.pro
+      this.isLoading = false;
+      console.log(res)
+      
+    })
+  }
+ 
 }
 
 
