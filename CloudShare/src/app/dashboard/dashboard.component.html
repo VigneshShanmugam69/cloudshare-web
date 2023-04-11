@@ -70,7 +70,7 @@
       <div class="sidebar">
         <div class="preview" >
        <!-- <button (click)="onSave()">Save</button> -->  
-       <button class="topbar-button" mat-button style="margin-right: 10px;" (click)="propety()"><b>properties</b></button>
+       <button class="topbar-button" mat-button  (click)="bucketproperties()"><b>properties</b></button>
        
        
         </div>
@@ -79,7 +79,7 @@
     <div class="spinner-border" role="status" *ngIf="isLoading">
       <span class="sr-only"></span>
     </div>
-    <div class="viewpanel1" *ngIf="!isLoading" style="overflow: auto;" >
+    <div class="viewpanels" *ngIf="!isLoading" style="overflow: auto;" >
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
 
         <!--- Note that these columns can be defined in any order.

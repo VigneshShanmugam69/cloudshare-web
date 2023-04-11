@@ -95,7 +95,7 @@
   background: #FFFFFF;
   box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
 }
-.viewpanel1{
+.viewpanels{
   position: absolute;
   width: 1347px;
   height: 180px;
@@ -320,4 +320,6 @@ table {
   margin-left: 10px;
 }
 
-
+.topbar-button{
+  margin-right: 10px
+}
