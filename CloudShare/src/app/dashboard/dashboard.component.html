@@ -3,7 +3,7 @@
 <body class="background-color">
 
   <div class="topbar">
-    <div class="top">
+    <div class="top" >
       <button class="topbar-button" mat-button routerLink="/admindashboard">Menu</button>
       <button class="topbar-button" mat-button>Home</button>
       <button class="topbar-button" mat-button>Edit</button>
@@ -15,7 +15,7 @@
     <div class="account">
       <!-- <div *ngFor="let item of items" class="example-item">{{item}}</div> -->
       <div class="top">
-        <button class="bucketlist-button" mat-button (click)="account()" >Account-1</button>
+        <button  class="topbar-button" mat-button (click)="account()">Account-1</button>
       </div>
 
     </div>
@@ -66,15 +66,42 @@
       </div>
     </div>
 
-    <div class="viewpanel">
+    <div class="viewpanel"  >
       <div class="sidebar">
-        <div class="preview">
-          <!-- <button (click)="properties()">Save</button>
-          <button class="click" mat-button>preview</button>
-          <button class="click" mat-button>action</button> -->
+        <div class="preview" >
+       <!-- <button (click)="onSave()">Save</button> -->  
+       <button class="topbar-button" mat-button  (click)="bucketproperties()"><b>properties</b></button>
+       
+       
         </div>
       </div>
+    </div>
+    <div class="spinner-border" role="status" *ngIf="isLoading">
+      <span class="sr-only"></span>
+    </div>
+    <div class="viewpanels" *ngIf="!isLoading" style="overflow: auto;" >
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
 
+        <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="Key">
+          <th mat-header-cell *matHeaderCellDef> Key </th>
+          <td class="mattab" mat-cell *matCellDef="let element"> {{element.key}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Values </th>
+          <td class="mattab" mat-cell *matCellDef="let element"> {{element.value}} </td>
+        </ng-container>
+
+
+
+        <tr class="mattab" mat-header-row *matHeaderRowDef="PropertiesdisplayedColumns"></tr>
+        <tr class="mattab" mat-row *matRowDef="let row; columns: PropertiesdisplayedColumns;"></tr>
+      </table>
     </div>
 
 
@@ -92,18 +119,18 @@
             <th mat-header-cell *matHeaderCellDef> Size </th>
             <td mat-cell *matCellDef="let element"> {{element.Size}}  </td>
           </ng-container>
-  
-  
+
+
           <ng-container matColumnDef="datetime">
             <th  mat-header-cell *matHeaderCellDef> datetime </th>
             <td mat-cell *matCellDef="let element"> {{element.LastModified}} </td>
           </ng-container>
-  
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
-   
+
     </div>
   </div>
 </body>
