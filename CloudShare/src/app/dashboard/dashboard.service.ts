@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Observable, observable } from 'rxjs';
 @Injectable({
@@ -22,7 +22,14 @@ export class AuthService {
   }
 
   userLists() {
-    return this.http.get(this.APIUrl + 'listLocalUsers')
+    var headers_object = new HttpHeaders({
+      'Content-Type': 'application/json',
+       'token': "Bearer "+ localStorage.getItem('token')
+    });
+    const httpOptions = {
+      headers: headers_object
+    };
+    return this.http.get(this.APIUrl + 'listLocalUsers',httpOptions)
 
   }
 

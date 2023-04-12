@@ -28,29 +28,38 @@ export class LoginComponent implements OnInit {
   submit() {
     if (this.loginform.valid) {
       let payload = {
-        Name: this.loginform.controls.uname.value,
+        Username: this.loginform.controls.uname.value,
         Password: this.loginform.controls.passwd.value,
         RoleID: this.loginform.controls.mode.value
       }
 
       this.shared.login(payload).subscribe((res: any) => {
-        if (res['IsVerified'] == true && res.result['IsFirst'] == 1) {
+if(res['status']==1){
+  localStorage.setItem('token',res['token']);
+  this.loginform.reset();
+  this.route.navigate(['/userdashboard']);
+}
+else {
+  Swal.fire(res['message'])
+}
 
-          this.loginform.reset();
-          this.datatransfer.sendUserDetails(res)
-          this.route.navigate(['/changepassword'])
-        }
-        else if (res['IsVerified'] == true && res.result['IsFirst'] == 0) {
+        // if (res['IsVerified'] == true && res.result['IsFirst'] == 1) {
 
-          this.loginform.reset();
-          Swal.fire(res['message']).then((result) => {
-            this.route.navigate(['/userdashboard']);
-          }
-          )
-        }
-        else {
-          Swal.fire(res['message'])
-        }
+        //   this.loginform.reset();
+        //   this.datatransfer.sendUserDetails(res)
+        //   this.route.navigate(['/changepassword'])
+        // }
+        // else if (res['IsVerified'] == true && res.result['IsFirst'] == 0) {
+
+        //   this.loginform.reset();
+        //   Swal.fire(res['message']).then((result) => {
+        //     this.route.navigate(['/userdashboard']);
+        //   }
+        //   )
+        // }
+        // else {
+        //   Swal.fire(res['message'])
+        // }
       })
     }
   }

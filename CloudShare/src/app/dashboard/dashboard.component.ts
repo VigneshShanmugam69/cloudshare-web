@@ -3,6 +3,8 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { Component } from '@angular/core';
 import { AuthService } from './dashboard.service';
 import { environment } from 'src/environments/environment.development';
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 interface propertiesnood {
   name: string;
@@ -97,14 +99,36 @@ export class DashboardComponent {
   constructor(private auth: AuthService) {
     this.propertiesinfo.data = TREE_DATA;
   }
+  // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  //   const token = localStorage.getItem('token'); // you probably want to store it in localStorage or something
+
+  //   if (!token) {
+  //     return next.handle(req);
+  //   }
+
+  //   const req1 = req.clone({
+  //     headers: req.headers.set('token', `Bearer ${token}`),
+  //   });
+
+  //   return next.handle(req1);
+  // }
 
   hasChild = (_: number, node: propertiesnood) => !!node.children && node.children.length > 0;
 
   // list the buckets
   account() {
+    // let payload={
+    //   token:'Bearer '+localStorage.getItem('token')
+    // }
+    // console.log(payload)
     this.auth.getBuckets().subscribe((res: any) => {
       this.buckets = res;
-    })
+      
+      })
+   
+    //   this.auth.userLists().subscribe((res:any)=>{
+    //     console.log(res);
+    // })
   }
 
 
