@@ -93,6 +93,7 @@ export class DashboardComponent {
   property: any;
   pro: any;
   isLoading: boolean = false;
+  res: any;
   
 
 
@@ -283,20 +284,57 @@ export class DashboardComponent {
       })
     }
   }
-  //To list out properties in a bucket
+
+ //To list out properties in a bucket
   bucketproperties() {
     this.isLoading = true;
     
     let payload = { "Bucket": this.bucketname }
     this.auth.listOfProperties(payload).subscribe((res: any) => {
-      var out2 = Object.entries(res).map(([key, value]) => ({ key: String(key) + ': ' ,value: String(value) }));
-      this.pro = out2
-      this.dataSource=this.pro
+      var result = Object.entries(res[0]).map(([key, value]) => ({ key: String(key) + ': ' ,value: String(value) }));
+      this.res = result
+      this.dataSource=this.res
       this.isLoading = false;
      
-      
-    })
+      })
   }
+
+  //To list the tags in abucket
+  buckettags() {
+    this.isLoading = true;
+    let payload = { "Bucket": this.bucketname }
+    this.auth.tags(payload).subscribe((res: any) => {
+      var result = Object.entries(res.Result[0] || res.TagSet[0]).map(([key, value]) => ({ key: String(key) + ': ' ,value: String(value) }));
+      this.res = result
+      this.dataSource=this.res
+      this.isLoading = false;
+      }) }
+
+//to list out the headers information in a buckets 
+      bucketheaders() {
+        this.isLoading = true;
+        let payload = { "Bucket": this.bucketname }
+        this.auth.headers(payload).subscribe((res: any) => {
+          var result = Object.entries(res.Result ).map(([key, value]) => ({ key: String(key) + ': ' ,value: String(value) }));
+          this.res = result
+          this.dataSource=this.res
+          this.isLoading = false;
+
+          
+        })
+      }
+      //To list the all permission in a bucket
+      bucketpermission() {
+        this.isLoading = true;
+        let payload = { "Bucket": this.bucketname }
+        this.auth.permission(payload).subscribe((res: any) => {
+          var result = Object.entries(res.Result).map(([key, value]) => ({ key: String(key) + ': ' ,value: String(value) }));
+          this.res = result
+          this.dataSource= this.res
+          this.isLoading = false;
+          
+        })
+      }
  
 }
 

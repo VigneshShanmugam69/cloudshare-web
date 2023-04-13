@@ -71,35 +71,30 @@
         <div class="preview" >
        <!-- <button (click)="onSave()">Save</button> -->  
        <button class="topbar-button" mat-button  (click)="bucketproperties()"><b>properties</b></button>
+       <button class="topbar-button" mat-button (click)=" buckettags()"><b>Tags</b></button>
+       <button class="topbar-button" mat-button (click)=" bucketheaders()"><b>Headers</b></button>
+       <button class="topbar-button" mat-button (click)=" bucketpermission()"><b>Permission</b></button>
        
        
         </div>
       </div>
     </div>
-    <div class="spinner-border" role="status" *ngIf="isLoading">
-      <span class="sr-only"></span>
-    </div>
-    <div class="viewpanels" *ngIf="!isLoading" style="overflow: auto;" >
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
-
-        <!--- Note that these columns can be defined in any order.
-      The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- Position Column -->
-        <ng-container matColumnDef="Key">
+   
+    <div class="viewpanels" style="overflow: auto;" >
+      <div class="spinner-border d-flex justify-content-center" role="status" *ngIf="isLoading" >
+        <span class="sr-only"></span>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!isLoading">
+        <ng-container matColumnDef="Key" >
           <th mat-header-cell *matHeaderCellDef> Key </th>
           <td class="mattab" mat-cell *matCellDef="let element"> {{element.key}} </td>
         </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="value">
+        <ng-container matColumnDef="value" >
           <th mat-header-cell *matHeaderCellDef> Values </th>
           <td class="mattab" mat-cell *matCellDef="let element"> {{element.value}} </td>
         </ng-container>
-
-
-
-        <tr class="mattab" mat-header-row *matHeaderRowDef="PropertiesdisplayedColumns"></tr>
+       
+        <tr class="mattab" mat-header-row *matHeaderRowDef="PropertiesdisplayedColumns"> </tr>
         <tr class="mattab" mat-row *matRowDef="let row; columns: PropertiesdisplayedColumns;"></tr>
       </table>
     </div>
