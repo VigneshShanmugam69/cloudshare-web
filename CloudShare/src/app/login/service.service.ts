@@ -10,7 +10,8 @@ export class ServiceService {
 
   constructor(private http:HttpClient) { }
   login(val: any){
-    return this.http.post(this.APIUrl + 'verifyUser',val);
+    // return this.http.post(this.APIUrl + 'verifyUser',val);
+    return this.http.post(this.APIUrl + 'auth',val);
   }
   roles():Observable <any>{
     let url = this.APIUrl +`getRole`
