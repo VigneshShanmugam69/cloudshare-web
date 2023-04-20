@@ -22,6 +22,12 @@ import { CostmanagementComponent } from './admindashboard/costmanagement/costman
 import { TopbarComponent } from './admindashboard/topbar/topbar.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
+
+const oktaConfig = {
+  issuer: 'https://dev-99932483.okta.com/oauth2/default',
+  clientId: '0oa8gaw5glpoV7Lu85d7',
+  redirectUri: window.location.origin + '/callback'
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,8 +56,9 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
     MatToolbarModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 // { provide: HTTP_INTERCEPTORS, useClass: DashboardComponent, multi: true }
+// { provide: OKTA_CONFIG, useValue: oktaConfig }

@@ -183,6 +183,12 @@
     scrollbar-color: #0085ff;
     overflow-y: scroll;
 }
+.userlist{white-space: nowrap;}
+.userlist:hover{
+    cursor: pointer;
+    color:#0085ff;
+    
+}
 
 .example-viewport {
     height: 10px;
@@ -210,12 +216,17 @@ table {
     border-bottom-style: solid;
 
 }
+.mdc-data-table{
+    white-space: nowrap;
+    background-color: #0085FF;
+    color: white;
+}
 
 td,
-th {
-
+th{  
     border-color: #F1F1F3 !important;
 }
+
 
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb {
