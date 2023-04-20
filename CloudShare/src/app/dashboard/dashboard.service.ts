@@ -30,7 +30,9 @@ export class AuthService {
       headers: headers_object
     };
     return this.http.get(this.APIUrl + 'listLocalUsers',httpOptions)
-
+  }
+  listUsers(){
+    return this.http.get(this.APIUrl + 'listUsers');
   }
 
   addUserFields(val: any) {

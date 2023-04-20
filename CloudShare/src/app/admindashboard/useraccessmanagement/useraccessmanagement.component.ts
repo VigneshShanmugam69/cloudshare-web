@@ -30,8 +30,8 @@ export class UseraccessmanagementComponent {
 
   //listing the user in admin
   userList() {
-    this.auth.userLists().subscribe((res: any) => {
-      this.userlist = res.users;
+    this.auth.listUsers().subscribe((res: any) => {
+      this.userlist = res;
     })
   }
 
