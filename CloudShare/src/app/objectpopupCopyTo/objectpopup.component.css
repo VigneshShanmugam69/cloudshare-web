@@ -1,0 +1,36 @@
+/* .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  } */
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.list:hover {
+  color: #0085FF;
+}
+
+.listbucket {
+
+  /* border-radius: 50px; */
+  background-color: whitesmoke;
+  color: black;
+
+}
+
+.card {
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+::ng-deep.mat-mdc-dialog-container, .mat-mdc-dialog-container .mdc-dialog__container, .mat-mdc-dialog-container .mdc-dialog__surface {
+  max-height: 415px !important;
+  min-height: 362px !important;
+  min-width: inherit;
+  max-width: inherit;
+}

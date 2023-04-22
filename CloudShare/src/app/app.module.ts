@@ -21,6 +21,9 @@ import { SpacemanagementComponent } from './admindashboard/spacemanagement/space
 import { CostmanagementComponent } from './admindashboard/costmanagement/costmanagement.component';
 import { TopbarComponent } from './admindashboard/topbar/topbar.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { AgGridModule } from 'ag-grid-angular';
+import {ObjectpopupComponent} from './objectpopupCopyTo/objectpopup.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
     SpacemanagementComponent,
     CostmanagementComponent,
     TopbarComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    ObjectpopupComponent
   ],
   imports: [
     NgbModule,
@@ -48,7 +52,10 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    AgGridModule
+      
   ],
   providers: [],
   bootstrap: [AppComponent]
