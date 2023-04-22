@@ -47,9 +47,9 @@ export class AuthService {
   getObjectTag(val: any) {
     return this.http.post(this.APIUrl + 'getObjectTag', val)
   }
-  objectheader(val: any) {
-    return this.http.post(this.APIUrl + 'getHeadObjects', val)
-  }
+  // objectheader(val: any) {
+  //   return this.http.post(this.APIUrl + 'getHeadObjects', val)
+  // }
   objectPermission(val: any) {
     return this.http.post(this.APIUrl + 'getAccessControlList', val)
   }
@@ -81,5 +81,8 @@ export class AuthService {
   }
   getFolderProperties(val: any) {
     return this.http.post(this.APIUrl + 'getfolderproperties', val)
+  }
+  copyObject(val: any) {
+    return this.http.post(this.APIUrl + 'copyobject', val)
   }
 }

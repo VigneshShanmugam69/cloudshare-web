@@ -323,3 +323,38 @@ table {
 .topbar-button{
   margin-right: 10px
 }
+
+.menu-row {
+  /* display: flex; */
+  flex-direction: row;
+}
+
+ .menu-column {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0px; 
+} 
+/* .icon{
+  display: flex;
+  flex-direction: column;
+  margin-right: 6px;
+  margin-left: -9px;
+}
+.content{
+  /* display: flex;
+  flex-direction: column; */
+  /* margin-right:20px;
+}
+
+.keyboard{
+  display: flex;
+  flex-direction: column;
+  margin-left: 42px;
+  margin-right: 15px;
+} */ 
+.row:hover{
+ 
+    background-color: #0085FF;
+    color: white;
+  
+}

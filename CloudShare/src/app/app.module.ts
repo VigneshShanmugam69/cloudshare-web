@@ -21,6 +21,9 @@ import { SpacemanagementComponent } from './admindashboard/spacemanagement/space
 import { CostmanagementComponent } from './admindashboard/costmanagement/costmanagement.component';
 import { TopbarComponent } from './admindashboard/topbar/topbar.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { AgGridModule } from 'ag-grid-angular';
+import {ObjectpopupComponent} from './objectpopupCopyTo/objectpopup.component';
 
 
 const oktaConfig = {
@@ -39,7 +42,8 @@ const oktaConfig = {
     SpacemanagementComponent,
     CostmanagementComponent,
     TopbarComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    ObjectpopupComponent
   ],
   imports: [
     NgbModule,
@@ -54,7 +58,10 @@ const oktaConfig = {
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    AgGridModule
+      
   ],
   providers: [ ],
   bootstrap: [AppComponent]
