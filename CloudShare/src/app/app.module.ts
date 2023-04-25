@@ -24,11 +24,15 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { MatMenuModule } from '@angular/material/menu';
 import { AgGridModule } from 'ag-grid-angular';
 import {ObjectpopupComponent} from './objectpopupCopyTo/objectpopup.component';
+import { OKTA_CONFIG,OktaAuthModule  } from '@okta/okta-angular';
 
 
 const oktaConfig = {
   issuer: 'https://dev-99932483.okta.com/oauth2/default',
-  clientId: '0oa8gaw5glpoV7Lu85d7',
+  clientId: '0oa96jm6l9Xbt6lmy5d7',
+  // redirectUri: 'http://localhost:4200/login/callback',
+  scopes: ['openid', 'profile'],
+  pkce: true,
   redirectUri: window.location.origin + '/callback'
 };
 @NgModule({
@@ -43,7 +47,8 @@ const oktaConfig = {
     CostmanagementComponent,
     TopbarComponent,
     ChangepasswordComponent,
-    ObjectpopupComponent
+    ObjectpopupComponent,
+    
   ],
   imports: [
     NgbModule,
@@ -60,10 +65,11 @@ const oktaConfig = {
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
-    AgGridModule
-      
+    AgGridModule,
+    OktaAuthModule
+    
   ],
-  providers: [ ],
+  providers: [ { provide: OKTA_CONFIG, useValue: oktaConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
