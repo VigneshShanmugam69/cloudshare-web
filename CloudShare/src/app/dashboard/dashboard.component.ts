@@ -9,6 +9,9 @@ import { Component, HostListener, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ObjectpopupComponent } from '../objectpopupCopyTo/objectpopup.component';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { OktaAuthService } from '@okta/okta-angular';
+import { Router } from '@angular/router';
+
 
 
 
@@ -109,7 +112,7 @@ export class DashboardComponent {
   tableObjects: any;
   rowValue: any;
 
-  constructor(private auth: AuthService, public dialog: MatDialog) {
+  constructor(private auth: AuthService, public dialog: MatDialog,private oktaAuth: OktaAuthService,private route: Router) {
     this.propertiesinfo.data = TREE_DATA;
   }
   // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -411,6 +414,13 @@ onCustomKeyDown(event: KeyboardEvent, row: any) {
 
   });
 
+}
+
+logout(){
+    window.sessionStorage.clear();
+    this.route.navigate(['']);
+   
+  // await this.oktaAuth.signOut()
 }
 }
 

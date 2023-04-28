@@ -25,6 +25,7 @@
     "@okta/okta-auth-js": "^7.2.0",
     "ag-grid-angular": "^29.2.0",
     "bootstrap": "^5.2.3",
+    "cors": "^2.8.5",
     "exif": "^0.6.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.4.8",

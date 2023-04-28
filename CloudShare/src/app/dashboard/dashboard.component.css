@@ -22,6 +22,16 @@
   background-color: #0085FF;
   color: white;
 }
+.logout-button {
+  border-radius: 50px;
+  background-color: 0085FF;
+  color: rgb(0, 0, 0);
+}
+
+.logout-button:hover {
+  background-color: #0085FF;
+  color: white;
+}
 
 .bucketlist-button {
   border-radius: 50px;

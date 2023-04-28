@@ -64,3 +64,17 @@
     font-size: 16px;
     border-radius: 6px;
 }
+
+.okta-sign-button {
+    background-color: #0885ff;
+    border: none;
+    color: white;
+    padding: 7px 80px;
+    text-align: center;
+    margin-top: 380px;
+    margin-left: 66px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+}

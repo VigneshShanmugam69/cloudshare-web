@@ -33,7 +33,7 @@ const oktaConfig = {
   // redirectUri: 'http://localhost:4200/login/callback',
   scopes: ['openid', 'profile'],
   pkce: true,
-  redirectUri: window.location.origin + '/callback'
+  redirectUri: window.location.origin + '/userdashboard'
 };
 @NgModule({
   declarations: [
