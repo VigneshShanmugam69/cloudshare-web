@@ -12,7 +12,7 @@ export class UseraccessmanagementComponent {
   ngOnInit(): void {
     this.userList();
   }
-  displayedColumns: string[] = ['ID', 'uname', 'email', 'role'];
+  displayedColumns: string[] = ['ID', 'uname', 'email', 'role','Action'];
   userlist: any;
   hideform: boolean = false;
   adduserform = new FormGroup({

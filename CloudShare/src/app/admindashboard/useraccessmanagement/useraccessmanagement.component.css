@@ -171,13 +171,12 @@
 .tables {
     border-radius: 4px;
     position: absolute;
-    width: 635px;
-    height: 358px;
+    width: auto;
+    height: 100%;
     left: 233px;
-    top: 250px;
-    border-radius: 9px 9px 9px 9px;
+    top: 13%;
     background: #FFFFFF;
-    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
+    
 
     scrollbar-width: light;
     scrollbar-color: #0085ff;
