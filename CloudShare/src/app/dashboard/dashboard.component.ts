@@ -112,7 +112,7 @@ export class DashboardComponent {
   tableObjects: any;
   rowValue: any;
 
-  constructor(private auth: AuthService, public dialog: MatDialog,private oktaAuth: OktaAuthService,private route: Router) {
+  constructor(private auth: AuthService, public dialog: MatDialog, private oktaAuth: OktaAuthService, private route: Router) {
     this.propertiesinfo.data = TREE_DATA;
   }
   // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -357,7 +357,7 @@ export class DashboardComponent {
 
   contextMenuPosition = { x: '0px', y: '0px' };
   onContextMenu(event: MouseEvent, row: any) {
-    
+
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -370,7 +370,7 @@ export class DashboardComponent {
   }
   // open the popup both right use (contextmenu) and left click (click)
 
-  
+
 
 
   copyto() {
@@ -381,47 +381,47 @@ export class DashboardComponent {
 
       width: '414px',
       height: '350px',
-      
+
 
       data: {
-      bucket: this.bucketname,
-      object: this.tableObjects
-    }
+        bucket: this.bucketname,
+        object: this.tableObjects
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
 
     });
-}
+  }
 
 
 
 
 
-@HostListener('document:keydown.control.shift.c', ['$event'])
-onCustomKeyDown(event: KeyboardEvent, row: any) {
-  this.tableObjects = this.rowValue;
+  @HostListener('document:keydown.control.shift.c', ['$event'])
+  onCustomKeyDown(event: KeyboardEvent, row: any) {
+    this.tableObjects = this.rowValue;
 
-  console.log("keyboard", this.tableObjects)
-  const dialog = this.dialog.open(ObjectpopupComponent, {
-    width: '414px',
-    height: '350px',
-    data: {
-      bucket: this.bucketname,
-      object: this.tableObjects
-    }
-  });
-  dialog.afterClosed().subscribe(result => {
+    console.log("keyboard", this.tableObjects)
+    const dialog = this.dialog.open(ObjectpopupComponent, {
+      width: '414px',
+      height: '350px',
+      data: {
+        bucket: this.bucketname,
+        object: this.tableObjects
+      }
+    });
+    dialog.afterClosed().subscribe(result => {
 
-  });
+    });
 
-}
+  }
 
-logout(){
+  logout() {
     window.sessionStorage.clear();
     this.route.navigate(['']);
-   
-  // await this.oktaAuth.signOut()
-}
+
+    // await this.oktaAuth.signOut()
+  }
 }
 
 
