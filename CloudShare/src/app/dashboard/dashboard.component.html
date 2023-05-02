@@ -16,13 +16,6 @@
 
 
   <div class="container">
-    <div>
-      <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6"></div>
-        <div class="col-md-3"></div>
-      </div>
-    </div>
     <div class="account">
       <!-- <div *ngFor="let item of items" class="example-item">{{item}}</div> -->
       <div class="top">
@@ -111,7 +104,7 @@
 
 
       <!-- <table mat-table [dataSource]="dataSources" class="mat-elevation-z8"> -->
-      <table *ngIf="hideTable1" mat-table [dataSource]="dataSources" class="mat-elevation-z8">
+      <table *ngIf="falseTable" mat-table [dataSource]="dataSources" class="mat-elevation-z8">
         <!-- Position Column -->
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef> Key </th>

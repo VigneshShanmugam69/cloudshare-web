@@ -125,7 +125,7 @@ export class DashboardComponent {
   pro: any;
   isLoading: boolean = false;
   hideTable: boolean = true;
-  hideTable1: boolean = false;
+  falseTable: boolean = false;
   //showBucket: boolean = false;
   res: any;
 
@@ -234,14 +234,14 @@ export class DashboardComponent {
       this.isLoading = false;
     });
     this.hideTable = true;
-    this.hideTable1 = false;
+    this.falseTable = false;
   }
 
   //To list the tags in abucket
   buckettags() {
     this.isLoading = true;
     this.hideTable = true;
-    this.hideTable1 = false;
+    this.falseTable = false;
     let payload = { Bucket: this.bucketname };
     this.auth.tags(payload).subscribe((res: any) => {
       var result = Object.entries(res.Result[0] || res.TagSet[0]).map(
@@ -273,7 +273,7 @@ export class DashboardComponent {
 
   onRowClick(row: any) {
     this.rowValue = row;
-    console.log('rowvalue', this.rowValue);
+
   }
   // open the popup both right use (contextmenu) and left click (click)
 
@@ -313,7 +313,7 @@ export class DashboardComponent {
   onCustomKeyDown(event: KeyboardEvent, row: any) {
     this.tableObjects = this.rowValue;
 
-    console.log('keyboard', this.tableObjects);
+   
     const dialog = this.dialog.open(ObjectpopupComponent, {
       width: '414px',
       height: '700px',
@@ -349,7 +349,7 @@ export class DashboardComponent {
   bucketheaders() {
     this.isLoading = true;
     this.hideTable = true;
-    this.hideTable1 = false;
+    this.falseTable = false;
     let payload = { Bucket: this.bucketname };
     this.auth.headers(payload).subscribe((res: any) => {
       var result = Object.entries(res.Result).map(([key, value]) => ({
@@ -365,7 +365,7 @@ export class DashboardComponent {
   bucketpermission() {
     this.isLoading = true;
     this.hideTable = true;
-    this.hideTable1 = false;
+    this.falseTable = false;
     let payload = { Bucket: this.bucketname };
     this.auth.permission(payload).subscribe((res: any) => {
       var result = Object.entries(res.Result).map(([key, value]) => ({
@@ -381,7 +381,7 @@ export class DashboardComponent {
   bucketstorages() {
     this.isLoading = true;
     this.hideTable = true;
-    this.hideTable1 = false;
+    this.falseTable = false;
     let payload = { Bucket: this.bucketname };
     this.auth.getstorage(payload).subscribe((res: any) => {
       var result = Object.entries(res).map(([key, value]) => ({
@@ -394,12 +394,11 @@ export class DashboardComponent {
     });
   }
   bucketmanagements() {
-    console.log('Hi');
     // this.isLoading = true;
     this.dataSource = [];
     // this.showBucket = true;
     this.hideTable = false;
-    this.hideTable1 = true;
+    this.falseTable = true;
 
     let payload = { Bucket: this.bucketname };
 
@@ -407,7 +406,7 @@ export class DashboardComponent {
       this.dataSource1 = res.bucketReplication;
       this.msgs = this.dataSource1;
       this.value = this.dataSource1.Message;
-      console.log('test', this.value);
+     
 
       this.isLoading = false;
     });
@@ -417,9 +416,7 @@ export class DashboardComponent {
     this.auth.bucketlifecyle(payload).subscribe((res: any) => {
       this.response1 = res.BucketLifecycle;
       this.val = res.BucketLifecycle.message;
-      console.log('val', this.response1);
-      this.msg = this.val;
-      console.log('msggg', this.msg);
+        this.msg = this.val;
       if (this.msg) {
         this.showMessage = false;
       } else {
@@ -440,7 +437,6 @@ export class DashboardComponent {
     });
   }
   openCityDialog(name: string) {
-    console.log(name);
     if (name == 'bucketReplication') {
       const dialogRef = this.dialog.open(this.cityDialog);
       this.bucketmanagements();
