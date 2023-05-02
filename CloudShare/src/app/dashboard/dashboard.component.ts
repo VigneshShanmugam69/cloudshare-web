@@ -362,7 +362,14 @@ export class DashboardComponent {
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.openMenu();
+    
   }
+
+  // menuClose() {
+  //   this.contextMenu!.closeMenu(); 
+  // }
+
+
   onRowClick(row: any) {
     this.rowValue = row;
     console.log("rowvalue", this.rowValue)
@@ -373,20 +380,23 @@ export class DashboardComponent {
 
 
 
-  copyto() {
+
+  copyto(action: string) {
     // event.preventDefault();
     this.tableObjects = this.rowValue;
-    console.log("tableObjects Key: ", this.tableObjects.Key);
+    this.contextMenu.closeMenu(); 
     const dialogRef = this.dialog.open(ObjectpopupComponent, {
 
       width: '414px',
-      height: '350px',
+      height:'700px',
 
 
       data: {
+        action: action,
         bucket: this.bucketname,
         object: this.tableObjects
       }
+
     });
     dialogRef.afterClosed().subscribe(result => {
 
@@ -397,19 +407,24 @@ export class DashboardComponent {
 
 
 
+
+
   @HostListener('document:keydown.control.shift.c', ['$event'])
+  @HostListener('document:keydown.control.shift.x', ['$event'])
   onCustomKeyDown(event: KeyboardEvent, row: any) {
     this.tableObjects = this.rowValue;
 
     console.log("keyboard", this.tableObjects)
     const dialog = this.dialog.open(ObjectpopupComponent, {
       width: '414px',
-      height: '350px',
+      height: '700px',
       data: {
         bucket: this.bucketname,
-        object: this.tableObjects
+        object: this.tableObjects,
       }
+
     });
+
     dialog.afterClosed().subscribe(result => {
 
     });

@@ -143,7 +143,7 @@
         </table>
 
         <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
-          [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+          [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu" >
         </div>
         <mat-menu #contextMenu="matMenu">
           <!-- <ng-template matMenuContent iet-item="item">
@@ -154,19 +154,23 @@
           </ng-template> -->
           <ng-container matMenuContent>
             <div class="menu-row">
+              <hr>
               <div class="menu-column">
-                <button (contextmenu)="copyto()" (click)="copyto()" mat-menu-item>
+                <button  (contextmenu)="copyto('copy')" (click)="copyto('copy')"  mat-menu-item>
                   <mat-icon class="icon">file_copy</mat-icon>
-                  <span class="content">Copyto..</span>
+                  <span class="content">Copy to...</span>
                   <span class="keyboard">Ctrl+Shift+C</span>
                 </button>
               </div>
-              <hr>
+             
               <div class="menu-column">
-                <button>
-                  <span>Move</span>
+                <button (contextmenu)="copyto('move')"(click)="copyto('move')" mat-menu-item>
+                  <mat-icon>move_to_inbox</mat-icon>
+                  <span>Move to...</span>
+                  <span>Ctrl+Shift+X</span>
                 </button>
               </div>
+              <hr>
               <!-- <div class="menu-column">
                 <button>
                   <span>Ctrl+Shift+C</span>

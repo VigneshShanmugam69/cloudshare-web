@@ -85,4 +85,7 @@ export class AuthService {
   copyObject(val: any) {
     return this.http.post(this.APIUrl + 'copyobject', val)
   }
+  moveObject(val: any) {
+    return this.http.post(this.APIUrl + 'moveObject',val)
+  }
 }
