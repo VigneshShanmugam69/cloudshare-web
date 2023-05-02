@@ -54,7 +54,10 @@ export class UseraccessmanagementComponent {
     })
 
   }
+adduser(){
+  // enableform=true;
 
+}
   //when click add user that time hide and show the form
   showForm() {
     this.hideform = true;

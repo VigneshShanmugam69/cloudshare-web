@@ -23,6 +23,13 @@
     flex: 1 1 auto;
 }
 
+.add-button{
+    background-color: #0885ff;
+    color: white;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+}
 .submit-button {
     background-color: #0885ff;
     border: none;
