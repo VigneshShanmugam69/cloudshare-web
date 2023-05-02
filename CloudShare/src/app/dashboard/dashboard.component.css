@@ -384,3 +384,38 @@ table {
   color: white;
 
 }
+.mattabs{
+
+  margin-left: 2035px;
+    margin-bottom: 593px;
+
+
+}
+/* .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
+  margin-left: 2035px;
+  margin-bottom: 593px;
+} */
+
+/* ::ng-deep.mat-mdc-dialog-container {
+  position: absolute !important;
+  
+  width: 20px ;
+}
+::ng-deep.mat-mdc-dialog-container .mdc-dialog__surface{
+  margin-left: 977px  !important;
+  height: 200px  !important;
+  margin-top: 480px  !important;
+  width: 73% !important;
+
+    margin-right: 161px
+}
+.pop{
+  font-family: 'Times New Roman', Times, serif;
+  font-style:initial;
+  text-align:justify;
+  text-decoration:wavy;
+  background-color: #ffffff;
+  border-radius: 50px;
+
+} */

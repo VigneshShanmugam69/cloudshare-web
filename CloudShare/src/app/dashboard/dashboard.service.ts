@@ -85,4 +85,17 @@ export class AuthService {
   copyObject(val: any) {
     return this.http.post(this.APIUrl + 'copyobject', val)
   }
+  getstorage(val: any) {
+    return this.http.post(this.APIUrl + 'storage', val)
+  }
+  bucketmanagement(val: any) {
+    return this.http.post(this.APIUrl + 'bucketreplication', val)
+  }
+  bucketlifecyle(val:any){
+    return this.http.post(this.APIUrl +'BucketLifecycle',val)
+  }
+  bucketinventroy(val:any){
+    return this.http.post(this.APIUrl+"BucketInventory",val)
+  }
+  
 }

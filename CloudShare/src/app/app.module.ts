@@ -26,6 +26,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import {ObjectpopupComponent} from './objectpopupCopyTo/objectpopup.component';
 import { OKTA_CONFIG,OktaAuthModule  } from '@okta/okta-angular';
 
+import { MatDialogModule } from '@angular/material/dialog'; 
 
 const oktaConfig = {
   issuer: 'https://dev-99932483.okta.com/oauth2/default',
@@ -66,8 +67,9 @@ const oktaConfig = {
     MatIconModule,
     MatMenuModule,
     AgGridModule,
-    OktaAuthModule
+    OktaAuthModule,
     
+    MatDialogModule
   ],
   providers: [ { provide: OKTA_CONFIG, useValue: oktaConfig }],
   bootstrap: [AppComponent]

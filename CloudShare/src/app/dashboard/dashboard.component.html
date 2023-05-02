@@ -1,7 +1,6 @@
 <html>
 
 <body class="background-color">
-
   <div class="topbar">
     <div class="top">
       <button class="topbar-button" mat-button routerLink="/admindashboard">Menu</button>
@@ -9,20 +8,28 @@
       <button class="topbar-button" mat-button>Edit</button>
       <button class="topbar-button" mat-button>Automation</button>
       <button class="topbar-button" mat-button>Help</button>
-
     </div>
     <div class="top">
       <button class="logout-button" mat-button (click)="logout()">Logout</button>
     </div>
   </div>
+
+
   <div class="container">
+    <div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
     <div class="account">
       <!-- <div *ngFor="let item of items" class="example-item">{{item}}</div> -->
       <div class="top">
         <button class="topbar-button" mat-button (click)="account()">Account-1</button>
       </div>
-
     </div>
+
 
     <div class="bucketlist">
       <div *ngFor="let item of buckets" class="example-item">
@@ -30,8 +37,6 @@
           <button class="bucketlist-button" (click)="objectList(item.Name)" mat-button>
             <li>{{item.Name}}</li>
           </button>
-
-
         </ul>
       </div>
     </div>
@@ -39,7 +44,6 @@
 
     <div class="properties">
       <div class="property">
-
         <div>
           <span style="color: #0085ff;"> </span>
         </div>
@@ -71,6 +75,7 @@
       </div>
     </div>
 
+
     <div class="viewpanel">
       <div class="sidebar">
         <div class="preview">
@@ -79,28 +84,48 @@
           <button class="topbar-button" mat-button (click)=" buckettags()"><b>Tags</b></button>
           <button class="topbar-button" mat-button (click)=" bucketheaders()"><b>Headers</b></button>
           <button class="topbar-button" mat-button (click)=" bucketpermission()"><b>Permission</b></button>
-
-
+          <button class="topbar-button" mat-button (click)=" bucketstorages()"><b>storage</b></button>
+          <button class="topbar-button" mat-button (click)=" bucketmanagements()"><b>Bucketmanagement</b></button>
         </div>
       </div>
     </div>
+
 
     <div class="viewpanels" style="overflow: auto;">
       <div class="spinner-border d-flex justify-content-center" role="status" *ngIf="isLoading">
         <span class="sr-only"></span>
       </div>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!isLoading">
+      <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!isLoading"> -->
+      <table *ngIf="hideTable && !isLoading" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="Key">
           <th mat-header-cell *matHeaderCellDef> Key </th>
           <td class="mattab" mat-cell *matCellDef="let element"> {{element.key}} </td>
         </ng-container>
         <ng-container matColumnDef="value">
           <th mat-header-cell *matHeaderCellDef> Values </th>
-          <td class="mattab" mat-cell *matCellDef="let element"> {{element.value}} </td>
+          <td class="mattab" mat-cell *matCellDef="let element">{{element.value}} </td>
         </ng-container>
-
         <tr class="mattab" mat-header-row *matHeaderRowDef="PropertiesdisplayedColumns"> </tr>
         <tr class="mattab" mat-row *matRowDef="let row; columns: PropertiesdisplayedColumns;"></tr>
+      </table>
+
+
+      <!-- <table mat-table [dataSource]="dataSources" class="mat-elevation-z8"> -->
+      <table *ngIf="hideTable1" mat-table [dataSource]="dataSources" class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> Key </th>
+          <td mat-cell *matCellDef="let element">{{element.position}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Values </th>
+          <td mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
+              (click)="openCityDialog(element.name)">Show</button></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
       </table>
     </div>
 
@@ -112,16 +137,13 @@
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td class="col-sm-2" mat-cell *matCellDef="let element"
-              (click)="folderObjectslist(element.Prefix || element.Key)">
-              {{element.Prefix}} {{element.Key}}</td>
+              (click)="folderObjectslist(element.Prefix || element.Key)"> {{element.Prefix}} {{element.Key}}</td>
           </ng-container>
-
 
           <ng-container matColumnDef="Size">
             <th mat-header-cell *matHeaderCellDef> Size </th>
             <td mat-cell *matCellDef="let element"> {{element.Size}} </td>
           </ng-container>
-
 
           <ng-container matColumnDef="datetime">
             <th mat-header-cell *matHeaderCellDef> datetime </th>
@@ -137,9 +159,6 @@
             (keydown)="onCustomKeyDown($event,row);onRowClick(row)">
             <!-- [ngClass]="{'disabled-button': status, 'enabled-button': !status}" -->
           </tr>
-
-
-
         </table>
 
         <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
@@ -175,16 +194,73 @@
               </div> -->
             </div>
           </ng-container>
-
         </mat-menu>
-
-
       </div>
-
     </div>
   </div>
 
+  <div class="popups">
+    <ng-template let-data #myCityDialog class="popup">
+      <ul *ngFor="let item of dataSource1" class="pop">
+        <ng-container *ngIf="showMessage">
+          <li>ReplicationRoles: {{item.ReplicationRoles}}</li>
+          <li>bucketreplicationID: {{item.bucketreplicationID}}</li>
+          <li>ReplicationPriority: {{item.ReplicationPriority}}</li>
+          <li>ReplicationPrefix: {{item.ReplicationPrefix}}</li>
+          <li>ReplicationStatus: {{item.ReplicationStatus}}</li>
+          <li>ReplicationDestinationBucket: {{item.ReplicationDestinationBucket}}</li>
+          <li>ReplicationDeleteMarkerReplicationstatus: {{item.ReplicationDeleteMarkerReplicationstatus}}</li>
+          <hr>
+        </ng-container>
+      </ul>
+      <li *ngIf="!showMessage">Message: {{value}}</li>
+      <div mat-dialog-actions>
+        <button class="topbar-button" mat-button mat-dialog-close>Close</button>
+      </div>
+    </ng-template>
+  </div>
+  <div class="popups">
+    <ng-template let-data #myCityDialog1 class="popups">
+      <ul *ngFor="let item of response1" class="pop">
+        <ng-container *ngIf="showMessage">
+          <li>BucketLifecycleID: {{item.BucketLifecycleID}}</li>
+          <li>BucketLifecyclePrefix: {{item.BucketLifecyclePrefix}}</li>
+          <li>BucketLifecycleStatus: {{item.BucketLifecycleStatus}}</li>
+          <li>BucketLifecycleTransitionsDays: {{item.BucketLifecycleTransitionsDays}}</li>
+          <li>BucketLifecycleStorageClass: {{item.BucketLifecycleStorageClass}}</li>
+          <li>NoncurrentVersionransitions: {{item.NoncurrentVersionransitions}}</li>
 
+
+          <hr>
+        </ng-container>
+      </ul>
+      <li *ngIf="!showMessage">Message: {{msg}}</li>
+      <div mat-dialog-actions>
+        <button class="topbar-button" mat-button mat-dialog-close>Close</button>
+      </div>
+    </ng-template>
+  </div>
+  <div class="popups">
+    <ng-template let-data #myCityDialog2 class="popups">
+
+      <ul *ngFor="let item of results" class="popss">
+        <ng-container *ngIf="showMessage">
+          <li>DestinationAccountID: {{item.DestinationAccountID}}</li>
+          <li>Bucket: {{item.Bucket}}</li>
+          <li>Format: {{item.Format}}</li>
+          <li>Prefix: {{item.Prefix}}</li>
+          <li>id: {{item.id}}</li>
+          <li>IncludedObjectVersions: {{item.IncludedObjectVersions}}</li>
+          <li>IsEnabled: {{item.IsEnabled}}</li>
+          <hr>
+        </ng-container>
+      </ul>
+      <li *ngIf="!showMessage">Message: {{message}}</li>
+      <div mat-dialog-actions>
+        <button class="topbar-button" mat-button mat-dialog-close>Close</button>
+      </div>
+    </ng-template>
+  </div>
 
 </body>
 
