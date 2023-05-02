@@ -4,6 +4,8 @@ import { Route, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DatatransferService } from '../datatransfer.service';
+import OktaAuth from '@okta/okta-auth-js';
+import { OktaAuthModule, OktaAuthService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-login',
@@ -11,20 +13,34 @@ import { DatatransferService } from '../datatransfer.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+  public isAuthenticated: boolean | undefined;
+
+ 
   hide = true;
   roles: any[] = [];
-  constructor(private shared: ServiceService, private route: Router, private datatransfer:DatatransferService) { }
+  constructor(private shared: ServiceService, private route: Router, private datatransfer:DatatransferService, private oktaAuth: OktaAuthService) {
+    this.oktaAuth.$authenticationState.subscribe(
+      (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
+    );
+   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.getroles();
+   
+    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
   }
+
   loginform = new FormGroup({
     uname: new FormControl("", [Validators.required]),
     passwd: new FormControl("", [Validators.required]),
     mode: new FormControl("", [Validators.required])
 
   })
+
+ async oktasign(){
+    await this.oktaAuth.signInWithRedirect();
+  }
+
   submit() {
     if (this.loginform.valid) {
       let payload = {
