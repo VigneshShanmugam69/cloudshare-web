@@ -384,7 +384,7 @@ export class DashboardComponent {
     const dialogRef = this.dialog.open(ObjectpopupComponent, {
 
       width: '414px',
-      height: '350px',
+      height:'500px',
 
 
       data: {
@@ -413,7 +413,7 @@ export class DashboardComponent {
     console.log("keyboard", this.tableObjects)
     const dialog = this.dialog.open(ObjectpopupComponent, {
       width: '414px',
-      height: '350px',
+      height: '700px',
       data: {
         bucket: this.bucketname,
         object: this.tableObjects,
