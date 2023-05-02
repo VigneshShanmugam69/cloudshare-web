@@ -98,4 +98,7 @@ export class AuthService {
     return this.http.post(this.APIUrl+"BucketInventory",val)
   }
   
+  moveObject(val: any) {
+    return this.http.post(this.APIUrl + 'moveObject',val)
+  }
 }
