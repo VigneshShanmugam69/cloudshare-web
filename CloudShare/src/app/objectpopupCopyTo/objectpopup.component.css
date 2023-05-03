@@ -9,28 +9,67 @@
   margin: 5px;
 }
 
-.list:hover {
-  color: #0085FF;
+.bucket:hover {
+  background-color: #0085FF;
+  color: white;
 }
 
 .listbucket {
 
   /* border-radius: 50px; */
   background-color: whitesmoke;
-  color: black;
+  color: rgb(0, 0, 0);
 
 }
 
 .card {
-  margin-left: 20px;
-  margin-right: 20px;
-  height: 300px;
+  margin-top: 15px;
+  margin-left: 13px;
+  margin-right: 9px;
+  height: 305px;
   overflow-y: auto;
   overflow-x: hidden;
+  /* scrollbar-width: light;
+  scrollbar-color: #0085ff;
+  overflow-y: scroll; */
 }
-::ng-deep.mat-mdc-dialog-container, .mat-mdc-dialog-container .mdc-dialog__container, .mat-mdc-dialog-container .mdc-dialog__surface {
+
+::ng-deep.mat-mdc-dialog-container,
+.mat-mdc-dialog-container .mdc-dialog__container,
+.mat-mdc-dialog-container .mdc-dialog__surface {
   max-height: 415px !important;
   min-height: 362px !important;
   min-width: inherit;
   max-width: inherit;
+}
+
+.cancle-button {
+  
+  margin-left:  337px;
+  border-radius:219px;
+  background-color: 0085FF;
+  color: rgb(0, 0, 0);
+}
+
+.cancle-button:hover {
+  
+  background-color: #0085FF;
+  color: white;
+  
+}
+
+.box{
+  width: 405px;
+  height: 21px;
+  border: 1px solid black;
+  padding: 5px;
+  margin-top: 21px;
+  margin-left: 6px;
+  padding-bottom: 19px;
+
+}
+
+.container {
+  width: 100%;
+  /* background-color: #0c0fda; */
 }

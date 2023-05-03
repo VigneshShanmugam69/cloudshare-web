@@ -1,16 +1,25 @@
 <div>
   <!-- field -->
-  <div> Bucket:{{destinationBucket}}</div>
+
+  <label class="box">
+    {{destinationBucket}}
+  </label>
+
   <!-- card -->
+  <div class="container">
   <div class="card">
-  <mat-card class="listbucket">
-  <mat-radio-group class="example-radio-group-lable" [(ngModel)]="destinationBucket">
-    <mat-radio-button class="example-radio-button" *ngFor="let item of buckets" [value]="item.Name">
-      {{item.Name}}
-    </mat-radio-button>
-  </mat-radio-group>
-</mat-card>
+    <mat-card class="listbucket">
+      <mat-radio-group class="example-radio-group-lable" [(ngModel)]="destinationBucket">
+        <mat-radio-button class="bucket" class="example-radio-button" *ngFor="let item of buckets" [value]="item.Name">
+          {{item.Name}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card>
+  </div>
 </div>
   <!-- button -->
-  <button [mat-dialog-close] (click)="objectCopy()" mat-button>OK</button>
+  <div>
+    <!-- <button [mat-dialog-close] (click)="objectCopy()" mat-button>OK</button> -->
+    <button class="cancle-button" [mat-dialog-close] mat-button>Cancel</button>
+  </div>
 </div>
