@@ -132,6 +132,10 @@ export class DashboardComponent {
   selectedRowIndex: any;
   tableObjects: any;
   rowValue: any;
+  folderPrefix: any;
+  folderObj: any;
+  objectLists: null | undefined;
+  filePath: any;
 
   dataSource1: any;
   response: any;
@@ -171,9 +175,10 @@ export class DashboardComponent {
   }
 
   // list the objects from the selecting bucket
-  objectList(val: any) {
-    this.bucketname = val;
-    let payload = { Bucket: val };
+  objectList(val: any) {  
+    this.foldername = [];
+    this.bucketname = val
+    let payload = { "Bucket": val }
     this.auth.listObjects(payload).subscribe((res: any) => {
       this.folders = res.commonPrefixes;
       this.Objects = res.objects;
@@ -182,38 +187,42 @@ export class DashboardComponent {
     
     });
   }
-
-  //listing objects from the folder
+  //listing objects from the folder 
   folderObjectslist(val: any) {
+    if (this.foldername && this.foldername !== val) {
+      // concatenate the previous folder name with the new folder name
+      val = `${this.foldername}${val}`;
+    }    
     this.foldername = val;
-    if (this.foldername.includes('/')) {
-      let payload = { Bucket: this.bucketname, folderPath: this.foldername };
-      this.auth.folderObjects(payload).subscribe((res: any) => {
-        this.folderObjectlists = res;
-
+    if (this.foldername.includes("/")) {   
+      let payload = { "Bucket": this.bucketname, "folderPath": this.foldername }    
+      this.auth.folderObjects(payload).subscribe((res: any) => {       
+        this.folderPrefix = res?.folderNames ?? [];
+        this.folderObj = res?.objects ?? []; 
+        this.objectlists = null;
+        this.objectlists = this.folderPrefix
+        this.objectlists = this.folderPrefix.concat(this.folderObj)   
+        
         //To list the properties in a object
-        this.enableTree = false;
-        this.auth.getFolderProperties(payload).subscribe((res: any) => {
-          var output = Object.entries(res).map(([key, value]) => ({
-            name: String(key) + ': ' + String(value),
-          }));
-          TREE_DATA[0].children = output;
-          this.propertiesinfo.data = TREE_DATA;
-          this.enableTree = true;
-        });
-      });
-    } else {
-      let payload = { Bucket: this.bucketname, Key: this.foldername };
+    //     this.enableTree = false;
+    //     this.auth.getFolderProperties(payload).subscribe((res: any) => {
+    //       var output = Object.entries(res).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+    //       TREE_DATA[0].children = output;
+    //       this.propertiesinfo.data = TREE_DATA;
+    //       this.enableTree = true;
+    //     })
+    //   })
+    // } else {
 
-      //To list the tags in a object
-      this.enableTree = false;
-      this.auth.getObjectTag(payload).subscribe((res1: any) => {
-        var out = Object.entries(res1).map(([key, value]) => ({
-          name: String(key) + ': ' + String(value),
-        }));
-        TREE_DATA[1].children = out;
-        this.propertiesinfo.data = TREE_DATA;
-        this.enableTree = true;
+      // let payload = { "Bucket": this.bucketname, "Key": this.foldername }
+
+      // //To list the tags in a object
+      // this.enableTree = false;
+      // this.auth.getObjectTag(payload).subscribe((res1: any) => {
+      //   var out = Object.entries(res1).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+      //   TREE_DATA[1].children = out;
+      //   this.propertiesinfo.data = TREE_DATA;
+      //   this.enableTree = true;
 
        });
     }
