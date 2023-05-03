@@ -100,6 +100,7 @@ export class DashboardComponent {
   enableTree = true;
   enableTreefolder: Boolean = true;
   showMessage: Boolean = false;
+  
   properties: any;
   Tags: any;
   tag: any;
@@ -394,9 +395,8 @@ export class DashboardComponent {
     });
   }
   bucketmanagements() {
-    // this.isLoading = true;
-    this.dataSource = [];
-    // this.showBucket = true;
+   
+  
     this.hideTable = false;
     this.falseTable = true;
 
@@ -404,10 +404,17 @@ export class DashboardComponent {
 
     this.auth.bucketmanagement(payload).subscribe((res: any) => {
       this.dataSource1 = res.bucketReplication;
+      
       this.msgs = this.dataSource1;
-      this.value = this.dataSource1.Message;
-     
 
+      this.value = this.dataSource1[0].Message;
+      console.log("value",this.value)
+     
+      if (this.value) {
+        this.showMessage = false;
+      } else {
+        this.showMessage = true;
+      }
       this.isLoading = false;
     });
   }
@@ -415,9 +422,9 @@ export class DashboardComponent {
     let payload = { Bucket: this.bucketname };
     this.auth.bucketlifecyle(payload).subscribe((res: any) => {
       this.response1 = res.BucketLifecycle;
-      this.val = res.BucketLifecycle.message;
-        this.msg = this.val;
-      if (this.msg) {
+      this.val = this.response1[0].message;
+        
+      if (this.val) {
         this.showMessage = false;
       } else {
         this.showMessage = true;
@@ -428,7 +435,8 @@ export class DashboardComponent {
     let payload = { Bucket: this.bucketname };
     this.auth.bucketinventroy(payload).subscribe((res: any) => {
       this.results = res.BucketInventory;
-      this.message = this.results?.['0'].Message;
+      this.message = this.results[0].Message;
+      console.log("buc",this.message)
       if (this.message) {
         this.showMessage = false;
       } else {

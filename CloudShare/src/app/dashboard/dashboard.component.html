@@ -114,8 +114,8 @@
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Values </th>
-          <td mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
-              (click)="openCityDialog(element.name)">Show</button></td>
+          <td mat-cell *matCellDef="let element"><span class="show"
+           type="button"   (click)="openCityDialog(element.name)">Show</span></td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
@@ -197,7 +197,9 @@
   </div>
 
   <div class="popups">
+    
     <ng-template let-data #myCityDialog class="popup">
+  
       <ul *ngFor="let item of dataSource1" class="pop">
         <ng-container *ngIf="showMessage">
           <li>ReplicationRoles: {{item.ReplicationRoles}}</li>
@@ -210,9 +212,9 @@
           <hr>
         </ng-container>
       </ul>
-      <li *ngIf="!showMessage">Message: {{value}}</li>
+      <li *ngIf="!showMessage"> Message: {{value}}</li>
       <div mat-dialog-actions>
-        <button class="topbar-button" mat-button mat-dialog-close>Close</button>
+        <button class="mat-buttons" mat-button mat-dialog-close>Close</button>
       </div>
     </ng-template>
   </div>
@@ -231,9 +233,9 @@
           <hr>
         </ng-container>
       </ul>
-      <li *ngIf="!showMessage">Message: {{msg}}</li>
+      <li *ngIf="!showMessage">Message: {{val}}</li>
       <div mat-dialog-actions>
-        <button class="topbar-button" mat-button mat-dialog-close>Close</button>
+        <button class="topbar-buttons" mat-button mat-dialog-close>Close</button>
       </div>
     </ng-template>
   </div>
@@ -254,7 +256,7 @@
       </ul>
       <li *ngIf="!showMessage">Message: {{message}}</li>
       <div mat-dialog-actions>
-        <button class="topbar-button" mat-button mat-dialog-close>Close</button>
+        <button class="topbar-buttons" mat-button mat-dialog-close>Close</button>
       </div>
     </ng-template>
   </div>
