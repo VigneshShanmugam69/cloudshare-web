@@ -22,98 +22,113 @@
 </div> -->
 
 <div>
-   
+
     <div class="tables">
-         <div> 
-        <button class="add-button" (click)="adduser()">Add</button>
-    </div>
-        <table mat-table [dataSource]="userlist" class="mat-elevation-z8">
+        <div class="add-btn-div">
+            <button class="add-button" (click)="adduser()">Add</button>
+        </div>
+        <div>
+            <table mat-table [dataSource]="userlist" class="mat-elevation-z8">
+                <ng-container matColumnDef="uname">
+                    <th mat-header-cell *matHeaderCellDef> Username </th>
+                    <td mat-cell *matCellDef="let element" (click)="showForm()" class="userlist"> {{element.firstname +'
+                        '+
+                        element.lastname}} </td>
+                </ng-container>
 
 
-            <ng-container matColumnDef="uname">
-                <th mat-header-cell *matHeaderCellDef> Username </th>
-                <td mat-cell *matCellDef="let element" (click)="showForm()" class="userlist"> {{element.firstname +' '+
-                    element.lastname}} </td>
-            </ng-container>
+                <ng-container matColumnDef="ID">
+                    <th mat-header-cell *matHeaderCellDef> UserID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
 
 
-            <ng-container matColumnDef="ID">
-                <th mat-header-cell *matHeaderCellDef> UserID </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email</th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
 
 
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef> Email</th>
-                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
+                <ng-container matColumnDef="role">
+                    <th mat-header-cell *matHeaderCellDef>Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                </ng-container>
 
-
-            <ng-container matColumnDef="role">
-                <th mat-header-cell *matHeaderCellDef>Status </th>
-                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="Action">
-                <th mat-header-cell *matHeaderCellDef>Action </th>
-                <td mat-cell *matCellDef="let element"><button mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
-                            <span>Delete</span>
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef>Action </th>
+                    <td mat-cell *matCellDef="let element"><button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
                         </button>
-                        <button mat-menu-item>
-                            <span>Update</span>
-                        </button>
-                    </mat-menu>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item>
+                                <span>Delete</span>
+                            </button>
+                            <button mat-menu-item>
+                                <span>Update</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-        </table>
+            </table>
+        </div>
+
 
     </div>
-    <!-- <form class="adduserform" [formGroup]="adduserform">
-        <div  *ngIf="hideform">
-            <div  class="adduserfield">
-                <div class="adduser-title">
-                    <span>Add user</span>
+    <div *ngIf="openPopup">
+        <form class="adduserform" [formGroup]="adduserform" #check>
+                <div class="adduserfield">
+                    <div class="adduser-title">
+                        <span>Add user</span>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>First name</mat-label>
+                            <input formControlName="fname" matInput placeholder="Enter your First name">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>last name</mat-label>
+                            <input formControlName="lname" matInput placeholder="Enter your Last name">
+                        </mat-form-field>
+                    </div>
+                    <div> <mat-form-field appearance="outline">
+                            <mat-label>User name</mat-label>
+                            <input formControlName="uname" matInput placeholder="Enter your User name">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email id</mat-label>
+                            <input formControlName="gmail" matInput placeholder="abc@gmail.com">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                         <select formControlName="type" class="form-select" aria-label="Default select example">
+                        <option selected>Select type</option>
+                        <option value="local">Local</option>
+                        <option value="directory">Directory</option>
+                    </select>
+                    </div>
+                   <div>
+                     <select formControlName="roles" class="form-select" aria-label="Default select example">
+                        <option selected>Select role</option>
+                        <option value="1">user</option>
+                        <option value="2">admin</option>
+                    </select>
+                   </div>
+                   
                 </div>
                 <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>First name</mat-label>
-                        <input formControlName="fname" matInput placeholder="Enter your First name">
-                    </mat-form-field>
+                    <button class="submit" (click)="addUser()">submit</button>
+                    <button class="submit" (click)="cancel()">cancel</button>
                 </div>
-                <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>last name</mat-label>
-                        <input formControlName="lname" matInput placeholder="Enter your Last name">
-                    </mat-form-field>
-                </div>
-                <div> <mat-form-field appearance="outline">
-                        <mat-label>User name</mat-label>
-                        <input formControlName="uname" matInput placeholder="Enter your User name">
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Email id</mat-label>
-                        <input formControlName="gmail" matInput placeholder="abc@gmail.com">
-                    </mat-form-field>
-                </div>
-                    <select formControlName="roles" class="form-select" aria-label="Default select example">
-                    <option selected>Select role</option>
-                    <option value="1">user</option>
-                    <option value="2">admin</option>
-                  </select>
-                </div>
-                <div>
-                    <button class="submit-button" (click)="addUser()">submit</button>
-                </div>
-            </div>
-    </form> -->
+
+        </form>
+    </div>
+
 
 </div>
