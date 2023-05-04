@@ -38,18 +38,27 @@
     border-radius: 6px;
     font-size: 16px;
 }
+.slt-opt{
+    margin-top: 10px;
+}
+.slt-opt-fld{
+    width: 282px;
+    border-radius: 4px;
+    height: 50px;
+}
 .submit {
     background-color: #0885ff;
     border: none;
     color: white;
     padding: 7px 45px;
     text-align: center;
-    margin-top: 439px;
-    margin-left: 70px;
+    margin-top: 500px;
+    margin-left: 25px;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    border-radius: 6px;
+    border-radius: 10px;
+    height: 45px;
 }
 
 
@@ -127,7 +136,7 @@
     overflow: auto;
     position: absolute;
     width: 424px;
-    height: 521px;
+    height: 550px;
     top: 15%;
     left: 40%;
 
@@ -158,7 +167,10 @@
 
 
 }
-
+.add-btn{  
+    display: flex;
+    justify-content: center;
+}
 .adduser-title {
     font-size: 30px;
     font-weight: 550;

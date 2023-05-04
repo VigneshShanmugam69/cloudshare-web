@@ -106,15 +106,15 @@
                             <input formControlName="gmail" matInput placeholder="abc@gmail.com">
                         </mat-form-field>
                     </div>
-                    <div>
-                         <select formControlName="type" class="form-select" aria-label="Default select example">
+                    <div class="slt-opt">
+                         <select formControlName="type" class="slt-opt-fld" aria-label="Default select example">
                         <option selected>Select type</option>
                         <option value="local">Local</option>
                         <option value="directory">Directory</option>
                     </select>
                     </div>
-                   <div>
-                     <select formControlName="roles" class="form-select" aria-label="Default select example">
+                   <div class="slt-opt">
+                     <select formControlName="roles" class="slt-opt-fld" aria-label="Default select example">
                         <option selected>Select role</option>
                         <option value="1">user</option>
                         <option value="2">admin</option>
@@ -122,7 +122,7 @@
                    </div>
                    
                 </div>
-                <div>
+                <div class="add-btn">
                     <button class="submit" (click)="addUser()">submit</button>
                     <button class="submit" (click)="cancel()">cancel</button>
                 </div>
