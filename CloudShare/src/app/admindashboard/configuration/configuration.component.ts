@@ -23,7 +23,7 @@ export class ConfigurationComponent {
       metadata:this.configureurl.controls.metadata.value,
       embed:this.configureurl.controls.embed.value,
     }
-    console.log(payload)
+    // console.log(payload)
   }
 
 }
