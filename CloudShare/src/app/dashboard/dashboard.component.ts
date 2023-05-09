@@ -284,6 +284,7 @@ export class DashboardComponent {
     this.rowValue = row;
 
   }
+  
   // open the popup both right use (contextmenu) and left click (click)
 
 
@@ -293,22 +294,24 @@ export class DashboardComponent {
   copyto(action: string) {
     // event.preventDefault();
     this.tableObjects = this.rowValue;
+    console.log(this.rowValue);
     this.contextMenu.closeMenu(); 
-    const dialogRef = this.dialog.open(ObjectpopupComponent, {
-      width: '414px',
-      height:'700px',
+    
+    this. dialogRef = this.dialog.open(ObjectpopupComponent, {
+      width: '420px',
+      // height: '700px',
 
       data: {
         action: action,
         bucket: this.bucketname,
         object: this.tableObjects
       }
-
     });
-    dialogRef.afterClosed().subscribe(result => {
 
-    });
-    dialogRef.afterClosed().subscribe((result) => {});
+  //  this. dialogRef.afterClosed().subscribe(result => {
+
+  //   });
+    // dialogRef.afterClosed().subscribe((result) => {});
   }
 
 
