@@ -1,25 +1,87 @@
+<!-- <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="toolbar-item-spacer"></span>
+    <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+        <button mat-menu-item routerLink="#">
+            <mat-icon>person</mat-icon><span>My Account</span>
+        </button>
+        <button mat-menu-item routerLink="#">
+            <mat-icon>settings</mat-icon><span>Settings</span>
+        </button>
+        <button mat-menu-item routerLink="#">
+            <mat-icon>help</mat-icon><span>Help</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="#">
+            <mat-icon>exit_to_app</mat-icon>Logout
+        </button>
+    </mat-menu>
+</mat-toolbar>
+
+    <mat-sidenav #sidenav mode="side" [class.mat-elevation-z4]="true" class="app-sidenav">
+        <mat-nav-list>
+            <mat-expansion-panel [class.mat-elevation-z0]="true">
+                <mat-expansion-panel-header>
+                    useraccessmanagement
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="/useraccessmanagement">
+                       <span> Local</span>
+                    </a>
+                    <a mat-list-item routerLink="/useraccessmanagement">
+                        <span>Directory</span>
+                    </a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+        </mat-nav-list>
+    </mat-sidenav>
+ -->
 
 
 
 
     <mat-toolbar >
-        <div class="sidebar-opener" (click)="sidebarShow = !sidebarShow">
+        <div class="sidebar-opener" (click)="sidenav.toggle()" matTooltip="Menu">
             <mat-icon>menu </mat-icon>
         </div>
-        <div class="sidebar-slider" [class.sidebar-slide-in]="sidebarShow">
-            <div class="sidebar-close" (click)="sidebarShow = !sidebarShow">
+        <!-- <div class="sidebar-slider" [class.sidebar-slide-in]="sidebarShow"> -->
+            <!-- <div class="sidebar-close" (click)="sidebarShow = !sidebarShow">
                 X
-            </div>
-            <div class="sidebar-content">
-                <button class="side-buttons" routerLink="/configuration">Configuration</button>
+            </div> -->
+            <div class="side-nav">
+                <mat-sidenav #sidenav mode="side" [class.mat-elevation-z4]="true" class="app-sidenav">
+                    <mat-nav-list>
+                        <mat-expansion-panel [class.mat-elevation-z0]="true">
+                            <mat-expansion-panel-header>
+                                UserAccessManagement
+                            </mat-expansion-panel-header>
+                            <mat-nav-list>
+                                <a mat-list-item routerLink="/useraccessmanagement">
+                                   <span>Local</span>
+                                </a>
+                                <a mat-list-item routerLink="/useraccessmanagement">
+                                    <span>Directory</span>
+                                </a>
+                            </mat-nav-list>
+                        </mat-expansion-panel>
+                    </mat-nav-list>
+                    <label class="side-buttons" routerLink="/spacemanagement">Space management</label>
+                </mat-sidenav>
+                
+                <!-- <button class="side-buttons" routerLink="/configuration">Configuration</button>
                 <br>
                 <button class="side-buttons"  routerLink="/useraccessmanagement">User access management</button> 
                 <br>
                 <button class="side-buttons" routerLink="/spacemanagement">Space management</button>
                 <br>
-                <button class="side-buttons" routerLink="/costmanagement" >Cost management</button>
+                <button class="side-buttons" routerLink="/costmanagement" >Cost management</button> -->
             </div>
-        </div>
+        <!-- </div> -->
         <div class="profile"></div>
         <mat-icon>account_circle </mat-icon>
     </mat-toolbar> 

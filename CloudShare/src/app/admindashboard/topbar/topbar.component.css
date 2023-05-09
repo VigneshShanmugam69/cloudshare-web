@@ -1,3 +1,4 @@
+
 .background-color {
     background-color: #eeeded;
   }
@@ -39,7 +40,13 @@
 .sidebar-opener {
     cursor: pointer;
 }
+.side-nav{
 
+        position: absolute;
+        height: 100%;
+        top: 12%;
+       
+}
 .sidebar-slider {
     position: fixed;
     top: 12%;
@@ -85,3 +92,21 @@
 
 
 
+.toolbar-item-spacer {
+    flex: 1 1 auto;
+}
+
+.app-container {
+    height: 90%;
+    /* width:20%; */
+    margin: 0;
+}  
+.app-sidenav {
+    width: 20%;
+}
+.app-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+} 

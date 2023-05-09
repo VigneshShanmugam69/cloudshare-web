@@ -54,7 +54,7 @@
                     <td mat-cell *matCellDef="let element"> {{element.status}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="Action">
+                <!-- <ng-container matColumnDef="Action">
                     <th mat-header-cell *matHeaderCellDef>Action </th>
                     <td mat-cell *matCellDef="let element"><button mat-icon-button [matMenuTriggerFor]="menu">
                             <mat-icon>more_vert</mat-icon>
@@ -68,7 +68,7 @@
                             </button>
                         </mat-menu>
                     </td>
-                </ng-container>
+                </ng-container> -->
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
@@ -106,13 +106,13 @@
                             <input formControlName="gmail" matInput placeholder="abc@gmail.com">
                         </mat-form-field>
                     </div>
-                    <div class="slt-opt">
+                    <!-- <div class="slt-opt">
                          <select formControlName="type" class="slt-opt-fld" aria-label="Default select example">
                         <option selected>Select type</option>
                         <option value="local">Local</option>
                         <option value="directory">Directory</option>
                     </select>
-                    </div>
+                    </div> -->
                    <div class="slt-opt">
                      <select formControlName="roles" class="slt-opt-fld" aria-label="Default select example">
                         <option selected>Select role</option>
