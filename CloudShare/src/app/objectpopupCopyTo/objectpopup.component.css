@@ -1,37 +1,48 @@
-/* .example-radio-group {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-    align-items: flex-start;
-  } */
+.up {
+   background: whitesmoke;
+  padding: 1rem;
+  margin-top: -18px;
+  }
+
+.upbutton{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 11px;
+}
+
+.footer {
+  margin-top: 275px;
+}
 
 .example-radio-button {
   margin: 5px;
 }
 
+/* .bucket {
+  margin-left: 11px;
+  margin-top: 15px;
+}
+
 .bucket:hover {
   background-color: #0085FF;
   color: white;
+} */
+
+.libucket {
+  width: 100%;
+  height: 10px;
 }
 
 .listbucket {
-
-  /* border-radius: 50px; */
-  background-color: whitesmoke;
-  color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+  width: 418px;
+  overflow-x: auto;
+  height: 281px;
 
 }
-
-.card {
-  margin-top: 15px;
-  margin-left: 13px;
-  margin-right: 9px;
-  height: 305px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  /* scrollbar-width: light;
-  scrollbar-color: #0085ff;
-  overflow-y: scroll; */
+.nobucket{ 
+  margin-left: 138px;
+  margin-top: 114px;
 }
 
 ::ng-deep.mat-mdc-dialog-container,
@@ -41,35 +52,53 @@
   min-height: 362px !important;
   min-width: inherit;
   max-width: inherit;
+
+}
+
+.refreshbutton {
+  margin-left: -11px; 
+}
+
+.refreshbutton:hover {
+  background-color: #5aabf7;
+  color: white;
 }
 
 .cancle-button {
-  
-  margin-left:  337px;
-  border-radius:219px;
-  background-color: 0085FF;
-  color: rgb(0, 0, 0);
+  margin-left: 17rem;
+  border-radius: 219px;
 }
 
 .cancle-button:hover {
-  
   background-color: #0085FF;
   color: white;
-  
 }
 
-.box{
-  width: 405px;
-  height: 21px;
-  border: 1px solid black;
-  padding: 5px;
-  margin-top: 21px;
-  margin-left: 6px;
-  padding-bottom: 19px;
-
+.copybutton {
+  border-radius: 219px;
 }
 
-.container {
-  width: 100%;
-  /* background-color: #0c0fda; */
+.copybutton:hover {
+  background-color: #0085FF;
+  color: white;
+
+}
+.clearbutton:hover {
+  background-color: red;
+  color: white
+}
+
+.searchicon {
+  margin-top: -23px;
+  margin-left: -4px;
+ }
+
+.filter {
+  width: 50%;
+  margin-left: -148px;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
+  overflow-y: hidden !important;
 }

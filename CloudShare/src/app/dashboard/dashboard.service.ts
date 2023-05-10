@@ -83,6 +83,7 @@ export class AuthService {
     return this.http.post(this.APIUrl + 'getfolderproperties', val)
   }
   copyObject(val: any) {
+
     return this.http.post(this.APIUrl + 'copyobject', val)
   }
   getstorage(val: any) {
