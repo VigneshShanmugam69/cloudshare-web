@@ -65,10 +65,8 @@ export class ObjectpopupComponent implements OnInit {
     }
 
   }
-  onRowClick(row: any){
+  onRowClick(row: any) {
     this.destinationBucket = row;
-    console.log("db",this.destinationBucket); 
-
   }
 
   // objectCopy(action: string) {
@@ -82,12 +80,7 @@ export class ObjectpopupComponent implements OnInit {
         "sourceKeyName": this.objKey,
         "destinationKeyName": null
       }
-      console.log(payload);
-      console.log(this.objKey);
-      console.log(this.destinationBucket);
-
       this.auth.copyObject(payload).subscribe((res: any) => {
-        console.log("j", res)
         this.copyResult = res
       })
     } else {
@@ -99,12 +92,7 @@ export class ObjectpopupComponent implements OnInit {
         "sourceKeyName": this.objKey,
         "destinationKeyName": null
       }
-      console.log(payload);
-      console.log(this.objKey);
-      console.log(this.destinationBucket);
-
       this.auth.moveObject(payload).subscribe((res: any) => {
-        console.log("M", res)
         this.moveResult = res
       })
 
@@ -115,8 +103,6 @@ export class ObjectpopupComponent implements OnInit {
   }
   //Filter Option
   filterBuckets(event: any) {
-    console.log(event.value)
-
     this.buckets = this.searchByName(event.target.value)
 
   }

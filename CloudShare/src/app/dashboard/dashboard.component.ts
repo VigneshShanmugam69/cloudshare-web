@@ -175,7 +175,7 @@ export class DashboardComponent {
   }
 
   // list the objects from the selecting bucket
-  objectList(val: any) {  
+  objectList(val: any) {
     this.foldername = [];
     this.bucketname = val
     let payload = { "Bucket": val }
@@ -184,7 +184,7 @@ export class DashboardComponent {
       this.Objects = res.objects;
       this.objectlists = this.folders.concat(this.Objects);
 
-    
+
     });
   }
   //listing objects from the folder 
@@ -192,39 +192,39 @@ export class DashboardComponent {
     if (this.foldername && this.foldername !== val) {
       // concatenate the previous folder name with the new folder name
       val = `${this.foldername}${val}`;
-    }    
+    }
     this.foldername = val;
-    if (this.foldername.includes("/")) {   
-      let payload = { "Bucket": this.bucketname, "folderPath": this.foldername }    
-      this.auth.folderObjects(payload).subscribe((res: any) => {       
+    if (this.foldername.includes("/")) {
+      let payload = { "Bucket": this.bucketname, "folderPath": this.foldername }
+      this.auth.folderObjects(payload).subscribe((res: any) => {
         this.folderPrefix = res?.folderNames ?? [];
-        this.folderObj = res?.objects ?? []; 
+        this.folderObj = res?.objects ?? [];
         this.objectlists = null;
         this.objectlists = this.folderPrefix
-        this.objectlists = this.folderPrefix.concat(this.folderObj)   
-        
+        this.objectlists = this.folderPrefix.concat(this.folderObj)
+
         //To list the properties in a object
-    //     this.enableTree = false;
-    //     this.auth.getFolderProperties(payload).subscribe((res: any) => {
-    //       var output = Object.entries(res).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
-    //       TREE_DATA[0].children = output;
-    //       this.propertiesinfo.data = TREE_DATA;
-    //       this.enableTree = true;
-    //     })
-    //   })
-    // } else {
+        //     this.enableTree = false;
+        //     this.auth.getFolderProperties(payload).subscribe((res: any) => {
+        //       var output = Object.entries(res).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+        //       TREE_DATA[0].children = output;
+        //       this.propertiesinfo.data = TREE_DATA;
+        //       this.enableTree = true;
+        //     })
+        //   })
+        // } else {
 
-      // let payload = { "Bucket": this.bucketname, "Key": this.foldername }
+        // let payload = { "Bucket": this.bucketname, "Key": this.foldername }
 
-      // //To list the tags in a object
-      // this.enableTree = false;
-      // this.auth.getObjectTag(payload).subscribe((res1: any) => {
-      //   var out = Object.entries(res1).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
-      //   TREE_DATA[1].children = out;
-      //   this.propertiesinfo.data = TREE_DATA;
-      //   this.enableTree = true;
+        // //To list the tags in a object
+        // this.enableTree = false;
+        // this.auth.getObjectTag(payload).subscribe((res1: any) => {
+        //   var out = Object.entries(res1).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+        //   TREE_DATA[1].children = out;
+        //   this.propertiesinfo.data = TREE_DATA;
+        //   this.enableTree = true;
 
-       });
+      });
     }
   }
 
@@ -272,7 +272,7 @@ export class DashboardComponent {
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.openMenu();
-    
+
   }
 
   // menuClose() {
@@ -284,22 +284,17 @@ export class DashboardComponent {
     this.rowValue = row;
 
   }
-  
+
   // open the popup both right use (contextmenu) and left click (click)
-
-
-
-
-
+  
   copyto(action: string) {
     // event.preventDefault();
     this.tableObjects = this.rowValue;
     console.log(this.rowValue);
-    this.contextMenu.closeMenu(); 
-    
-    this. dialogRef = this.dialog.open(ObjectpopupComponent, {
+    this.contextMenu.closeMenu();
+
+    this.dialogRef = this.dialog.open(ObjectpopupComponent, {
       width: '420px',
-      // height: '700px',
 
       data: {
         action: action,
@@ -308,10 +303,6 @@ export class DashboardComponent {
       }
     });
 
-  //  this. dialogRef.afterClosed().subscribe(result => {
-
-  //   });
-    // dialogRef.afterClosed().subscribe((result) => {});
   }
 
 
@@ -325,10 +316,9 @@ export class DashboardComponent {
   onCustomKeyDown(event: KeyboardEvent, row: any) {
     this.tableObjects = this.rowValue;
 
-   
+
     const dialog = this.dialog.open(ObjectpopupComponent, {
-      width: '414px',
-      height: '700px',
+      width: '420px',
       data: {
         bucket: this.bucketname,
         object: this.tableObjects,
@@ -418,7 +408,7 @@ export class DashboardComponent {
       this.dataSource1 = res.bucketReplication;
       this.msgs = this.dataSource1;
       this.value = this.dataSource1.Message;
-     
+
 
       this.isLoading = false;
     });
@@ -428,7 +418,7 @@ export class DashboardComponent {
     this.auth.bucketlifecyle(payload).subscribe((res: any) => {
       this.response1 = res.BucketLifecycle;
       this.val = res.BucketLifecycle.message;
-        this.msg = this.val;
+      this.msg = this.val;
       if (this.msg) {
         this.showMessage = false;
       } else {
