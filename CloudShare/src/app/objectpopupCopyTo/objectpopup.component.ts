@@ -18,26 +18,27 @@ export class ObjectpopupComponent implements OnInit {
   moveResult: any;
   bucketName: any;
   show: boolean = false;
-  
+  showCopyButton: boolean = false;
+  showMoveButton: boolean = false;
 
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private auth: AuthService,public dialog: MatDialog,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private auth: AuthService, public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
     this.getbuckets();
+    this.toggleButtons();
   }
-  
+
   SearchForm = new FormGroup({
-    search : new FormControl('')
+    search: new FormControl('')
   })
 
   bucketForm = new FormGroup({
-    bucketform : new FormControl('')
+    bucketform: new FormControl('')
 
   })
 
-  getbuckets(){
+  getbuckets() {
     this.buckets = [];
     this.buckets = null;
     this.auth.getBuckets().subscribe((res: any) => {
@@ -46,17 +47,32 @@ export class ObjectpopupComponent implements OnInit {
     })
   }
 
-  refresh(){
-    console.log("opo")
+  refresh() {
+
     this.SearchForm.reset();
     this.bucketForm.reset();
     this.show = false;
     this.getbuckets();
 
-      }
+  }
+  toggleButtons() {
+    if (this.data.action == 'copy') {
+      this.showCopyButton = true;
+      this.showMoveButton = false;
+    } else {
+      this.showCopyButton = false;
+      this.showMoveButton = true;
+    }
+
+  }
+  onRowClick(row: any){
+    this.destinationBucket = row;
+    console.log("db",this.destinationBucket); 
+
+  }
 
   // objectCopy(action: string) {
-    objectCopy() {
+  objectCopy() {
     if (this.data.action == 'copy') {
       this.objKey = this.data.object.Key ? this.data.object.Key : this.data.object.Prefix;
 
@@ -64,14 +80,14 @@ export class ObjectpopupComponent implements OnInit {
         "destinationBucket": this.destinationBucket,
         "sourceBucket": this.sourceBucket,
         "sourceKeyName": this.objKey,
-        "destinationKeyName":null
+        "destinationKeyName": null
       }
       console.log(payload);
       console.log(this.objKey);
       console.log(this.destinationBucket);
 
       this.auth.copyObject(payload).subscribe((res: any) => {
-        console.log("j",res)
+        console.log("j", res)
         this.copyResult = res
       })
     } else {
@@ -80,10 +96,15 @@ export class ObjectpopupComponent implements OnInit {
       let payload = {
         "destinationBucket": this.destinationBucket,
         "sourceBucket": this.sourceBucket,
-        "folderName": this.objKey
+        "sourceKeyName": this.objKey,
+        "destinationKeyName": null
       }
+      console.log(payload);
+      console.log(this.objKey);
+      console.log(this.destinationBucket);
 
       this.auth.moveObject(payload).subscribe((res: any) => {
+        console.log("M", res)
         this.moveResult = res
       })
 

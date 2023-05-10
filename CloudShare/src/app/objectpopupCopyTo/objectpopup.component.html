@@ -56,14 +56,14 @@
       </div>
 
 
-      <div class="libucket">
+      <div class="libucket" >
         <mat-card class="listbucket">
 
           <div *ngIf="buckets">
             <form [formGroup]="bucketForm">
-              <mat-radio-group class="example-radio-group-lable" [(ngModel)]="destinationBucket"
+              <mat-radio-group class="example-radio-group-lable" 
                 formControlName="bucketform">
-                <mat-radio-button class="example-radio-button" *ngFor="let item of buckets" [value]="item.Name">
+                <mat-radio-button class="example-radio-button" (click)="onRowClick(item.Name)" *ngFor="let item of buckets" [value]="item.Name">
                   {{item.Name}}
                 </mat-radio-button>
               </mat-radio-group>
@@ -77,9 +77,11 @@
 
       </div>
       <div>
-        <footer class="footer">
+        <footer class="footer" >
           <button class="cancle-button" [mat-dialog-close] mat-button>Cancel</button>
-          <button class="copybutton" mat-button (click)="objectCopy()" [mat-dialog-close]>Copy
+          <button *ngIf="showCopyButton"class="copybutton" mat-button (click)="objectCopy()" [mat-dialog-close]>Copy
+          </button>
+          <button *ngIf="showMoveButton"class="copybutton" mat-button (click)="objectCopy()" [mat-dialog-close]>Move
           </button>
 
         </footer>
