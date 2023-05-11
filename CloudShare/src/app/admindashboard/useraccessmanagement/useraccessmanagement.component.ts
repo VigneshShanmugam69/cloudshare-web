@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/dashboard/dashboard.service';
+import { DatatransferService } from 'src/app/datatransfer.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,10 +10,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./useraccessmanagement.component.css']
 })
 export class UseraccessmanagementComponent {
+  @Input() parentvalue: any;
   openPopup= false;
-  ngOnInit(): void {
+  tableName:any;
+
+
+  constructor(private auth: AuthService,private datatransfer:DatatransferService) { }
+
+  ngOnInit(): void { 
     this.userList();
+    this.tableName=this.datatransfer.sendtablename();
+    console.log(this.tableName);
+    this.adduserform.controls.passwrd.disable();
   }
+
   displayedColumns: string[] = ['uname','ID',  'email', 'role'];  //,'Action'
   userlist: any;
   hideform: boolean = false;
@@ -21,13 +32,12 @@ export class UseraccessmanagementComponent {
     lname: new FormControl(""),
     uname: new FormControl(""),
     gmail: new FormControl(""),
+    passwrd: new FormControl(""),
     roles: new FormControl(""),
-    type: new FormControl("")
+    // type: new FormControl("")
+    checkUser:new FormControl("")
   })
 
-
-
-  constructor(private auth: AuthService) { }
 
   //listing the user in admin
   userList() {
@@ -35,7 +45,9 @@ export class UseraccessmanagementComponent {
       this.userlist = res;
     })
   }
-
+   handleValEvent(value:any){
+     console.log(value)
+   }
   //adding new user
   addUser() {
     let payload = {
@@ -44,7 +56,7 @@ export class UseraccessmanagementComponent {
       username: this.adduserform.controls.uname.value,
       email: this.adduserform.controls.gmail.value,
       roleID: this.adduserform.controls.roles.value,
-      type:this.adduserform.controls.type.value
+      // type:this.adduserform.controls.type.value
     }
     console.log(payload);
     this.auth.addUserFields(payload).subscribe((res: any) => {
@@ -58,7 +70,15 @@ export class UseraccessmanagementComponent {
 
   }
 
-  
+onCheck(){
+  const isChecked = this.adduserform.controls.checkUser.value;
+  // console.log(isChecked);
+  if (isChecked) {
+    this.adduserform.controls.passwrd.disable();
+  } else {
+    this.adduserform.controls.passwrd.enable();
+  }
+}
 adduser(){
   // enableform=true;
   // this.openPopup = !openPopup;
@@ -72,4 +92,6 @@ cancel(){
   showForm() {
     this.hideform = true;
   }
+
+  
 }

@@ -39,7 +39,12 @@
     font-size: 16px;
 }
 .slt-opt{
-    margin-top: 10px;
+    display: flex;
+    margin-top: 4px;
+}
+.chk-stl{
+    display: inline-block;
+    margin-left: 9px;
 }
 .slt-opt-fld{
     width: 282px;

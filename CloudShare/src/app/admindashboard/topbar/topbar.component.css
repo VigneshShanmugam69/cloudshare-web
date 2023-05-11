@@ -4,6 +4,7 @@
   }
 
 .side-buttons {
+    font-size: 16px;
     border-radius: #FFFFFF;
     background-color: #FFFFFF;
     border-color: #FFFFFF;
@@ -16,6 +17,9 @@
     background-color: #0085FF;
     color: white;
     /* height: 30px; */
+}
+.mat-expansion-panel-header{
+    padding: 0px;
 }
 
 .mat-toolbar-row,
@@ -41,7 +45,8 @@
     cursor: pointer;
 }
 .side-nav{
-
+    top: 40px;
+    /* position: absolute; */
         position: absolute;
         height: 100%;
         top: 12%;
