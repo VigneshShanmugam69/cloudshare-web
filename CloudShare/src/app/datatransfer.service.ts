@@ -1,19 +1,41 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatatransferService {
   userDetails : any;
+  tableName:any;
+
+  private _tableVable = new Subject<any>;
+  tableValue= this._tableVable.asObservable()
+
   constructor() { }
+  // tablename(val: string){
+  //   console.log(val)
+  //   if(val=='local'){
+  //     this.tableName=true;
+  //   }
+  //   else{
+  //     this.tableName=false;
+  //   }
+    
+  // }
 
+tablename(Value:any){
+this._tableVable.next(Value)
+}
 
+sendtablename(){
+  return this.tableName;
+}
 
-  sendUserDetails(data:any){
+sendUserDetails(data:any){
 this.userDetails = data;
   }
 
-  sendUserName(){
+sendUserName(){
     return this.userDetails;
   }
 }

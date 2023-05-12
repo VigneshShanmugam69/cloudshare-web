@@ -1,8 +1,10 @@
+
 .background-color {
     background-color: #eeeded;
   }
 
 .side-buttons {
+    font-size: 16px;
     border-radius: #FFFFFF;
     background-color: #FFFFFF;
     border-color: #FFFFFF;
@@ -15,6 +17,12 @@
     background-color: #0085FF;
     color: white;
     /* height: 30px; */
+}
+.side-buttons:focus{
+    background-color: #a6d1fa;
+}
+.mat-expansion-panel-header{
+    padding: 0px;
 }
 
 .mat-toolbar-row,
@@ -39,7 +47,14 @@
 .sidebar-opener {
     cursor: pointer;
 }
-
+.side-nav{
+    top: 40px;
+    /* position: absolute; */
+        position: absolute;
+        height: 100%;
+        top: 12%;
+       
+}
 .sidebar-slider {
     position: fixed;
     top: 12%;
@@ -85,3 +100,21 @@
 
 
 
+.toolbar-item-spacer {
+    flex: 1 1 auto;
+}
+
+.app-container {
+    height: 90%;
+    /* width:20%; */
+    margin: 0;
+}  
+.app-sidenav {
+    width: 20%;
+}
+.app-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+} 
