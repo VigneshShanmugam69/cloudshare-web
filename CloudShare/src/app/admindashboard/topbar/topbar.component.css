@@ -48,7 +48,8 @@
     background-color: #ffffff;
     transform: translateX(-100%);
     transition: ease-in-out 300ms transform;
-    width: 220px;
+    width: 20%;
+    height: 100%;
     box-shadow: 5px 4px 5px rgba(0, 0, 0, 0.13);
 }
 

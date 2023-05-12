@@ -147,6 +147,10 @@ export class DashboardComponent {
   selectedRowIndex: any;
   tableObjects: any;
   rowValue: any;
+  folderPrefix: any;
+  folderObj: any;
+  objectLists: null | undefined;
+  filePath: any;
 
   dataSource1: any;
   response: any;
@@ -201,42 +205,59 @@ export class DashboardComponent {
   }
 
   // list the objects from the selecting bucket
-  objectList(val: any)  
-
-  {
-   
-    
-    this.bucketname = val;
-    let payload = { Bucket: val };
+  objectList(val: any) {
+    this.foldername = [];
+    this.bucketname = val
+    let payload = { "Bucket": val }
     this.auth.listObjects(payload).subscribe((res: any) => {
       this.folders = res.commonPrefixes;
       this.Objects = res.objects;
       this.objectlists = this.folders.concat(this.Objects);
     
+
+
     });
   }
-
-  //listing objects from the folder
+  //listing objects from the folder 
   folderObjectslist(val: any) {
    
     {
    
+    if (this.foldername && this.foldername !== val) {
+      // concatenate the previous folder name with the new folder name
+      val = `${this.foldername}${val}`;
+    }
     this.foldername = val;
-    if (this.foldername.includes('/')) {
-      let payload = { Bucket: this.bucketname, folderPath: this.foldername };
+    if (this.foldername.includes("/")) {
+      let payload = { "Bucket": this.bucketname, "folderPath": this.foldername }
       this.auth.folderObjects(payload).subscribe((res: any) => {
-        this.folderObjectlists = res;
+        this.folderPrefix = res?.folderNames ?? [];
+        this.folderObj = res?.objects ?? [];
+        this.objectlists = null;
+        this.objectlists = this.folderPrefix
+        this.objectlists = this.folderPrefix.concat(this.folderObj)
 
         //To list the properties in a object
-        this.enableTree = false;
-        this.auth.getFolderProperties(payload).subscribe((res: any) => {
-          var output = Object.entries(res).map(([key, value]) => ({
-            name: String(key) + ': ' + String(value),
-          }));
-          TREE_DATA[0].children = output;
-          this.propertiesinfo.data = TREE_DATA;
-          this.enableTree = true;
-        });
+        //     this.enableTree = false;
+        //     this.auth.getFolderProperties(payload).subscribe((res: any) => {
+        //       var output = Object.entries(res).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+        //       TREE_DATA[0].children = output;
+        //       this.propertiesinfo.data = TREE_DATA;
+        //       this.enableTree = true;
+        //     })
+        //   })
+        // } else {
+
+        // let payload = { "Bucket": this.bucketname, "Key": this.foldername }
+
+        // //To list the tags in a object
+        // this.enableTree = false;
+        // this.auth.getObjectTag(payload).subscribe((res1: any) => {
+        //   var out = Object.entries(res1).map(([key, value]) => ({ name: String(key) + ': ' + String(value) }));
+        //   TREE_DATA[1].children = out;
+        //   this.propertiesinfo.data = TREE_DATA;
+        //   this.enableTree = true;
+
       });
     } else {
       let payload = { Bucket: this.bucketname, Key: this.foldername };
@@ -298,6 +319,7 @@ export class DashboardComponent {
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.openMenu();
+
   }
 
   // menuClose() {
@@ -307,24 +329,25 @@ export class DashboardComponent {
   onRowClick(row: any) {
     this.rowValue = row;
   }
-  // open the popup both right use (contextmenu) and left click (click)
 
+  // open the popup both right use (contextmenu) and left click (click)
+  
   copyto(action: string) {
     // event.preventDefault();
     this.tableObjects = this.rowValue;
+    console.log(this.rowValue);
     this.contextMenu.closeMenu();
-    const dialogRef = this.dialog.open(ObjectpopupComponent, {
-      width: '414px',
-      height: '700px',
+
+    this.dialogRef = this.dialog.open(ObjectpopupComponent, {
+      width: '420px',
 
       data: {
         action: action,
         bucket: this.bucketname,
-        object: this.tableObjects,
-      },
+        object: this.tableObjects
+      }
     });
-    dialogRef.afterClosed().subscribe((result) => {});
-    dialogRef.afterClosed().subscribe((result) => {});
+
   }
 
   @HostListener('document:keydown.control.shift.c', ['$event'])
@@ -333,8 +356,7 @@ export class DashboardComponent {
     this.tableObjects = this.rowValue;
 
     const dialog = this.dialog.open(ObjectpopupComponent, {
-      width: '414px',
-      height: '700px',
+      width: '420px',
       data: {
         bucket: this.bucketname,
         object: this.tableObjects,
@@ -537,6 +559,9 @@ export class DashboardComponent {
 
     this.auth.bucketmanagement(payload).subscribe((res: any) => {
       this.dataSource1 = res.bucketReplication;
+      this.msgs = this.dataSource1;
+      this.value = this.dataSource1.Message;
+
 
       this.msgs = this.dataSource1;
 
@@ -554,9 +579,9 @@ export class DashboardComponent {
     let payload = { Bucket: this.bucketname };
     this.auth.bucketlifecyle(payload).subscribe((res: any) => {
       this.response1 = res.BucketLifecycle;
-      this.val = this.response1[0].message;
-
-      if (this.val) {
+      this.val = res.BucketLifecycle.message;
+      this.msg = this.val;
+      if (this.msg) {
         this.showMessage = false;
       } else {
         this.showMessage = true;

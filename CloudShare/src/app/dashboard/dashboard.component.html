@@ -1,6 +1,6 @@
 <html>
 
-<body class="background-color">
+<body class="background-color"> 
   <div class="topbar">
     <div class="top">
       <button class="topbar-button" mat-button routerLink="/admindashboard">Menu</button>
@@ -164,12 +164,12 @@
 
     <div class="tables">
       <div>
-        <table mat-table [dataSource]="objectlists" [dataSource]="folderObjectlists" class="mat-elevation-z8">
-
+        <table mat-table [dataSource]="objectlists"  class="mat-elevation-z8">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td class="col-sm-2" mat-cell *matCellDef="let element"
-              (click)="folderObjectslist(element.Prefix || element.Key)"> {{element.Prefix}} {{element.Key}}</td>
+              (dblclick)="folderObjectslist(element.Prefix || element.Key)">
+              {{element.Prefix}} {{element.Key}}</td>
           </ng-container>
 
           <ng-container matColumnDef="Size">
