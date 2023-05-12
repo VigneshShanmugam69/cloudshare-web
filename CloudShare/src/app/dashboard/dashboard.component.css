@@ -426,6 +426,7 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 border-style: groove;
 border: 100rem;
 font-weight: 300;
+border-radius: 50rem;
 
 }
 .pop{
@@ -435,10 +436,27 @@ font-weight: 300;
   
   text-decoration-color: black;
   border-spacing: 60px;
-  background-size: cover;
+  
  
 }
-.show{
+.show:hover{
 color: #0085FF;
 text-decoration: underline;
+
+}
+.mattab mat-elevation-z88{
+  background-color: #0085FF;
+
+}
+.Tables{
+  height: 10rem;
+}
+
+thead[_ngcontent-usl-c72], tr[_ngcontent-usl-c72] {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1.5px;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 34px;
 }

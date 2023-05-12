@@ -77,7 +77,7 @@
           <button class="topbar-button" mat-button (click)=" buckettags()"><b>Tags</b></button>
           <button class="topbar-button" mat-button (click)=" bucketheaders()"><b>Headers</b></button>
           <button class="topbar-button" mat-button (click)=" bucketpermission()"><b>Permission</b></button>
-          <button class="topbar-button" mat-button (click)=" bucketstorages()"><b>storage</b></button>
+          <button class="topbar-button" mat-button (click)=" bucketstoragess()"><b>storage</b></button>
           <button class="topbar-button" mat-button (click)=" bucketmanagements()"><b>Bucketmanagement</b></button>
         </div>
       </div>
@@ -101,6 +101,45 @@
         <tr class="mattab" mat-header-row *matHeaderRowDef="PropertiesdisplayedColumns"> </tr>
         <tr class="mattab" mat-row *matRowDef="let row; columns: PropertiesdisplayedColumns;"></tr>
       </table>
+
+<!-- hi -->
+<table class="Tables"  *ngIf="storagetable ">
+  <thead class="key">
+    <tr>
+      <th >Key</th>
+      <th >Values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Totalfolder</td>
+    
+    
+      <td> {{ storages?.TotalFolder }}</td>
+      
+    </tr>
+    <tr>
+      <td>Totalobject</td>
+      <td>{{ objects?.TotalObject}}  </td>
+        
+    
+    </tr>
+    <tr>
+      <td>Totalfilesize</td>
+      <td><span class="show" (click)="totalobject('Totalfilesize')">
+        <span *ngIf="!filesize">show</span>
+        <span *ngIf="filesize">{{ filesize?.TotalfileSize}}</span>
+      </span></td>
+    </tr>
+    <tr>
+      <td>storageclass</td>
+    <td> {{ storageclas?.Storageclass }}</td>
+  </tbody>
+</table>
+
+
+
+
 
 
       <!-- <table mat-table [dataSource]="dataSources" class="mat-elevation-z8"> -->
@@ -212,7 +251,7 @@
           <hr>
         </ng-container>
       </ul>
-      <li *ngIf="!showMessage"> Message: {{value}}</li>
+      <li *ngIf="!showMessage"> {{value}}</li>
       <div mat-dialog-actions>
         <button class="mat-buttons" mat-button mat-dialog-close>Close</button>
       </div>
@@ -220,8 +259,8 @@
   </div>
   <div class="popups">
     <ng-template let-data #myCityDialog1 class="popups">
-      <ul *ngFor="let item of response1" class="pop">
-        <ng-container *ngIf="showMessage">
+      <ul *ngFor="let item of response1 " class="pop">
+        <ng-container *ngIf="showMessage && !isLoading">
           <li>BucketLifecycleID: {{item.BucketLifecycleID}}</li>
           <li>BucketLifecyclePrefix: {{item.BucketLifecyclePrefix}}</li>
           <li>BucketLifecycleStatus: {{item.BucketLifecycleStatus}}</li>
@@ -233,7 +272,7 @@
           <hr>
         </ng-container>
       </ul>
-      <li *ngIf="!showMessage">Message: {{val}}</li>
+      <li *ngIf="!showMessage"> {{val}}</li>
       <div mat-dialog-actions>
         <button class="topbar-buttons" mat-button mat-dialog-close>Close</button>
       </div>
@@ -254,7 +293,7 @@
           <hr>
         </ng-container>
       </ul>
-      <li *ngIf="!showMessage">Message: {{message}}</li>
+      <li *ngIf="!showMessage"> {{message}}</li>
       <div mat-dialog-actions>
         <button class="topbar-buttons" mat-button mat-dialog-close>Close</button>
       </div>
