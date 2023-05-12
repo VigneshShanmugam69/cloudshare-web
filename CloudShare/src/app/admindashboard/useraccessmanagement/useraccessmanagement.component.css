@@ -1,14 +1,29 @@
-.accountlists {
-    padding-left: 34px;
-    padding-top: 12px;
+.tables {
+    border-radius: 4px;
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    left: 20%;
+    top: 13%;
+    background: #FFFFFF;
+    
 
+    scrollbar-width: light;
+    scrollbar-color: #0085ff;
+    overflow-y: scroll;
 }
 .mt-size{
     height: 500px;
     width: 500px;
     position: relative;
     top: 33%;
-    left: 25%;
+    left: 33%;
+    padding: 5px;
+}
+.mt-size-in{
+    overflow: auto;
+    margin-top: 5px;
+    height:200px
 }
 .mat-toolbar-row,
 .mat-toolbar-single-row {
@@ -73,21 +88,25 @@
     border-radius: 10px;
     height: 45px;
 }
+.import {
+    background-color: #0885ff;
+    border: none;
+    color: white;
+    padding: 7px 67px;
+    text-align: center;
+    margin-top: 30px;
+    margin-right: 25px;
+    margin-left: 35px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+    height: 45px;
+}
 
 
-.accounts {
-    overflow: auto;
-    position: absolute;
-    width: 200px;
-    height: 150px;
-    left: 230px;
-    top: 110px;
-    border-radius: 6px 6px 0px 0px;
-    margin-top: -23px;
-    margin-left: 2px;
-
-    background: #ffffff;
-    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
+.check{
+    margin-right: 10px;
 }
 
 th,thead,thead,td {
@@ -98,59 +117,6 @@ border-collapse: separate;
   border-width: 1px;
 }
 
-.user-card {
-    overflow: auto;
-    position: absolute;
-    width: 424px;
-    height: 150px;
-    left: 442px;
-    top: 110px;
-    border-radius: 6px 6px 0px 0px;
-    margin-top: -23px;
-    margin-left: 2px;
-
-    background: #FfffFF;
-    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
-}
-
-.adduser-image {
-    margin-top: 37px;
-    margin-left: 46px;
-    height: 50px;
-    width: 50px;
-}
-
-.adduser-text {
-    position: absolute;
-    left: 37px;
-    top: 100px;
-}
-
-.updateuser-image {
-    margin-top: 37px;
-    margin-left: 81px;
-    height: 50px;
-    width: 50px;
-}
-
-.updateuser-text {
-    position: absolute;
-    left: 152px;
-    top: 100px;
-}
-
-.deleteuser-image {
-    margin-top: 37px;
-    margin-left: 78px;
-    height: 50px;
-    width: 50px;
-}
-
-.deleteuser-text {
-    position: absolute;
-    left: 292px;
-    top: 100px;
-}
 
 
 .adduserform {
@@ -207,30 +173,9 @@ border-collapse: separate;
 
 }
 
-.acountlist-button {
-    border-color: #FFFFFF;
-    background-color: #FFFFFF;
 
-}
 
-.acountlist-button:hover {
-    color: #0085FF;
-}
 
-.tables {
-    border-radius: 4px;
-    position: absolute;
-    width: 80%;
-    height: 100%;
-    left: 20%;
-    top: 13%;
-    background: #FFFFFF;
-    
-
-    scrollbar-width: light;
-    scrollbar-color: #0085ff;
-    overflow-y: scroll;
-}
 .userlist{white-space: nowrap;}
 .userlist:hover{
     cursor: pointer;
@@ -258,6 +203,10 @@ table {
     width: 100%;
     font-size: 12px;
     box-shadow: none;
+
+    scrollbar-width: light;
+    scrollbar-color: #0085ff;
+    overflow-y: scroll;
 
 }
 

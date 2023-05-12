@@ -14,7 +14,11 @@ export class UseraccessmanagementComponent {
   @Input() parentvalue: any;
   openPopup= false;
   tableName:boolean | undefined;
+  groups:any;
+  users:any;
+  groupName: any[] = [];
   addpopup=false;
+  // saveCheckbox:boolean;
   closeResult: string | undefined;
 
 
@@ -92,16 +96,42 @@ adduser(){
   // enableform=true;
   // this.openPopup = !openPopup;
   if(!this.tableName){
+    this.auth.listGroups().subscribe((res: any)=>{
+      this.groups=res;
+      // console.log(this.groups)
+    })
     this.addpopup=!this.addpopup;
+    
   }
   else{
     this.openPopup = !this.openPopup;
   }
-  
-
 }
 cancel(){
   this.openPopup = !this.openPopup;
+}
+dcancel(){
+  this.addpopup=!this.addpopup;
+}
+groupusers(event: any,name: any){
+
+  if(event.target.checked){
+     this.groupName.push(name);
+  }
+  else{
+    let index=this.groupName.indexOf(name);
+    this.groupName.splice(index,1)
+  }
+  let  payload={
+    groupName:this.groupName
+  }
+  
+this.auth.listGroupUsers(payload).subscribe((res:any)=>{
+  // console.log(res);
+  this.users=res;
+
+}) 
+  
 }
   //when click add user that time hide and show the form
   showForm() {

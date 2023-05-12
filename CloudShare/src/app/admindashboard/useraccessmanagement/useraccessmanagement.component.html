@@ -13,7 +13,7 @@
             <table *ngIf="tableName; else directory" class="mat-elevation-z8">
                 <thead>
                     <tr>
-                        <th><input type=checkbox>Name</th>
+                        <th><input type=checkbox class="check"><span>Name</span></th>
                         <th>ID</th>
                         <th>Email</th>
                         <th>Status</th>
@@ -21,7 +21,7 @@
                 </thead>
                 <tbody *ngFor="let item of userlist">
                     <tr>
-                        <td><input type=checkbox>{{item.firstname}}{{item.lastname}}</td>
+                        <td><input type=checkbox class="check">{{item.firstname}}{{item.lastname}}</td>
                         <td>{{item.userID}}</td>
                         <td>{{item.email}}</td>
                         <td>{{item.status}}</td>
@@ -33,7 +33,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th><input type=checkbox>Name</th>
+                            <th><input type=checkbox class="check">Name</th>
                             <th>UserID</th>
                             <th>Email</th>
                             <th>Status</th>
@@ -42,7 +42,7 @@
                     </thead>
                     <tbody *ngFor="let item of directoryuser">
                         <tr>
-                            <td><input type=checkbox>{{item.firstname}}{{item.lastname}}</td>
+                            <td><input type=checkbox class="check">{{item.firstname}}{{item.lastname}}</td>
                             <td>{{item.userID}}</td>
                             <td>{{item.email}}</td>
                             <td>{{item.status}}</td>
@@ -117,18 +117,44 @@
     <div *ngIf="addpopup">
         <mat-card class="mt-size">
                     <div>
-                        <mat-card>
-                                <input type="checkbox">
+                        <mat-card class="mt-size-in">
+                            <table class="mat-elevation-z8">
+                                <thead>
+                                    <tr>
+                                        <th><input type=checkbox class="check">Group Names</th>
+                                        <th>GroupID</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let item of groups">
+                                    <tr>
+                                        <td><input type=checkbox  class="check" (click)="groupusers($event,item.name)">{{item.name}}</td>
+                                        <td>{{item.groupId}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </mat-card>
                     </div>
                     <div>
-                        <mat-card>
-
+                        <mat-card class="mt-size-in">
+                            <table class="mat-elevation-z8">
+                                <thead>
+                                    <tr>
+                                        <th><input type=checkbox class="check">Users</th>
+                                        <th>UserID</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let item of users">
+                                    <tr>
+                                        <td><input type=checkbox class="check">{{item.firstName}} {{item.lastName}}</td>
+                                        <td>{{item.userId}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </mat-card>
                     </div>
                     <div>
-                        <button class="submit">Import</button>
-                        <button class="submit">cancel</button>
+                        <button class="import">Import</button>
+                        <button class="import" (click)="dcancel()">cancel</button>
                     </div>
         </mat-card>
     </div>
