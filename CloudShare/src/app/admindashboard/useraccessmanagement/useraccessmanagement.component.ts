@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/dashboard/dashboard.service';
 import { DatatransferService } from 'src/app/datatransfer.service';
 import Swal from 'sweetalert2';
@@ -12,20 +13,28 @@ import Swal from 'sweetalert2';
 export class UseraccessmanagementComponent {
   @Input() parentvalue: any;
   openPopup= false;
-  tableName:any;
+  tableName:boolean | undefined;
+  addpopup=false;
+  closeResult: string | undefined;
 
 
-  constructor(private auth: AuthService,private datatransfer:DatatransferService) { }
+  constructor(private auth: AuthService,private datatransfer:DatatransferService,private modalService: NgbModal) { }
 
   ngOnInit(): void { 
     this.userList();
-    this.tableName=this.datatransfer.sendtablename();
-    console.log(this.tableName);
+    this.datatransfer.tableValue.subscribe((res:any)=>{
+      if(res == 'local'){
+         this.tableName = true;
+      } else {
+        this.tableName = false;
+      }
+    })
     this.adduserform.controls.passwrd.disable();
   }
 
   displayedColumns: string[] = ['uname','ID',  'email', 'role'];  //,'Action'
   userlist: any;
+  directoryuser:any;
   hideform: boolean = false;
   adduserform = new FormGroup({
     fname: new FormControl(""),
@@ -82,7 +91,13 @@ onCheck(){
 adduser(){
   // enableform=true;
   // this.openPopup = !openPopup;
-  this.openPopup = !this.openPopup;
+  if(!this.tableName){
+    this.addpopup=!this.addpopup;
+  }
+  else{
+    this.openPopup = !this.openPopup;
+  }
+  
 
 }
 cancel(){
@@ -93,5 +108,21 @@ cancel(){
     this.hideform = true;
   }
 
+  // open(content: any) {
+  //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  //     this.closeResult = `Closed with: ${result}`;
+  //   }, (reason) => {
+  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //   });
+  // }
   
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC) {
+  //     return 'by pressing ESC';
+  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  //     return 'by clicking on a backdrop';
+  //   } else {
+  //     return `with: ${reason}`;
+  //   }
+  // }
 }

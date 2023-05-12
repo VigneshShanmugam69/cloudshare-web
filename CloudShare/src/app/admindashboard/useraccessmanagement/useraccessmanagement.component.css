@@ -3,7 +3,13 @@
     padding-top: 12px;
 
 }
-
+.mt-size{
+    height: 500px;
+    width: 500px;
+    position: relative;
+    top: 33%;
+    left: 25%;
+}
 .mat-toolbar-row,
 .mat-toolbar-single-row {
     display: flex;
@@ -37,6 +43,7 @@
     text-align: center;
     border-radius: 6px;
     font-size: 16px;
+    margin-left: 20px;
 }
 .slt-opt{
     display: flex;
@@ -58,6 +65,7 @@
     padding: 7px 45px;
     text-align: center;
     margin-top: 500px;
+    margin-right: 25px;
     margin-left: 25px;
     text-decoration: none;
     display: inline-block;
@@ -80,6 +88,14 @@
 
     background: #ffffff;
     box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
+}
+
+th,thead,thead,td {
+border-collapse: separate;
+  text-align: left;
+  padding: 12px;
+  box-sizing: border-box;
+  border-width: 1px;
 }
 
 .user-card {
@@ -238,6 +254,7 @@
 
 
 table {
+    border-collapse: collapse;
     width: 100%;
     font-size: 12px;
     box-shadow: none;
@@ -255,10 +272,7 @@ table {
     color: white;
 }
 
-td,
-th{  
-    border-color: #F1F1F3 !important;
-}
+
 
 
 *::-webkit-scrollbar,

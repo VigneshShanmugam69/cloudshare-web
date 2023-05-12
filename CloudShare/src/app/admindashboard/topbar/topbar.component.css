@@ -18,6 +18,9 @@
     color: white;
     /* height: 30px; */
 }
+.side-buttons:focus{
+    background-color: #a6d1fa;
+}
 .mat-expansion-panel-header{
     padding: 0px;
 }

@@ -10,14 +10,11 @@ export class TopbarComponent {
   public sidebarShow: boolean = true;
   public val="";
   constructor( private datatransfer:DatatransferService){}
-  // valEvent: any;
-  // @Output()  valEvent = new EventEmitter<any>();
  
 
   local(){
 this.val="local"
 this.datatransfer.tablename(this.val);
-// this.valEvent.emit(this.val)
   }
   directory(){
     this.val="directory"
