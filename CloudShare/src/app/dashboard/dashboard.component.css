@@ -17,31 +17,12 @@
   background-color: 0085FF;
   color: rgb(0, 0, 0);
 }
-.topbar-buttons {
-  border-radius: 50px;
-  background-color: 0085FF;
-  color: rgb(0, 0, 0);
-  margin-left: 25rem;
-}
-.mat-buttons {
-  border-radius: 50px;
-  background-color: 0085FF;
-  color: rgb(0, 0, 0);
-  margin-left: 35rem;
+
+.topbar-button:hover {
+  background-color: #0085FF;
+  color: white;
 }
 
-.mat-buttons:hover  {
-  background-color: #0085FF;
-  color: white;
-}
-.topbar-button:hover  {
-  background-color: #0085FF;
-  color: white;
-}
-.topbar-buttons:hover {
-  background-color: #0085FF;
-  color: white;
-}
 .logout-button {
   border-radius: 50px;
   background-color: 0085FF;
@@ -354,7 +335,7 @@ table {
   animation: spin 1s ease-in-out infinite;
 }
 
-/* @keyframes spin {
+@keyframes spin {
   to {
     transform: rotate(360deg);
   }
@@ -369,7 +350,7 @@ table {
 }
 
 .menu-row {
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
 }
 
@@ -377,7 +358,7 @@ table {
   display: flex;
   flex-direction: column;
   margin-right: 0px;
-} */
+}
 
 /* .icon{
   display: flex;
@@ -397,7 +378,7 @@ table {
   margin-left: 42px;
   margin-right: 15px;
 } */
-/* .row:hover {
+.row:hover {
 
   background-color: #0085FF;
   color: white;
@@ -409,7 +390,7 @@ table {
     margin-bottom: 593px;
 
 
-} */
+}
 /* .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
   margin-left: 2035px;
@@ -420,43 +401,21 @@ table {
   position: absolute !important;
   
   width: 20px ;
-} */
+}
 ::ng-deep.mat-mdc-dialog-container .mdc-dialog__surface{
-font-family: Verdana, Arial, Helvetica, sans-serif;
-border-style: groove;
-border: 100rem;
-font-weight: 300;
-border-radius: 50rem;
+  margin-left: 977px  !important;
+  height: 200px  !important;
+  margin-top: 480px  !important;
+  width: 73% !important;
 
+    margin-right: 161px
 }
 .pop{
-  
-  
-  background-color: #FFFFFF;
-  
-  text-decoration-color: black;
-  border-spacing: 60px;
-  
- 
-}
-.show:hover{
-color: #0085FF;
-text-decoration: underline;
+  font-family: 'Times New Roman', Times, serif;
+  font-style:initial;
+  text-align:justify;
+  text-decoration:wavy;
+  background-color: #ffffff;
+  border-radius: 50px;
 
-}
-.mattab mat-elevation-z88{
-  background-color: #0085FF;
-
-}
-.Tables{
-  height: 10rem;
-}
-
-thead[_ngcontent-usl-c72], tr[_ngcontent-usl-c72] {
-  border-color: inherit;
-  border-style: solid;
-  border-width: 1.5px;
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  height: 34px;
-}
+} */
