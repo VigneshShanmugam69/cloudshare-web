@@ -27,6 +27,7 @@ import {ObjectpopupComponent} from './objectpopupCopyTo/objectpopup.component';
 import { OKTA_CONFIG,OktaAuthModule  } from '@okta/okta-angular';
 
 import { MatDialogModule } from '@angular/material/dialog'; 
+import { ListobjectcopyComponent } from './listobjectcopy/listobjectcopy.component';
 
 const oktaConfig = {
   issuer: 'https://dev-99932483.okta.com/oauth2/default',
@@ -49,6 +50,7 @@ const oktaConfig = {
     TopbarComponent,
     ChangepasswordComponent,
     ObjectpopupComponent,
+    ListobjectcopyComponent
     
   ],
   imports: [

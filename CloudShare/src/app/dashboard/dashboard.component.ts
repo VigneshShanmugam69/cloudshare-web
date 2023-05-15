@@ -286,50 +286,32 @@ export class DashboardComponent {
   }
 
   // open the popup both right use (contextmenu) and left click (click)
-  
+
   copyto(action: string) {
     // event.preventDefault();
     this.tableObjects = this.rowValue;
-    console.log(this.rowValue);
     this.contextMenu.closeMenu();
-
     this.dialogRef = this.dialog.open(ObjectpopupComponent, {
       width: '420px',
-
       data: {
         action: action,
         bucket: this.bucketname,
         object: this.tableObjects
       }
     });
-
   }
-
-
-
-
-
-
 
   @HostListener('document:keydown.control.shift.c', ['$event'])
   @HostListener('document:keydown.control.shift.x', ['$event'])
   onCustomKeyDown(event: KeyboardEvent, row: any) {
     this.tableObjects = this.rowValue;
-
-
     const dialog = this.dialog.open(ObjectpopupComponent, {
       width: '420px',
       data: {
         bucket: this.bucketname,
         object: this.tableObjects,
       }
-
     });
-
-    dialog.afterClosed().subscribe(result => {
-
-    });
-
   }
 
   logout() {

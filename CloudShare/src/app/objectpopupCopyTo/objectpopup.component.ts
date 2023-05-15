@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../dashboard/dashboard.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ListobjectcopyComponent } from '../listobjectcopy/listobjectcopy.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-objectpopup',
@@ -14,12 +16,13 @@ export class ObjectpopupComponent implements OnInit {
   sourceBucket = this.data.bucket;
   Source = this.data;
   objKey: any;
-  copyResult: any;
-  moveResult: any;
   bucketName: any;
   show: boolean = false;
   showCopyButton: boolean = false;
   showMoveButton: boolean = false;
+  dialogRef: any;
+  sourceObject = this.data.object;
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private auth: AuthService, public dialog: MatDialog,
   ) { }
@@ -27,16 +30,17 @@ export class ObjectpopupComponent implements OnInit {
   ngOnInit() {
     this.getbuckets();
     this.toggleButtons();
+
   }
 
-  SearchForm = new FormGroup({
-    search: new FormControl('')
-  })
+  // SearchForm = new FormGroup({
+  //   search: new FormControl('')
+  // })
 
-  bucketForm = new FormGroup({
-    bucketform: new FormControl('')
+  // bucketForm = new FormGroup({
+  //   bucketform: new FormControl('')
 
-  })
+  // })
 
   getbuckets() {
     this.buckets = [];
@@ -44,17 +48,18 @@ export class ObjectpopupComponent implements OnInit {
     this.auth.getBuckets().subscribe((res: any) => {
       this.buckets = res;
       this.bucketName = this.buckets;
+      console.log("bn", this.bucketName);
     })
   }
 
-  refresh() {
+  // refresh() {
+  // How to use form group and form controll in angular
+  //   this.SearchForm.reset();
+  //   this.bucketForm.reset();
+  //   this.show = false;
+  //   this.getbuckets();
 
-    this.SearchForm.reset();
-    this.bucketForm.reset();
-    this.show = false;
-    this.getbuckets();
-
-  }
+  // }
   toggleButtons() {
     if (this.data.action == 'copy') {
       this.showCopyButton = true;
@@ -81,8 +86,9 @@ export class ObjectpopupComponent implements OnInit {
         "destinationKeyName": null
       }
       this.auth.copyObject(payload).subscribe((res: any) => {
-        this.copyResult = res
+        Swal.fire(res['Result'])
       })
+
     } else {
       this.objKey = this.data.object.Key ? this.data.object.Key : this.data.object.Prefix;
 
@@ -93,7 +99,7 @@ export class ObjectpopupComponent implements OnInit {
         "destinationKeyName": null
       }
       this.auth.moveObject(payload).subscribe((res: any) => {
-        this.moveResult = res
+        Swal.fire(res['Result'])
       })
 
 
@@ -106,8 +112,11 @@ export class ObjectpopupComponent implements OnInit {
     this.buckets = this.searchByName(event.target.value)
 
   }
+
   searchByName(value: String) {
-    let temp = this.bucketName.filter((item: any) => item.Name.toLowerCase().startsWith(value)
+    // let temp = this.bucketName.filter((item: any) => item.Name.toLowerCase().startsWith(value)
+    // );
+    let temp = this.bucketName.filter((item: any) => item.Name.toLowerCase().includes(value)
     );
     if (temp == 0) {
       this.show = true;
@@ -116,5 +125,21 @@ export class ObjectpopupComponent implements OnInit {
       this.show = false;
       return temp;
     }
+  }
+
+  listobject() {
+    this.dialog.closeAll();
+    this.dialogRef = this.dialog.open(ListobjectcopyComponent, {
+      data: {
+        action: this.data.action,
+        "destinationBucket": this.destinationBucket,
+        "sourceBucket": this.sourceBucket,
+        "sourceKeyName": this.data.object,
+
+      }
+
+
+    })
+
   }
 }
