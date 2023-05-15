@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import { ModalDismissReasons,NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -25,8 +25,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AgGridModule } from 'ag-grid-angular';
 import {ObjectpopupComponent} from './objectpopupCopyTo/objectpopup.component';
 import { OKTA_CONFIG,OktaAuthModule  } from '@okta/okta-angular';
-import {NgbModule,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'
+
 import { MatDialogModule } from '@angular/material/dialog'; 
+import { ListobjectcopyComponent } from './listobjectcopy/listobjectcopy.component';
 
 const oktaConfig = {
   issuer: 'https://dev-99932483.okta.com/oauth2/default',
@@ -49,10 +50,10 @@ const oktaConfig = {
     TopbarComponent,
     ChangepasswordComponent,
     ObjectpopupComponent,
+    ListobjectcopyComponent
     
   ],
   imports: [
-   
     NgbModule,
     BrowserModule,
     AppRoutingModule,
@@ -69,6 +70,7 @@ const oktaConfig = {
     MatMenuModule,
     AgGridModule,
     OktaAuthModule,
+    
     MatDialogModule
   ],
   providers: [ { provide: OKTA_CONFIG, useValue: oktaConfig }],

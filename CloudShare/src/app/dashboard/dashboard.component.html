@@ -74,11 +74,11 @@
         <div class="preview">
           <!-- <button (click)="onSave()">Save</button> -->
           <button class="topbar-button" mat-button (click)="bucketproperties()"><b>properties</b></button>
-          <button class="topbar-button" mat-button (click)=" buckettags()"><b>Tags</b></button>
-          <button class="topbar-button" mat-button (click)=" bucketheaders()"><b>Headers</b></button>
-          <button class="topbar-button" mat-button (click)=" bucketpermission()"><b>Permission</b></button>
-          <button class="topbar-button" mat-button (click)=" bucketstoragess()"><b>storage</b></button>
-          <button class="topbar-button" mat-button (click)=" bucketmanagements()"><b>Bucketmanagement</b></button>
+          <button class="topbar-button" mat-button (click)="buckettags()"><b>Tags</b></button>
+          <button class="topbar-button" mat-button (click)="bucketheaders()"><b>Headers</b></button>
+          <button class="topbar-button" mat-button (click)="bucketpermission()"><b>Permission</b></button>
+          <button class="topbar-button" mat-button (click)="bucketstoragess()"><b>storage</b></button>
+          <button class="topbar-button" mat-button (click)="bucketmanagements()"><b>Bucketmanagement</b></button>
         </div>
       </div>
     </div>
@@ -112,28 +112,28 @@
   </thead>
   <tbody>
     <tr>
-      <td>Totalfolder</td>
+      <td class="storage">Totalfolder</td>
     
     
-      <td> {{ storages?.TotalFolder }}</td>
+      <td class="storage"> {{ storages?.TotalFolder }}</td>
       
     </tr>
     <tr>
-      <td>Totalobject</td>
-      <td>{{ objects?.TotalObject}}  </td>
+      <td class="storage">Totalobject</td>
+      <td class="storage">{{ objects?.TotalObject}}  </td>
         
     
     </tr>
     <tr>
-      <td>Totalfilesize</td>
-      <td><span class="show" (click)="totalobject('Totalfilesize')">
+      <td class="storage">Totalfilesize</td>
+      <td class="storage"><span class="show" (click)="totalobject('Totalfilesize')">
         <span *ngIf="!filesize">show</span>
         <span *ngIf="filesize">{{ filesize?.TotalfileSize}}</span>
       </span></td>
     </tr>
     <tr>
-      <td>storageclass</td>
-    <td> {{ storageclas?.Storageclass }}</td>
+      <td class="storage">storageclass</td>
+    <td  class="storage"> {{ storageclas?.Storageclass }}</td>
   </tbody>
 </table>
 

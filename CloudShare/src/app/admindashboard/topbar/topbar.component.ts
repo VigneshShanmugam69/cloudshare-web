@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { DatatransferService } from 'src/app/datatransfer.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-topbar',
@@ -8,16 +7,4 @@ import { DatatransferService } from 'src/app/datatransfer.service';
 })
 export class TopbarComponent {
   public sidebarShow: boolean = true;
-  public val="";
-  constructor( private datatransfer:DatatransferService){}
- 
-
-  local(){
-this.val="local"
-this.datatransfer.tablename(this.val);
-  }
-  directory(){
-    this.val="directory"
-    this.datatransfer.tablename(this.val);
-  }
 }

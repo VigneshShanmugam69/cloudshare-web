@@ -353,6 +353,10 @@ table {
   height: 30px;
   animation: spin 1s ease-in-out infinite;
 }
+.storage{
+  height:2.5rem;
+
+}
 
 /* @keyframes spin {
   to {

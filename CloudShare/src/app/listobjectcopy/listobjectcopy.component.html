@@ -1,0 +1,108 @@
+<div>
+  <ng-container>
+    <div>
+      <div>
+        <mat-card class="top">
+          <div class="topbutton">
+            <div>
+              <div>
+                <input (keyup)="filterObjects($event)" class="filter" placeholder="Search">
+                <div class="search">
+                  <mat-icon>search</mat-icon>
+                </div>
+              </div>
+            </div>
+            <mat-icon class="clear" [mat-dialog-close]>clear</mat-icon>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <mat-card class="centerdata">
+          <!-- <table mat-table [dataSource]="objectlists"> -->
+          <div class="tabledata" *ngIf="objectlists">
+            <table>
+              <thead>
+                <tr>
+                  <th class="name">Name</th>
+                  <th>Storage class</th>
+                  <th>Size</th>
+                  <th>Last modified</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of objectlists">
+                <tr>
+                  <td>
+                   
+                    <div>
+                      <mat-radio-button (click)="onclick(item.Prefix)" class="example-radio-button" [disabled]="!item?.Prefix?.includes('/')">
+                        <label>
+                          <span (click)="onclick(item.Prefix)" (dblclick)="folderObjectslist(item.Prefix)">
+                            {{item.Prefix}}
+                          </span>
+                        </label>
+
+                        <label>
+                          <span>
+                            {{item.Key}}
+                          </span>
+                        </label>
+
+                      </mat-radio-button>
+                    </div>
+                  </td>
+                  <td>{{item.StorageClass}}</td>
+                  <td>{{item.Size}} </td>
+                  <td>{{item.LastModified}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="show">
+            <h3 class="nofolder">No matches ...</h3>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+    <div>
+      <footer class="footer">
+        <button class="canclebutton" mat-button [mat-dialog-close]>Cancel</button>
+        <button *ngIf="showCopyButton" mat-button class="copybutton" [mat-dialog-close] (click)="copyto()">Copy</button>
+        <button *ngIf="showMoveButton" mat-button class="copybutton" [mat-dialog-close] (click)="copyto()">Move</button>
+      </footer>
+    </div>
+
+  </ng-container>
+</div>
+
+
+
+
+<!-- <div>
+  <mat-radio-group >
+    <mat-radio-button class="example-radio-button" *ngFor="let item of objectlists" (dblclick)="folderObjectslist(item.Prefix )" >
+      {{item.Prefix}} 
+         </mat-radio-button>
+        <fieldset>   
+        <mat-radio-button [disabled]="true" name="test" class="example-radio-button" *ngFor="let item of objectlists" (dblclick)="folderObjectslist( item.Key)" >
+          {{item.Key}}
+        </mat-radio-button>
+      </fieldset>
+      </mat-radio-group>
+</div> -->
+<!-- <div>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Storage class</th>
+      <th>Size</th>
+      <th>Last modified</th>
+    </tr>
+    <tr>
+      <td type="radio">ht</td>
+    </tr>
+  </table>
+</div> -->

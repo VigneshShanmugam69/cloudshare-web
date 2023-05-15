@@ -4,7 +4,7 @@ import { Route, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DatatransferService } from '../datatransfer.service';
-import OktaAuth from '@okta/okta-auth-js';
+// import OktaAuth from '@okta/okta-auth-js';
 import { OktaAuthModule, OktaAuthService } from '@okta/okta-angular';
 
 @Component({

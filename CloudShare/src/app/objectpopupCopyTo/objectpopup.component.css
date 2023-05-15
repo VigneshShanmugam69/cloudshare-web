@@ -35,7 +35,7 @@
 
 .listbucket {
     color: rgb(0, 0, 0);
-  width: 418px;
+  /* width: 418px; */
   overflow-x: auto;
   height: 281px;
 
@@ -90,15 +90,23 @@
 
 .searchicon {
   margin-top: -23px;
-  margin-left: -4px;
+  /* margin-left: -4px; */
+  margin-left: 136px;
  }
 
 .filter {
   width: 50%;
-  margin-left: -148px;
+  /* margin-left: -148px; */
+  margin-left: -5px;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
   overflow-y: hidden !important;
+}
+
+::ng-deep .mat-mdc-dialog-container, .mat-mdc-dialog-container .mdc-dialog__container, .mat-mdc-dialog-container .mdc-dialog__surface {
+  
+  min-height:auto !important;
+ 
 }
