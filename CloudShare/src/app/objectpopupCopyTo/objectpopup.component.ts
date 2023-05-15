@@ -48,7 +48,6 @@ export class ObjectpopupComponent implements OnInit {
     this.auth.getBuckets().subscribe((res: any) => {
       this.buckets = res;
       this.bucketName = this.buckets;
-      console.log("bn", this.bucketName);
     })
   }
 

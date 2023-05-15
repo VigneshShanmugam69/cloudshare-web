@@ -39,7 +39,7 @@ export class ListobjectcopyComponent implements OnInit {
 
     })
     this.toggleButton();
-    console.log('action',this.data.action);
+    
   }
 
   //listing objects from the selected folder 
@@ -64,7 +64,7 @@ export class ListobjectcopyComponent implements OnInit {
   }
   onclick(row:any){
     this.destinationKeyName = row;   
-    this.keyName = this.destinationKeyName.split('/')    
+    this.keyName = this.destinationKeyName.split('/')   
     
   }
 
@@ -80,7 +80,7 @@ export class ListobjectcopyComponent implements OnInit {
         "sourceKeyName": this.objKey,
         "destinationKeyName": destinationKeyName,
       }
-      console.log("copied",payload);
+      
       this.auth.copyObject(payload).subscribe((res: any) => {
         Swal.fire(res['Result'])
       })
@@ -94,7 +94,7 @@ export class ListobjectcopyComponent implements OnInit {
         "destinationKeyName":destinationKeyName,
         
       }
-      console.log("moved",payload);
+     
       this.auth.moveObject(payload).subscribe((res: any) => {
         Swal.fire(res['Result'])
       })
