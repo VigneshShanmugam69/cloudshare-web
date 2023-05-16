@@ -40,6 +40,14 @@
     left: 33%;
     padding: 5px;
 }
+.mt-size-re{
+    height: 300px;
+    width: 500px;
+    position: absolute;
+    top: 35%;
+    left: 33%;
+    padding: 5px;
+}
 .mt-size-in{
     overflow: auto;
     margin-top: 5px;

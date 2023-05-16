@@ -8,6 +8,13 @@ import { Observable, observable } from 'rxjs';
 
 export class AuthService {
 
+  usergroups(val:any){
+return this.http.post(this.APIUrl+'getUserGroups',val);
+  }
+  removeuser(val:any){
+    return this.http.post(this.APIUrl+'removefromgroup',val);
+  }
+
   directoryuser(){
     return this.http.get(this.APIUrl+'listDirectoryUsers')
   }

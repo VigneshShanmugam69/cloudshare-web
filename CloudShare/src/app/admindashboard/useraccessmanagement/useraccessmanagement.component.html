@@ -6,7 +6,7 @@
     <div class="tables">
         <div class="add-btn-div">
             <button class="add-button" *ngIf="!tableName">sync</button>
-            <button class="add-button" *ngIf="!tableName">Remove</button>
+            <button class="add-button" *ngIf="!tableName"(click)="removePopup()">Remove</button>
             <button class="add-button" (click)="adduser()">Add</button>
         </div>
         <div>
@@ -43,7 +43,7 @@
                     </thead>
                     <tbody *ngFor="let item of directoryuser">
                         <tr>
-                            <td><input type=checkbox class="check">{{item.firstname}} {{item.lastname}}</td>
+                            <td><input type=checkbox class="check" (click)="userId=item.id">{{item.firstname}} {{item.lastname}}</td>
                             <td>{{item.id}}</td>
                             <td>{{item.email}}</td>
                             <td>{{item.status}}</td>
@@ -109,7 +109,7 @@
             </div>
             <div class="add-btn">
                 <button class="submit" (click)="addUser()">submit</button>
-                <button class="submit" (click)="cancel()">cancel</button>
+                <button class="submit" (click)="this.openPopup = !this.openPopup;">cancel</button>
             </div>
 
         </form>
@@ -128,7 +128,7 @@
                                 </thead>
                                 <tbody *ngFor="let item of groups">
                                     <tr>
-                                        <td><input type=checkbox  class="check" (click)="groupusers($event,item.name)">{{item.name}}</td>
+                                        <td><input type=checkbox  class="check" (click)="groupusers($event,item.groupName)">{{item.groupName}}</td>
                                         <td>{{item.groupId}}</td>
                                     </tr>
                                 </tbody>
@@ -155,7 +155,35 @@
                     </div>
                     <div>
                         <button class="import">Import</button>
-                        <button class="import" (click)="dcancel()">cancel</button>
+                        <button class="import" (click)="this.addpopup=!this.addpopup;">cancel</button>
+                    </div>
+        </mat-card>
+    </div>
+
+    <!-- remove -->
+    <div *ngIf="removepopup">
+        <mat-card class="mt-size-re">
+                    <div>
+                        <mat-card class="mt-size-in">
+                            <table class="resizable-table">
+                                <thead>
+                                    <tr>
+                                        <th (mousedown)="onResizeStart($event)"><input type=checkbox class="check">Group Names<div class="resize-handle"></div></th>
+                                        <th>GroupID</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let item of usergroups">
+                                    <tr>
+                                        <td><input type=checkbox  class="check" (click)="groupId=item.groupId">{{item.groupName}}</td>
+                                        <td>{{item.groupId}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </mat-card>
+                    </div>
+                    <div>
+                        <button class="import" (click)="removeuser()">Ok</button>
+                        <button class="import" (click)="removepopup=!removepopup">cancel</button>
                     </div>
         </mat-card>
     </div>
