@@ -124,6 +124,7 @@ export class DashboardComponent {
   folderorobjectname: any;
   Key: any;
   objectsname: any;
+  loading :boolean = false;
 
   @ViewChild(MatMenuTrigger)
   contextMenu!: MatMenuTrigger;
@@ -190,13 +191,8 @@ export class DashboardComponent {
 
   // list the buckets
   account() {
-    
-    
-    
     this.auth.getBuckets().subscribe((res: any) => {
       this.buckets = res;
-    
-      
     });
 
     //   this.auth.userLists().subscribe((res:any)=>{
@@ -213,16 +209,11 @@ export class DashboardComponent {
       this.folders = res.commonPrefixes;
       this.Objects = res.objects;
       this.objectlists = this.folders.concat(this.Objects);
-    
-
-
     });
   }
   //listing objects from the folder 
   folderObjectslist(val: any) {
-   
-    {
-   
+    this.loading = true;
     if (this.foldername && this.foldername !== val) {
       // concatenate the previous folder name with the new folder name
       val = `${this.foldername}${val}`;
@@ -231,8 +222,9 @@ export class DashboardComponent {
     if (this.foldername.includes("/")) {
       let payload = { "Bucket": this.bucketname, "folderPath": this.foldername }
       this.auth.folderObjects(payload).subscribe((res: any) => {
+        this.loading = false;
         this.folderPrefix = res?.folderNames ?? [];
-        this.folderObj = res?.objects ?? [];
+        this.folderObj = res?.objects ?? [];       
         this.objectlists = null;
         this.objectlists = this.folderPrefix
         this.objectlists = this.folderPrefix.concat(this.folderObj)
@@ -273,7 +265,7 @@ export class DashboardComponent {
         this.enableTree = true;
       });
     }
-  }}
+  }
 
   //To list out properties in a bucket
   bucketproperties() {
@@ -331,7 +323,7 @@ export class DashboardComponent {
   }
 
   // open the popup both right use (contextmenu) and left click (click)
-  
+
   copyto(action: string) {
     // event.preventDefault();
     this.tableObjects = this.rowValue;
@@ -363,7 +355,7 @@ export class DashboardComponent {
       },
     });
 
-    dialog.afterClosed().subscribe((result) => {});
+    dialog.afterClosed().subscribe((result) => { });
   }
 
   logout() {
@@ -430,11 +422,11 @@ export class DashboardComponent {
       this.res = res;
       this.storages = res;
       console.log('datasourcessr', this.storages);
-      
+
     });
-   
+
   }
- 
+
   totalfilesize() {
     let payload = { Bucket: this.bucketname };
     this.auth.totalfilesize(payload).subscribe((res: any) => {
@@ -442,7 +434,7 @@ export class DashboardComponent {
       this.filesizes = res;
       console.log('filesizes', this.filesizes);
     });
-  
+
   }
   storageclass() {
     this.storagetable = true;
@@ -457,7 +449,7 @@ export class DashboardComponent {
       console.log('datasource', this.storageclas);
     });
   }
-  totalobjects(){
+  totalobjects() {
     this.storagetable = true;
     this.falseTable = false;
     this.hideTable = false;
@@ -467,88 +459,88 @@ export class DashboardComponent {
       this.res = res;
       this.objects = res;
       console.log('object', this.object);
-      
-     //this.refresh= this.object=[]=[]
+
+      //this.refresh= this.object=[]=[]
     });
-    }
+  }
   bucketstoragess() {
-   
+
     this.storagetable = true;
     this.falseTable = false;
     this.hideTable = false;
     this.bucketstorages()
     this.totalobjects()
     this.storageclass()
-    
+
   }
 
   //----------------
   totalobject(name: string) {
-   
+
     {
-    
-    if (name == 'Totalobject') {
-     
-     
-      this.storagetable = true;
-      this.falseTable = false;
-      this.hideTable = false;
 
-      let payload = { Bucket: this.bucketname };
-      this.auth.totalobjects(payload).subscribe((res: any) => {
-        this.res = res;
-        this.object = res;
-        console.log('object', this.object);
-        
-       //this.refresh= this.object=[]=[]
-      });
-      
-    };
-    
-    if (name == 'Totalfolder') {
-      this.storagetable = true;
-      this.falseTable = false;
-      this.hideTable = false;
-      let payload = { Bucket: this.bucketname };
-      this.auth.totalfolder(payload).subscribe((res: any) => {
-        this.res = res;
-        this.folder = res;
-        
-        
-        console.log('folder', this.folder);
-      });
-    };
+      if (name == 'Totalobject') {
 
-    if (name == 'Totalfilesize') {
-      this.storagetable = true;
-      this.falseTable = false;
-      this.hideTable = false;
 
-      let payload = { Bucket: this.bucketname };
-      this.auth.totalfilesize(payload).subscribe((res: any) => {
-        this.res = res;
-        this.filesize = res;
-        console.log('filesize', this.filesize);
-      });
-    };
-    if (name == 'storageclass') {
-      this.storagetable = true;
-      this.falseTable = false;
-      this.hideTable = false;
+        this.storagetable = true;
+        this.falseTable = false;
+        this.hideTable = false;
 
-      let payload = { Bucket: this.bucketname };
-      this.auth.storage(payload).subscribe((res?: any) => {
-        this.res = res;
-        this.class = res;
-        console.log('class', this.class);
-        
-      });
-    };
+        let payload = { Bucket: this.bucketname };
+        this.auth.totalobjects(payload).subscribe((res: any) => {
+          this.res = res;
+          this.object = res;
+          console.log('object', this.object);
+
+          //this.refresh= this.object=[]=[]
+        });
+
+      };
+
+      if (name == 'Totalfolder') {
+        this.storagetable = true;
+        this.falseTable = false;
+        this.hideTable = false;
+        let payload = { Bucket: this.bucketname };
+        this.auth.totalfolder(payload).subscribe((res: any) => {
+          this.res = res;
+          this.folder = res;
+
+
+          console.log('folder', this.folder);
+        });
+      };
+
+      if (name == 'Totalfilesize') {
+        this.storagetable = true;
+        this.falseTable = false;
+        this.hideTable = false;
+
+        let payload = { Bucket: this.bucketname };
+        this.auth.totalfilesize(payload).subscribe((res: any) => {
+          this.res = res;
+          this.filesize = res;
+          console.log('filesize', this.filesize);
+        });
+      };
+      if (name == 'storageclass') {
+        this.storagetable = true;
+        this.falseTable = false;
+        this.hideTable = false;
+
+        let payload = { Bucket: this.bucketname };
+        this.auth.storage(payload).subscribe((res?: any) => {
+          this.res = res;
+          this.class = res;
+          console.log('class', this.class);
+
+        });
+      };
+
+    }
+
 
   }
-  
-  
-}
 
   bucketmanagements() {
     this.hideTable = false;
@@ -617,5 +609,5 @@ export class DashboardComponent {
     }
   }
 
-  storage(name: string) {}
+  storage(name: string) { }
 }
