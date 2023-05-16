@@ -8,6 +8,14 @@ import { Observable, observable } from 'rxjs';
 
 export class AuthService {
 
+  directoryuser(){
+    return this.http.get(this.APIUrl+'listDirectoryUsers')
+  }
+
+  listlocaluser() {
+    return this.http.get(this.APIUrl+'listLocalUser');
+  }
+
   readonly APIUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 

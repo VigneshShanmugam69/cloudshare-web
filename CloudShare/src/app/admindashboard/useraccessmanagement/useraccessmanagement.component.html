@@ -10,19 +10,20 @@
             <button class="add-button" (click)="adduser()">Add</button>
         </div>
         <div>
-            <table *ngIf="tableName; else directory" class="mat-elevation-z8">
+            <table *ngIf="tableName; else directory" class="resizable-table">
                 <thead>
                     <tr>
-                        <th><input type=checkbox class="check"><span>Name</span></th>
-                        <th>ID</th>
-                        <th>Email</th>
+                        <th (mousedown)="onResizeStart($event)"><input type=checkbox class="check"><span>Name<div class="resize-handle"></div></span></th>
+                        <th (mousedown)="onResizeStart($event)">ID<div class="resize-handle"></div></th>
+                        <th (mousedown)="onResizeStart($event)">Email<div class="resize-handle"></div></th>
                         <th>Status</th>
+                        
                     </tr>
                 </thead>
-                <tbody *ngFor="let item of userlist">
+                <tbody *ngFor="let item of localuserlist">
                     <tr>
-                        <td><input type=checkbox class="check">{{item.firstname}}{{item.lastname}}</td>
-                        <td>{{item.userID}}</td>
+                        <td><input type=checkbox class="check">{{item.firstname}} {{item.lastname}}</td>
+                        <td>{{item.id}}</td>
                         <td>{{item.email}}</td>
                         <td>{{item.status}}</td>
                     </tr>
@@ -30,23 +31,23 @@
             </table>
 
             <ng-template #directory>
-                <table>
+                <table class="resizable-table">
                     <thead>
                         <tr>
-                            <th><input type=checkbox class="check">Name</th>
-                            <th>UserID</th>
-                            <th>Email</th>
-                            <th>Status</th>
+                            <th (mousedown)="onResizeStart($event)"><input type=checkbox class="check">Name<div class="resize-handle"></div></th>
+                            <th (mousedown)="onResizeStart($event)">UserID<div class="resize-handle"></div></th>
+                            <th (mousedown)="onResizeStart($event)">Email<div class="resize-handle"></div></th>
+                            <th (mousedown)="onResizeStart($event)">Status <div class="resize-handle"></div></th>
                             <th>AD Group</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let item of directoryuser">
                         <tr>
-                            <td><input type=checkbox class="check">{{item.firstname}}{{item.lastname}}</td>
-                            <td>{{item.userID}}</td>
+                            <td><input type=checkbox class="check">{{item.firstname}} {{item.lastname}}</td>
+                            <td>{{item.id}}</td>
                             <td>{{item.email}}</td>
                             <td>{{item.status}}</td>
-                            <td>{{item.adGroup}}</td>
+                            <td>{{item.ADGroup}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -118,10 +119,10 @@
         <mat-card class="mt-size">
                     <div>
                         <mat-card class="mt-size-in">
-                            <table class="mat-elevation-z8">
+                            <table class="resizable-table">
                                 <thead>
                                     <tr>
-                                        <th><input type=checkbox class="check">Group Names</th>
+                                        <th (mousedown)="onResizeStart($event)"><input type=checkbox class="check">Group Names<div class="resize-handle"></div></th>
                                         <th>GroupID</th>
                                     </tr>
                                 </thead>
@@ -136,10 +137,10 @@
                     </div>
                     <div>
                         <mat-card class="mt-size-in">
-                            <table class="mat-elevation-z8">
+                            <table class="resizable-table">
                                 <thead>
                                     <tr>
-                                        <th><input type=checkbox class="check">Users</th>
+                                        <th (mousedown)="onResizeStart($event)"><input type=checkbox class="check">Users<div class="resize-handle"></div></th>
                                         <th>UserID</th>
                                     </tr>
                                 </thead>

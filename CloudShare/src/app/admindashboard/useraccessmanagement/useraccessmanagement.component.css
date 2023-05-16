@@ -1,3 +1,23 @@
+.resizable-table th {
+    position: relative;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
+  .resize-handle {
+    position: absolute;
+    top: 0;
+    right: -4px;
+    bottom: 0;
+    width: 8px;
+    cursor: col-resize;
+  }
+  
+  .resizable-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
 .tables {
     border-radius: 4px;
     position: absolute;
@@ -108,14 +128,14 @@
 .check{
     margin-right: 10px;
 }
-
+/* 
 th,thead,thead,td {
 border-collapse: separate;
   text-align: left;
   padding: 12px;
   box-sizing: border-box;
   border-width: 1px;
-}
+} */
 
 
 

@@ -26,7 +26,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import {ObjectpopupComponent} from './objectpopupCopyTo/objectpopup.component';
 import { OKTA_CONFIG,OktaAuthModule  } from '@okta/okta-angular';
 import {NgbModule,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'
-import { MatDialogModule } from '@angular/material/dialog'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { ResizableModule } from 'angular-resizable-element';
+import { ResizableComponent } from './resizable/resizable.component';
+import { ResizableDirective } from './resizable/resizable.directive';
 
 const oktaConfig = {
   issuer: 'https://dev-99932483.okta.com/oauth2/default',
@@ -49,7 +52,9 @@ const oktaConfig = {
     TopbarComponent,
     ChangepasswordComponent,
     ObjectpopupComponent,
-    
+    ResizableComponent,
+    ResizableDirective,
+
   ],
   imports: [
    
@@ -69,7 +74,8 @@ const oktaConfig = {
     MatMenuModule,
     AgGridModule,
     OktaAuthModule,
-    MatDialogModule
+    MatDialogModule,
+    ResizableModule
   ],
   providers: [ { provide: OKTA_CONFIG, useValue: oktaConfig }],
   bootstrap: [AppComponent]

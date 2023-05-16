@@ -25,7 +25,8 @@ export class UseraccessmanagementComponent {
   constructor(private auth: AuthService,private datatransfer:DatatransferService,private modalService: NgbModal) { }
 
   ngOnInit(): void { 
-    this.userList();
+    this.listlocaluser();
+    this.directoryUser();
     this.datatransfer.tableValue.subscribe((res:any)=>{
       if(res == 'local'){
          this.tableName = true;
@@ -37,8 +38,8 @@ export class UseraccessmanagementComponent {
   }
 
   displayedColumns: string[] = ['uname','ID',  'email', 'role'];  //,'Action'
-  userlist: any;
-  directoryuser:any;
+  directoryuser: any;
+  localuserlist:any;
   hideform: boolean = false;
   adduserform = new FormGroup({
     fname: new FormControl(""),
@@ -51,13 +52,25 @@ export class UseraccessmanagementComponent {
     checkUser:new FormControl("")
   })
 
-
-  //listing the user in admin
-  userList() {
-    this.auth.listUsers().subscribe((res: any) => {
-      this.userlist = res;
+  //listing the local users
+  listlocaluser(){
+    this.auth.listlocaluser().subscribe((res:any)=>{
+      this.localuserlist=res.users;
+      console.log(this.localuserlist);
     })
   }
+
+  directoryUser(){
+    this.auth.directoryuser().subscribe((res:any)=>{
+      this.directoryuser=res.users;
+    })
+  }
+  //listing the user in admin
+  // userList() {
+  //   this.auth.listUsers().subscribe((res: any) => {
+  //     this.userlist = res;
+  //   })
+  // }
    handleValEvent(value:any){
      console.log(value)
    }
@@ -71,12 +84,12 @@ export class UseraccessmanagementComponent {
       roleID: this.adduserform.controls.roles.value,
       // type:this.adduserform.controls.type.value
     }
-    console.log(payload);
+    // console.log(payload);
     this.auth.addUserFields(payload).subscribe((res: any) => {
 
       this.adduserform.reset();
       Swal.fire(res['message']).then((result) => {
-        this.userList()
+        this.listlocaluser()
       });
 
     })
@@ -138,21 +151,36 @@ this.auth.listGroupUsers(payload).subscribe((res:any)=>{
     this.hideform = true;
   }
 
-  // open(content: any) {
-  //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-  // }
+  onResizeStart(event: MouseEvent): void {
+    const handle = event.target as HTMLElement;
+  const th = this.findParentTh(handle);
+      if (th) {
+        const initialWidth = th.offsetWidth;
+        const startX = event.pageX;
+
+    const onMouseMove = (e: MouseEvent) => {
+      const width = initialWidth + (e.pageX - startX);
+      th.style.width = width + 'px';
+    };
+      const onMouseUp = () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
   
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+  }
+  }
+  private findParentTh(element: HTMLElement): HTMLTableHeaderCellElement | null {
+    while (element && element.tagName !== 'TH') {
+      element = element.parentElement as HTMLElement;
+    }
+  
+    return element as HTMLTableHeaderCellElement;
+  }
+
+
 }
+
+
+

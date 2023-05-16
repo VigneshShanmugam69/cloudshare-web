@@ -24,6 +24,7 @@
     "@okta/okta-angular": "^3.0.1",
     "@okta/okta-auth-js": "^7.2.0",
     "ag-grid-angular": "^29.2.0",
+    "angular-resizable-element": "^7.0.2",
     "bootstrap": "^5.2.3",
     "cors": "^2.8.5",
     "exif": "^0.6.0",
