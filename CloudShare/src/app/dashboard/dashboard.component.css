@@ -464,3 +464,9 @@ thead[_ngcontent-usl-c72], tr[_ngcontent-usl-c72] {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 34px;
 }
+
+.spinner{  	
+	position: absolute;
+  margin-left: 2rem; 
+  margin-top: 4rem; 
+}
