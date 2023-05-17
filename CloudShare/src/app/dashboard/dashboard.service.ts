@@ -50,6 +50,14 @@ return this.http.post(this.APIUrl+'getUserGroups',val);
     return this.http.get(this.APIUrl + 'listUsers');
   }
 
+  listGroups(){
+    return this.http.get(this.APIUrl+'getAllGroups');
+   }
+ 
+   listGroupUsers(val:any){
+ return this.http.post(this.APIUrl+'listGroupUsers',val);
+   }
+ 
   addUserFields(val: any) {
     return this.http.post(this.APIUrl + 'createLocalUser', val)
   }

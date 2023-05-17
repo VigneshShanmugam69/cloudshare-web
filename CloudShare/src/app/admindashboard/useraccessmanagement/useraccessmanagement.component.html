@@ -1,31 +1,10 @@
 <app-topbar></app-topbar>
-<!-- <div class="accounts">
-    <div class="accountlists">
-        <button class="acountlist-button" mat-button (click)="userList()">Account1</button>
-        <br>
-        <button class="acountlist-button" mat-button (click)="userList()">Account2</button>
-        <br>
-        <button class="acountlist-button" mat-button (click)="userList()">Account3</button>
-    </div>
-</div> -->
-<!-- <div>
-    <div class="user-card">
-        <img class="adduser-image" type="button" (click)="showForm()"  src="../../../assets/adduser.png" alt="adduserimage">
-        <span class="adduser-text">Add user</span>
-        <img class="updateuser-image" src="../../../assets/updateuser.png" alt="adduserimage">
-        <span class="updateuser-text">Update user</span>
-        <img class="deleteuser-image" src="../../../assets/deleteuser.png" alt="adduserimage">
-        <span class="deleteuser-text">Delete user</span>
-    </div>
-
-
-</div> -->
 
 <div>
 
     <div class="tables">
         <div class="add-btn-div">
-            <button class="add-button" *ngIf="!tableName">sync</button>
+            <button class="add-button" *ngIf="!tableName">Sync</button>
             <button class="add-button" *ngIf="!tableName"(click)="removePopup()">Remove</button>
             <button class="add-button" (click)="adduser()">Add</button>
         </div>
@@ -106,31 +85,30 @@
                             <input formControlName="gmail" matInput placeholder="abc@gmail.com">
                         </mat-form-field>
                     </div>
-                    <div class="slt-opt">
-                         <select formControlName="type" class="slt-opt-fld" aria-label="Default select example">
-                        <option selected>Select type</option>
-                        <option value="local">Local</option>
-                        <option value="directory">Directory</option>
-                    </select>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input formControlName="passwrd" matInput placeholder="Enter your Last name">
+                        </mat-form-field>
                     </div>
-                   <div class="slt-opt">
-                     <select formControlName="roles" class="slt-opt-fld" aria-label="Default select example">
-                        <option selected>Select role</option>
-                        <option value="1">user</option>
-                        <option value="2">admin</option>
-                    </select>
-                   </div>
-                   
+    
+                    <div>
+                        <select formControlName="roles" class="slt-opt-fld" aria-label="Default select example">
+                            <option selected>Select role</option>
+                            <option value="1">user</option>
+                            <option value="2">admin</option>
+                        </select>
+                    </div>
+                    <div class="slt-opt">
+                        <input type="checkbox" formControlName="checkUser" (click)="onCheck()" class="chk-stl">
+                        <label class="chk-stl">set own password</label>
+                    </div>
                 </div>
                 <div class="add-btn">
-                    <button class="submit" (click)="addUser()">submit</button>
-                    <button class="submit" (click)="cancel()">cancel</button>
+                    <button class="submit" (click)="addUser()">Submit</button>
+                    <button class="submit" (click)="this.openPopup = !this.openPopup;">Cancel</button>
                 </div>
-            </div>
-            <div class="add-btn">
-                <button class="submit" (click)="addUser()">submit</button>
-                <button class="submit" (click)="this.openPopup = !this.openPopup;">cancel</button>
-            </div>
+    
 
         </form>
         <!-- </ng-template> -->
@@ -175,7 +153,7 @@
                     </div>
                     <div>
                         <button class="import">Import</button>
-                        <button class="import" (click)="this.addpopup=!this.addpopup;">cancel</button>
+                        <button class="import" (click)="this.addpopup=!this.addpopup;">Cancel</button>
                     </div>
         </mat-card>
     </div>
@@ -203,7 +181,7 @@
                     </div>
                     <div>
                         <button class="import" (click)="removeuser()">Ok</button>
-                        <button class="import" (click)="removepopup=!removepopup">cancel</button>
+                        <button class="import" (click)="removepopup=!removepopup">Cancel</button>
                     </div>
         </mat-card>
     </div>
