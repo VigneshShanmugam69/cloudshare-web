@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import { ModalDismissReasons,NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -31,6 +30,8 @@ import { ResizableModule } from 'angular-resizable-element';
 import { ResizableComponent } from './resizable/resizable.component';
 import { ResizableDirective } from './resizable/resizable.directive';
 
+import { ListobjectcopyComponent } from './listobjectcopy/listobjectcopy.component';
+
 const oktaConfig = {
   issuer: 'https://dev-99932483.okta.com/oauth2/default',
   clientId: '0oa96jm6l9Xbt6lmy5d7',
@@ -55,9 +56,10 @@ const oktaConfig = {
     ResizableComponent,
     ResizableDirective,
 
+    ListobjectcopyComponent
+    
   ],
   imports: [
-   
     NgbModule,
     BrowserModule,
     AppRoutingModule,

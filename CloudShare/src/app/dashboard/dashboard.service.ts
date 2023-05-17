@@ -50,14 +50,6 @@ return this.http.post(this.APIUrl+'getUserGroups',val);
     return this.http.get(this.APIUrl + 'listUsers');
   }
 
-  listGroups(){
-   return this.http.get(this.APIUrl+'getAllGroups');
-  }
-
-  listGroupUsers(val:any){
-return this.http.post(this.APIUrl+'listGroupUsers',val);
-  }
-
   addUserFields(val: any) {
     return this.http.post(this.APIUrl + 'createLocalUser', val)
   }
@@ -76,6 +68,21 @@ return this.http.post(this.APIUrl+'listGroupUsers',val);
   objectPermission(val: any) {
     return this.http.post(this.APIUrl + 'getAccessControlList', val)
   }
+  totalfolder(val:any){
+    return this.http.post(this.APIUrl + 'totalfolder',val)
+  }
+
+  totalobjects(val:any){
+    return this.http.post(this.APIUrl +'totalobject',val)
+  }
+
+  totalfilesize(val:any){
+    return this.http.post(this.APIUrl +'totalfilesize',val)
+   }
+   storage(val:any){
+    return this.http.post(this.APIUrl +'storageclass',val)
+  }
+  
 
 
 
@@ -125,18 +132,4 @@ return this.http.post(this.APIUrl+'listGroupUsers',val);
   moveObject(val: any) {
     return this.http.post(this.APIUrl + 'moveObject',val)
   }
-  totalfolder(val:any){
-    return this.http.post(this.APIUrl + 'totalfolder',val)
-  }
-  totalobjects(val:any){
-    return this.http.post(this.APIUrl +'totalobject',val)
-  }
-  totalfilesize(val:any){
-   return this.http.post(this.APIUrl +'totalfilesize',val)
-  }
-  storage(val:any){
-    return this.http.post(this.APIUrl +'storageclass',val)
-  }
-
-
 }

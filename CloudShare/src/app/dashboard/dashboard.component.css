@@ -353,6 +353,10 @@ table {
   height: 30px;
   animation: spin 1s ease-in-out infinite;
 }
+.storage{
+  height:2.5rem;
+
+}
 
 /* @keyframes spin {
   to {
@@ -459,4 +463,10 @@ thead[_ngcontent-usl-c72], tr[_ngcontent-usl-c72] {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 34px;
+}
+
+.spinner{  	
+	position: absolute;
+  margin-left: 2rem; 
+  margin-top: 4rem; 
 }

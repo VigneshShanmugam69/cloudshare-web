@@ -1,12 +1,13 @@
 
 
 
-<mat-toolbar>
-    <div class="sidebar-opener" (click)="sidenav.toggle()" matTooltip="Menu">
-        <mat-icon>menu </mat-icon>
-    </div>
-    <!-- <div class="sidebar-slider" [class.sidebar-slide-in]="sidebarShow"> -->
-    <!-- <div class="sidebar-close" (click)="sidebarShow = !sidebarShow">
+
+    <mat-toolbar >
+        <div class="sidebar-opener" (click)="sidebarShow = !sidebarShow">
+            <mat-icon>menu </mat-icon>
+        </div>
+        <div class="sidebar-slider" [class.sidebar-slide-in]="sidebarShow">
+            <div class="sidebar-close" (click)="sidebarShow = !sidebarShow">
                 X
             </div> -->
     <div class="side-nav">
@@ -37,10 +38,9 @@
                 <br>
                 <button class="side-buttons" routerLink="/spacemanagement">Space management</button>
                 <br>
-                <button class="side-buttons" routerLink="/costmanagement" >Cost management</button> -->
-    </div>
-    <!-- </div> -->
-    <div class="profile"></div>
-    <mat-icon>account_circle </mat-icon>
-</mat-toolbar>
-<!-- <app-useraccessmanagement [parentvalue]="val"></app-useraccessmanagement> -->
+                <button class="side-buttons" routerLink="/costmanagement" >Cost management</button>
+            </div>
+        </div>
+        <div class="profile"></div>
+        <mat-icon>account_circle </mat-icon>
+    </mat-toolbar> 

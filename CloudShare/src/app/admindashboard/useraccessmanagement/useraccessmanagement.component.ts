@@ -1,8 +1,6 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/dashboard/dashboard.service';
-import { DatatransferService } from 'src/app/datatransfer.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -50,7 +48,6 @@ export class UseraccessmanagementComponent {
     lname: new FormControl(""),
     uname: new FormControl(""),
     gmail: new FormControl(""),
-    passwrd: new FormControl(""),
     roles: new FormControl(""),
     checkUser: new FormControl("")
   })
