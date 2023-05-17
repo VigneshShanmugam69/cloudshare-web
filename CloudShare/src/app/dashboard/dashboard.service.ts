@@ -8,6 +8,21 @@ import { Observable, observable } from 'rxjs';
 
 export class AuthService {
 
+  usergroups(val:any){
+return this.http.post(this.APIUrl+'getUserGroups',val);
+  }
+  removeuser(val:any){
+    return this.http.post(this.APIUrl+'removefromgroup',val);
+  }
+
+  directoryuser(){
+    return this.http.get(this.APIUrl+'listDirectoryUsers')
+  }
+
+  listlocaluser() {
+    return this.http.get(this.APIUrl+'listLocalUser');
+  }
+
   readonly APIUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
@@ -35,6 +50,14 @@ export class AuthService {
     return this.http.get(this.APIUrl + 'listUsers');
   }
 
+  listGroups(){
+    return this.http.get(this.APIUrl+'getAllGroups');
+   }
+ 
+   listGroupUsers(val:any){
+ return this.http.post(this.APIUrl+'listGroupUsers',val);
+   }
+ 
   addUserFields(val: any) {
     return this.http.post(this.APIUrl + 'createLocalUser', val)
   }
