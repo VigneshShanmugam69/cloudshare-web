@@ -76,7 +76,9 @@
 
 .copybutton {
   border-radius: 219px;
+  /* background-color: orangered;  */
 }
+
 
 .copybutton:hover {
   background-color: #0085FF;
@@ -109,4 +111,13 @@
   
   min-height:auto !important;
  
+}
+.spinner {
+  
+  display: block;
+  position: fixed;
+  z-index: 974; 
+  top: 48%;
+  right: 49%;
+  
 }

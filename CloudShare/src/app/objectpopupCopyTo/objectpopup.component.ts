@@ -22,6 +22,10 @@ export class ObjectpopupComponent implements OnInit {
   showMoveButton: boolean = false;
   dialogRef: any;
   sourceObject = this.data.object;
+  isLoading: boolean = false;
+  hidecard: boolean = false;
+  disabledCopyButton: boolean = true;
+  disabledMoveButton: boolean = true;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private auth: AuthService, public dialog: MatDialog,
@@ -43,11 +47,13 @@ export class ObjectpopupComponent implements OnInit {
   // })
 
   getbuckets() {
+    this.isLoading = true;
     this.buckets = [];
     this.buckets = null;
     this.auth.getBuckets().subscribe((res: any) => {
       this.buckets = res;
       this.bucketName = this.buckets;
+      this.isLoading = false;
     })
   }
 
@@ -71,10 +77,14 @@ export class ObjectpopupComponent implements OnInit {
   }
   onRowClick(row: any) {
     this.destinationBucket = row;
+    this.disabledCopyButton = false;
+    this.disabledMoveButton = false;
   }
 
   // objectCopy(action: string) {
   objectCopy() {
+    this.isLoading = true;
+    this.hidecard = true;
     if (this.data.action == 'copy') {
       this.objKey = this.data.object.Key ? this.data.object.Key : this.data.object.Prefix;
 
@@ -86,6 +96,10 @@ export class ObjectpopupComponent implements OnInit {
       }
       this.auth.copyObject(payload).subscribe((res: any) => {
         Swal.fire(res['Result'])
+        this.dialog.closeAll();
+        this.isLoading = false;
+        // this.hidecard = false;
+        
       })
 
     } else {
@@ -99,6 +113,9 @@ export class ObjectpopupComponent implements OnInit {
       }
       this.auth.moveObject(payload).subscribe((res: any) => {
         Swal.fire(res['Result'])
+        this.dialog.closeAll();
+        this.isLoading = false;
+        // this.hidecard = false;
       })
 
 

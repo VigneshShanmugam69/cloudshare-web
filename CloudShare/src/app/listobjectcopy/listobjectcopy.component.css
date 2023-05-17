@@ -97,3 +97,13 @@
     width:40%;
 
   }
+
+  .spinner {
+  
+    display: block;
+    position: fixed;
+    z-index: 974; 
+    top: 48%;
+    right: 49%;
+    
+  }

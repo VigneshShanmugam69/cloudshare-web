@@ -327,7 +327,7 @@ export class DashboardComponent {
   copyto(action: string) {
     // event.preventDefault();
     this.tableObjects = this.rowValue;
-    console.log(this.rowValue);
+    // console.log(this.rowValue);
     this.contextMenu.closeMenu();
 
     this.dialogRef = this.dialog.open(ObjectpopupComponent, {

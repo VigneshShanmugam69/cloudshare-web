@@ -22,11 +22,18 @@ export class ListobjectcopyComponent implements OnInit {
   showCopyButton: boolean = false;
   showMoveButton: boolean = false;
   objKey: any;
+  isLoading: boolean = false;
+  hideTable: boolean = false;
+  disabledCopyButton: boolean = true;
+  disabledMoveButton: boolean = true;
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private auth: AuthService, public dialog: MatDialog,
   ) { }
   // Listing the object for the selected bucket
   ngOnInit() {
+    this.isLoading = true;
+    // this.hideTable = true;
     this.objectlists = [];
     this.objectlists = null;
     let payload = { "Bucket": this.data.destinationBucket }
@@ -35,7 +42,8 @@ export class ListobjectcopyComponent implements OnInit {
       this.objects = res.objects;
       this.objectlists = this.folders.concat(this.objects);
       this.object = this.objectlists;   
-      
+      this.isLoading = false;
+      // this.hideTable = false;
 
     })
     this.toggleButton();
@@ -64,12 +72,15 @@ export class ListobjectcopyComponent implements OnInit {
   }
   onclick(row:any){
     this.destinationKeyName = row;   
-    this.keyName = this.destinationKeyName.split('/')   
+    this.keyName = this.destinationKeyName.split('/') 
+    this.disabledCopyButton = false; 
+    this.disabledMoveButton = false; 
     
   }
 
   copyto(){
-   
+    this.isLoading = true;
+    this.hideTable = true;
     let destinationKeyName = this.keyName[0];
     if (this.data.action == 'copy') {
       this.objKey = this.data.sourceKeyName.Key ? this.data.sourceKeyName.Key : this.data.sourceKeyName.Prefix;
@@ -83,6 +94,9 @@ export class ListobjectcopyComponent implements OnInit {
       
       this.auth.copyObject(payload).subscribe((res: any) => {
         Swal.fire(res['Result'])
+        this.isLoading = false;
+        this.dialog.closeAll();
+        // this.hideTable = false;
       })
     } else {
       this.objKey = this.data.sourceKeyName.Key ? this.data.sourceKeyName.Key : this.data.sourceKeyName.Prefix;
@@ -97,6 +111,9 @@ export class ListobjectcopyComponent implements OnInit {
      
       this.auth.moveObject(payload).subscribe((res: any) => {
         Swal.fire(res['Result'])
+        this.isLoading = false;
+        this.dialog.closeAll();
+        // this.hideTable = false;
       })
     }
   }

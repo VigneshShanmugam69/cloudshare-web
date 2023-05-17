@@ -22,7 +22,7 @@
       <div>
         <mat-card class="centerdata">
           <!-- <table mat-table [dataSource]="objectlists"> -->
-          <div class="tabledata" *ngIf="objectlists">
+          <div class="tabledata" *ngIf="objectlists && !hideTable">
             <table>
               <thead>
                 <tr>
@@ -34,8 +34,8 @@
               </thead>
               <tbody *ngFor="let item of objectlists">
                 <tr>
-                  <td>
-                   
+
+                  <td>                   
                     <div>
                       <mat-radio-button (click)="onclick(item.Prefix)" class="example-radio-button" [disabled]="!item?.Prefix?.includes('/')">
                         <label>
@@ -49,20 +49,33 @@
                             {{item.Key}}
                           </span>
                         </label>
-
                       </mat-radio-button>
                     </div>
                   </td>
-                  <td>{{item.StorageClass}}</td>
-                  <td>{{item.Size}} </td>
-                  <td>{{item.LastModified}}</td>
+
+                  <td>{{item?.Prefix?.includes('/') ? '-':item.StorageClass}}</td>
+                  <td>{{item?.Prefix?.includes('/') ? '-':item.Size}} </td>
+                  <td>{{item?.Prefix?.includes('/') ? '-':item.LastModified}}</td>
+
                 </tr>
+                
               </tbody>
+              
             </table>
+           
           </div>
           <div *ngIf="show">
             <h3 class="nofolder">No matches ...</h3>
           </div>
+          <div class="spinner">
+            <div class="spinner-border" role="status" *ngIf="isLoading">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+
+          <!-- <div *ngIf="!item.Prefix.includes('/')">
+            <h3 class="nofolder">Choose any folder</h3>
+          </div> -->
         </mat-card>
       </div>
 
@@ -70,8 +83,8 @@
     <div>
       <footer class="footer">
         <button class="canclebutton" mat-button [mat-dialog-close]>Cancel</button>
-        <button *ngIf="showCopyButton" mat-button class="copybutton" [mat-dialog-close] (click)="copyto()">Copy</button>
-        <button *ngIf="showMoveButton" mat-button class="copybutton" [mat-dialog-close] (click)="copyto()">Move</button>
+        <button *ngIf="showCopyButton" mat-button class="copybutton"  (click)="copyto()" [disabled]="disabledCopyButton">Copy</button>
+        <button *ngIf="showMoveButton" mat-button class="copybutton" (click)="copyto()" [disabled]="disabledMoveButton">Move</button>
       </footer>
     </div>
 
