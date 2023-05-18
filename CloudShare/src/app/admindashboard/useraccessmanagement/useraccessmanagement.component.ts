@@ -21,8 +21,8 @@ export class UseraccessmanagementComponent {
   removepopup: boolean = false;
   // saveCheckbox:boolean;
   closeResult: string | undefined;
-  userId: any;
-  groupId: any;
+  userId: any[]=[];
+  groupId: any[]=[];
   usergroups: any;
 
 
@@ -74,7 +74,18 @@ export class UseraccessmanagementComponent {
     this.auth.removeuser(payload).subscribe((res: any) => {
       Swal.fire(res['message']).then((result) => { this.removepopup = !this.removepopup });
     })
+  }
 
+  //import user from directory to local database
+  importuser(){
+    let payload = {
+      "groupId": this.groupId,
+      "userId": this.userId
+    }
+    this.auth.importuser(payload).subscribe((res:any)=>{
+      Swal.fire(res['message']).then((result)=>{this.addpopup=!this.addpopup;})
+      this.directoryUser();
+    })
   }
 
   //listing the local users
@@ -138,25 +149,40 @@ export class UseraccessmanagementComponent {
     }
   }
 
-  groupusers(event: any, name: any) {
+  groupusers(event: any, name: any,id:any) {
 
     if (event.target.checked) {
       this.groupName.push(name);
+      this.groupId.push(id);
     }
     else {
       let index = this.groupName.indexOf(name);
       this.groupName.splice(index, 1)
+      let idIndex = this.groupName.indexOf(id);
+      this.groupId.splice(idIndex, 1)
     }
     let payload = {
       groupName: this.groupName
     }
-
     this.auth.listGroupUsers(payload).subscribe((res: any) => {
       this.users = res.response;
 
     })
 
   }
+
+  imoprtlistuser(event: any, id: any){
+    if (event.target.checked) {
+      this.userId.push(id);
+    }
+    else {
+      let index = this.groupName.indexOf(name);
+      this.userId.splice(index, 1)
+    }
+    console.log(this.userId);
+  }
+
+
   //when click add user that time hide and show the form
   showForm() {
     this.hideform = true;

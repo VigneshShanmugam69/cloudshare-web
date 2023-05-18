@@ -126,7 +126,7 @@
                                 </thead>
                                 <tbody *ngFor="let item of groups">
                                     <tr>
-                                        <td><input type=checkbox  class="check" (click)="groupusers($event,item.groupName)">{{item.groupName}}</td>
+                                        <td><input type=checkbox  class="check" (click)="groupusers($event,item.groupName,item.groupId)">{{item.groupName}}</td>
                                         <td>{{item.groupId}}</td>
                                     </tr>
                                 </tbody>
@@ -144,7 +144,7 @@
                                 </thead>
                                 <tbody *ngFor="let item of users">
                                     <tr>
-                                        <td><input type=checkbox class="check">{{item.firstName}} {{item.lastName}}</td>
+                                        <td><input type=checkbox class="check" (click)="imoprtlistuser($event,item.userId)">{{item.firstName}} {{item.lastName}}</td>
                                         <td>{{item.userId}}</td>
                                     </tr>
                                 </tbody>
@@ -152,7 +152,7 @@
                         </mat-card>
                     </div>
                     <div>
-                        <button class="import">Import</button>
+                        <button class="import" (click)="importuser()">Import</button>
                         <button class="import" (click)="this.addpopup=!this.addpopup;">Cancel</button>
                     </div>
         </mat-card>

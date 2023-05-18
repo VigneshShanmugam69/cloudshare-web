@@ -8,9 +8,14 @@ import { Observable, observable } from 'rxjs';
 
 export class AuthService {
 
+  importuser(val:any){
+return this.http.post(this.APIUrl+'importUsers',val);
+  }
+
   usergroups(val:any){
 return this.http.post(this.APIUrl+'getUserGroups',val);
   }
+
   removeuser(val:any){
     return this.http.post(this.APIUrl+'removefromgroup',val);
   }
