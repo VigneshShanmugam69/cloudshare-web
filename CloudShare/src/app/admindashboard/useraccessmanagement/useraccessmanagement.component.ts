@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/dashboard/dashboard.service';
 import { DatatransferService } from 'src/app/datatransfer.service';
 import Swal from 'sweetalert2';
@@ -136,6 +136,31 @@ export class UseraccessmanagementComponent {
       this.adduserform.controls.passwrd.enable();
     }
   }
+  importuserpop(content: any){
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
+      this.closeResult = `Closed with: ${result}`;  
+    }, (reason) => {  
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
+    });  
+    
+  }
+  private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return `with: ${reason}`;
+      }
+    }
+  localuserpop(content: any){
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
+      this.closeResult = `Closed with: ${result}`;  
+    }, (reason) => {  
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
+    });  
+  }
+
   adduser() {
     if (!this.tableName) {
       this.auth.listGroups().subscribe((res: any) => {

@@ -33,11 +33,11 @@
     overflow-y: scroll;
 }
 .mt-size{
-    height: 500px;
+    /* height: 500px;
     width: 500px;
     position: relative;
     top: 33%;
-    left: 33%;
+    left: 33%; */
     padding: 5px;
 }
 .mt-size-re{
