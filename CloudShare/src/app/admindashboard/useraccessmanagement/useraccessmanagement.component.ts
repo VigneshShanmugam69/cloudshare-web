@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, importProvidersFrom } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/dashboard/dashboard.service';
@@ -32,11 +32,13 @@ export class UseraccessmanagementComponent {
     this.listlocaluser();
     this.directoryUser();
     this.datatransfer.tableValue.subscribe((res: any) => {
+      console.log('res......',res)
       if (res == 'local') {
         this.tableName = true;
       } else {
         this.tableName = false;
       }
+      console.log('after......',this.tableName);
     })
     this.adduserform.controls.passwrd.disable();
   }
@@ -55,16 +57,25 @@ export class UseraccessmanagementComponent {
     checkUser: new FormControl("")
   })
 
-  removePopup() {
-    this.removepopup = !this.removepopup;
+  remove(content: any) {
+    // this.removepopup = !this.removepopup;
     let payload = {
       "userId": this.userId
     }
     this.auth.usergroups(payload).subscribe((res: any) => {
       this.usergroups = res;
     })
+    this.removePopup(content);
   }
 
+  removePopup(content: any){
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {  
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
+    });  
+
+  }
   //Remove user from group
   removeuser() {
     let payload = {
@@ -83,7 +94,7 @@ export class UseraccessmanagementComponent {
       "userId": this.userId
     }
     this.auth.importuser(payload).subscribe((res:any)=>{
-      Swal.fire(res['message']).then((result)=>{this.addpopup=!this.addpopup;})
+      Swal.fire(res['message']).then((result)=>{this.modalService.dismissAll()})
       this.directoryUser();
     })
   }
@@ -136,14 +147,30 @@ export class UseraccessmanagementComponent {
       this.adduserform.controls.passwrd.enable();
     }
   }
-  importuserpop(content: any){
+ importuserpop(content: any){
+   this.auth.listGroups().subscribe((res: any) => {
+      this.groups = res;
+      // console.log('groupname.....', this.groups);
+    });
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
-      this.closeResult = `Closed with: ${result}`;  
-    }, (reason) => {  
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
-    });  
-    
+          this.closeResult = `Closed with: ${result}`;
+          delete this.groups;
+          delete this.users;
+        }, (reason) => {  
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
+          delete this.groups;
+          delete this.users;
+        });  
+   
   }
+
+// popup(){
+//   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
+//     this.closeResult = `Closed with: ${result}`;  
+//   }, (reason) => {  
+//     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
+//   });  
+// }
   private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
         return 'by pressing ESC';
@@ -155,22 +182,26 @@ export class UseraccessmanagementComponent {
     }
   localuserpop(content: any){
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
-      this.closeResult = `Closed with: ${result}`;  
+      this.closeResult = `Closed with: ${result}`; 
+      this.adduserform.reset(); 
     }, (reason) => {  
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
+      this.adduserform.reset(); 
     });  
   }
 
-  adduser() {
+  adduser(content: any) {
     if (!this.tableName) {
       this.auth.listGroups().subscribe((res: any) => {
         this.groups = res;
       })
-      this.addpopup = !this.addpopup;
+      // this.addpopup = !this.addpopup;
+      this.importuserpop(content);
 
     }
     else {
-      this.openPopup = !this.openPopup;
+      // this.openPopup = !this.openPopup;
+      this.localuserpop(content);
     }
   }
 

@@ -1,7 +1,7 @@
 .resizable-table th {
     position: relative;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    /* background-color: #f0f0f0; */
+    border: 1px solid whitesmoke;
     padding: 8px;
   }
   
@@ -15,7 +15,7 @@
   }
   
   .resizable-table td {
-    border: 1px solid #ccc;
+    border: 1px solid whitesmoke;
     padding: 8px;
   }
 .tables {
@@ -26,7 +26,7 @@
     left: 20%;
     top: 13%;
     background: #FFFFFF;
-    
+   
 
     scrollbar-width: light;
     scrollbar-color: #0085ff;
@@ -44,8 +44,6 @@
     height: 300px;
     width: 500px;
     position: absolute;
-    top: 35%;
-    left: 33%;
     padding: 5px;
 }
 .mt-size-in{
@@ -152,10 +150,7 @@ border-collapse: separate;
     position: absolute;
     width: 424px;
     height: 550px;
-    top: 15%;
-    left: 40%;
-
-    border-radius: 6px 6px 0px 0px;
+    border-radius: 6px 6px 6px 6px;
 
     background: #FfffFF;
     box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
@@ -231,6 +226,8 @@ table {
     width: 100%;
     font-size: 12px;
     box-shadow: none;
+    border-radius: 9px 9px 9px 9px;
+    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
 
     scrollbar-width: light;
     scrollbar-color: #0085ff;
