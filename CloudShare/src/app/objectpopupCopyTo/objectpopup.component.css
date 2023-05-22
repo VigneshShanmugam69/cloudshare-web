@@ -70,18 +70,19 @@
 }
 
 .cancle-button:hover {
-  background-color: #0085FF;
+  background-color: rgb(252, 42, 42);
   color: white;
 }
 
 .copybutton {
   border-radius: 219px;
+  
   /* background-color: orangered;  */
 }
 
 
 .copybutton:hover {
-  background-color: #0085FF;
+  /* background-color: #0085FF; */
   color: white;
 
 }
