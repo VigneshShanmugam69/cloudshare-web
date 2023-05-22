@@ -217,6 +217,7 @@ export class DashboardComponent {
     if (this.foldername && this.foldername !== val) {
       // concatenate the previous folder name with the new folder name
       val = `${this.foldername}${val}`;
+     
     }
     this.foldername = val;
     if (this.foldername.includes("/")) {

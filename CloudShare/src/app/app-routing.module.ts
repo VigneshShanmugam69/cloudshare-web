@@ -9,6 +9,8 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
+import { ObjectpopupComponent } from './objectpopupCopyTo/objectpopup.component';
+import { ListobjectcopyComponent } from './listobjectcopy/listobjectcopy.component';
 
 const routes: Routes = [
   {
@@ -24,29 +26,30 @@ const routes: Routes = [
     component: AdmindashboardComponent
   },
   {
-    path:'useraccessmanagement',
+    path: 'useraccessmanagement',
     component: UseraccessmanagementComponent
   },
   {
-    path:'spacemanagement',
+    path: 'spacemanagement',
     component: SpacemanagementComponent
   },
   {
-    path:'costmanagement',
+    path: 'costmanagement',
     component: CostmanagementComponent
   },
   {
-    path:'configuration',
+    path: 'configuration',
     component: ConfigurationComponent
   },
   {
-    path:'changepassword',
+    path: 'changepassword',
     component: ChangepasswordComponent
   },
   {
     path: 'callback',
     component: OktaCallbackComponent
-  }
+  },
+  
 
 ];
 
