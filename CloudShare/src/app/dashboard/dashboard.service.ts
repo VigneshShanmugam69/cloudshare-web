@@ -64,7 +64,7 @@ return this.http.post(this.APIUrl+'getUserGroups',val);
    }
  
   addUserFields(val: any) {
-    return this.http.post(this.APIUrl + 'createLocalUser', val)
+    return this.http.post(this.APIUrl + 'createLocalUsers', val)
   }
   resetNewPassword(val: any) {
     return this.http.put(this.APIUrl + 'resetPasswordByFirstLogin', val)

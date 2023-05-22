@@ -14,19 +14,22 @@ export class UseraccessmanagementComponent {
   constructor(private auth: AuthService, private datatransfer: DatatransferService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-   
+
     this.datatransfer.tableValue.subscribe((res: any) => {
 
-      this.tableName=res;
+      this.tableName = res;
     })
     this.listlocaluser();
     this.directoryUser();
     this.adduserform.controls.passwrd.disable();
   }
+
+  public showPassword: boolean =false;
   @Input() parentvalue: any;
-  loading=false;
-  grouploading=false;
-  userloading=false;
+  loading = false;
+  eye=true;
+  grouploading = false;
+  userloading = false;
   openPopup = false;
   tableName: boolean = false;
   // this.datatransfer.tableValue.subscribe((res: any) => {this.tableName=res;});
@@ -37,8 +40,8 @@ export class UseraccessmanagementComponent {
   removepopup: boolean = false;
   // saveCheckbox:boolean;
   closeResult: string | undefined;
-  userId: any[]=[];
-  groupId: any[]=[];
+  userId: any[] = [];
+  groupId: any[] = [];
   usergroups: any;
 
 
@@ -51,10 +54,10 @@ export class UseraccessmanagementComponent {
   adduserform = new FormGroup({
     fname: new FormControl(""),
     lname: new FormControl(""),
-    uname: new FormControl(""),
+    // uname: new FormControl(""),
     gmail: new FormControl(""),
     passwrd: new FormControl(""),
-    roles: new FormControl(""),
+    // roles: new FormControl(""),
     checkUser: new FormControl("")
   })
 
@@ -69,12 +72,12 @@ export class UseraccessmanagementComponent {
     this.removePopup(content);
   }
 
-  removePopup(content: any){
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
+  removePopup(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {  
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
-    });  
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
 
   }
   //Remove user from group
@@ -84,18 +87,18 @@ export class UseraccessmanagementComponent {
       "userId": this.userId
     }
     this.auth.removeuser(payload).subscribe((res: any) => {
-      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll()});
+      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() });
     })
   }
-// const a=document.getElementbyId("removepop")
+  // const a=document.getElementbyId("removepop")
   //import user from directory to local database
-  importuser(){
+  importuser() {
     let payload = {
       "groupId": this.groupId,
       "userId": this.userId
     }
-    this.auth.importuser(payload).subscribe((res:any)=>{
-      Swal.fire(res['message']).then((result)=>{this.modalService.dismissAll()})
+    this.auth.importuser(payload).subscribe((res: any) => {
+      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() })
       this.directoryUser();
     })
   }
@@ -108,9 +111,9 @@ export class UseraccessmanagementComponent {
   }
 
   directoryUser() {
-    this.loading=true;
+    this.loading = true;
     this.auth.directoryuser().subscribe((res: any) => {
-      this.loading=false;
+      this.loading = false;
       this.directoryuser = res.users;
     })
   }
@@ -127,14 +130,16 @@ export class UseraccessmanagementComponent {
     let payload = {
       firstname: this.adduserform.controls.fname.value,
       lastname: this.adduserform.controls.lname.value,
-      username: this.adduserform.controls.uname.value,
+      // username: this.adduserform.controls.uname.value,
       email: this.adduserform.controls.gmail.value,
-      roleID: this.adduserform.controls.roles.value
+      // roleID: this.adduserform.controls.roles.value
+      password:this.adduserform.controls.passwrd.value
     }
     this.auth.addUserFields(payload).subscribe((res: any) => {
 
       this.adduserform.reset();
       Swal.fire(res['message']).then((result) => {
+        this.modalService.dismissAll();
         this.listlocaluser()
       });
 
@@ -144,60 +149,56 @@ export class UseraccessmanagementComponent {
 
   onCheck() {
     const isChecked = this.adduserform.controls.checkUser.value;
+    // console.log(isChecked);
     if (isChecked) {
+      this.eye=true;
       this.adduserform.controls.passwrd.disable();
     } else {
+      this.eye=false;
       this.adduserform.controls.passwrd.enable();
     }
   }
- importuserpop(content: any){
-   this.auth.listGroups().subscribe((res: any) => {
+  importuserpop(content: any) {
+    this.auth.listGroups().subscribe((res: any) => {
       this.groups = res;
       // console.log('groupname.....', this.groups);
     });
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
-          this.closeResult = `Closed with: ${result}`;
-          delete this.groups;
-          delete this.users;
-        }, (reason) => {  
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
-          delete this.groups;
-          delete this.users;
-        });  
-   
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      delete this.groups;
+      delete this.users;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      delete this.groups;
+      delete this.users;
+    });
+
   }
 
-// popup(){
-//   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
-//     this.closeResult = `Closed with: ${result}`;  
-//   }, (reason) => {  
-//     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
-//   });  
-// }
   private getDismissReason(reason: any): string {
-      if (reason === ModalDismissReasons.ESC) {
-        return 'by pressing ESC';
-      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-        return 'by clicking on a backdrop';
-      } else {
-        return `with: ${reason}`;
-      }
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
     }
-  localuserpop(content: any){
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {  
-      this.closeResult = `Closed with: ${result}`; 
-      this.adduserform.reset(); 
-    }, (reason) => {  
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
-      this.adduserform.reset(); 
-    });  
+  }
+  localuserpop(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.adduserform.reset();
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.adduserform.reset();
+    });
   }
 
   adduser(content: any) {
-    this.grouploading=true;
+    this.grouploading = true;
     if (!this.tableName) {
       this.auth.listGroups().subscribe((res: any) => {
-        this.grouploading=false;
+        this.grouploading = false;
         this.groups = res;
       })
       // this.addpopup = !this.addpopup;
@@ -210,8 +211,8 @@ export class UseraccessmanagementComponent {
     }
   }
 
-  groupusers(event: any, name: any,id:any) {
-this.userloading=true;
+  groupusers(event: any, name: any, id: any) {
+    this.userloading = true;
     if (event.target.checked) {
       this.groupName.push(name);
       this.groupId.push(id);
@@ -226,14 +227,14 @@ this.userloading=true;
       groupName: this.groupName
     }
     this.auth.listGroupUsers(payload).subscribe((res: any) => {
-      this.userloading=false;
+      this.userloading = false;
       this.users = res.response;
 
     })
 
   }
 
-  imoprtlistuser(event: any, id: any){
+  imoprtlistuser(event: any, id: any) {
     if (event.target.checked) {
       this.userId.push(id);
     }
