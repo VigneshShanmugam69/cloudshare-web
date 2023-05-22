@@ -11,9 +11,25 @@ import Swal from 'sweetalert2';
   styleUrls: ['./useraccessmanagement.component.css']
 })
 export class UseraccessmanagementComponent {
+  constructor(private auth: AuthService, private datatransfer: DatatransferService, private modalService: NgbModal) { }
+
+  ngOnInit(): void {
+   
+    this.datatransfer.tableValue.subscribe((res: any) => {
+
+      this.tableName=res;
+    })
+    this.listlocaluser();
+    this.directoryUser();
+    this.adduserform.controls.passwrd.disable();
+  }
   @Input() parentvalue: any;
+  loading=false;
+  grouploading=false;
+  userloading=false;
   openPopup = false;
-  tableName: boolean | undefined;
+  tableName: boolean = false;
+  // this.datatransfer.tableValue.subscribe((res: any) => {this.tableName=res;});
   groups: any;
   users: any;
   groupName: any[] = [];
@@ -26,22 +42,7 @@ export class UseraccessmanagementComponent {
   usergroups: any;
 
 
-  constructor(private auth: AuthService, private datatransfer: DatatransferService, private modalService: NgbModal) { }
 
-  ngOnInit(): void {
-    this.listlocaluser();
-    this.directoryUser();
-    this.datatransfer.tableValue.subscribe((res: any) => {
-      console.log('res......',res)
-      if (res == 'local') {
-        this.tableName = true;
-      } else {
-        this.tableName = false;
-      }
-      console.log('after......',this.tableName);
-    })
-    this.adduserform.controls.passwrd.disable();
-  }
 
   displayedColumns: string[] = ['uname', 'ID', 'email', 'role'];  //,'Action'
   directoryuser: any;
@@ -83,10 +84,10 @@ export class UseraccessmanagementComponent {
       "userId": this.userId
     }
     this.auth.removeuser(payload).subscribe((res: any) => {
-      Swal.fire(res['message']).then((result) => { this.removepopup = !this.removepopup });
+      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll()});
     })
   }
-
+// const a=document.getElementbyId("removepop")
   //import user from directory to local database
   importuser(){
     let payload = {
@@ -107,7 +108,9 @@ export class UseraccessmanagementComponent {
   }
 
   directoryUser() {
+    this.loading=true;
     this.auth.directoryuser().subscribe((res: any) => {
+      this.loading=false;
       this.directoryuser = res.users;
     })
   }
@@ -191,8 +194,10 @@ export class UseraccessmanagementComponent {
   }
 
   adduser(content: any) {
+    this.grouploading=true;
     if (!this.tableName) {
       this.auth.listGroups().subscribe((res: any) => {
+        this.grouploading=false;
         this.groups = res;
       })
       // this.addpopup = !this.addpopup;
@@ -206,7 +211,7 @@ export class UseraccessmanagementComponent {
   }
 
   groupusers(event: any, name: any,id:any) {
-
+this.userloading=true;
     if (event.target.checked) {
       this.groupName.push(name);
       this.groupId.push(id);
@@ -221,6 +226,7 @@ export class UseraccessmanagementComponent {
       groupName: this.groupName
     }
     this.auth.listGroupUsers(payload).subscribe((res: any) => {
+      this.userloading=false;
       this.users = res.response;
 
     })

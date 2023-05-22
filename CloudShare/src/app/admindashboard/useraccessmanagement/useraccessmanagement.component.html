@@ -10,6 +10,9 @@
         </div>
         <!-- tableName ? importuserpop(localpop): localuserpop(importpop) -->
         <div>
+            <div *ngIf="loading" class="centered">
+                <mat-spinner color="#0085ff" [diameter]="40"></mat-spinner>
+              </div>
             <table *ngIf="tableName; else directory" class="resizable-table">
                 <thead>
                     <tr>
@@ -120,6 +123,9 @@
         <mat-card class="mt-size">
                     <div>
                         <mat-card class="mt-size-in">
+                            <div *ngIf="grouploading" class="centered" >
+                                <mat-spinner [diameter]="40"></mat-spinner>
+                              </div>
                             <table class="resizable-table">
                                 <thead>
                                     <tr>
@@ -138,6 +144,9 @@
                     </div>
                     <div>
                         <mat-card class="mt-size-in">
+                            <div *ngIf="userloading" class="centered">
+                                <mat-spinner [diameter]="40"></mat-spinner>
+                              </div>
                             <table class="resizable-table">
                                 <thead>
                                     <tr>
