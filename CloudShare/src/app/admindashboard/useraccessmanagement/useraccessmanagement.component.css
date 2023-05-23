@@ -105,7 +105,9 @@
     font-size: 16px;
     margin-left: 20px;
 }
-
+.add-button:disabled {
+    background-color: #88c1fa;
+}
 .slt-opt {
     display: flex;
     margin-top: 4px;
@@ -137,23 +139,27 @@
     border-radius: 10px;
     height: 45px;
 }
-
+.btn-spc{
+    display: flex;
+    justify-content: space-evenly;
+}
 .import {
     background-color: #0885ff;
     border: none;
     color: white;
-    padding: 7px 67px;
+    padding: 7px 25px;
     text-align: center;
     margin-top: 30px;
-    margin-right: 25px;
-    margin-left: 35px;
+    width: 25%;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     border-radius: 10px;
     height: 45px;
 }
-
+.import:disabled{
+    background-color: #88c1fa;
+}
 
 .check {
     margin-right: 10px;

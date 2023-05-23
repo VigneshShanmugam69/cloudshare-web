@@ -7,25 +7,29 @@ import { Observable, observable } from 'rxjs';
 })
 
 export class AuthService {
-
-  importuser(val:any){
-return this.http.post(this.APIUrl+'importUsers',val);
+  
+  importallusers(val: any) {
+    return this.http.post(this.APIUrl + 'importAllUsers',val);
   }
 
-  usergroups(val:any){
-return this.http.post(this.APIUrl+'getUserGroups',val);
+  importuser(val: any) {
+    return this.http.post(this.APIUrl + 'importUsers', val);
   }
 
-  removeuser(val:any){
-    return this.http.post(this.APIUrl+'removefromgroup',val);
+  usergroups(val: any) {
+    return this.http.post(this.APIUrl + 'getUserGroups', val);
   }
 
-  directoryuser(){
-    return this.http.get(this.APIUrl+'listDirectoryUsers')
+  removeuser(val: any) {
+    return this.http.post(this.APIUrl + 'removefromgroup', val);
+  }
+
+  directoryuser() {
+    return this.http.get(this.APIUrl + 'listDirectoryUsers')
   }
 
   listlocaluser() {
-    return this.http.get(this.APIUrl+'listLocalUser');
+    return this.http.get(this.APIUrl + 'listLocalUser');
   }
 
   readonly APIUrl = environment.apiUrl;
@@ -44,25 +48,25 @@ return this.http.post(this.APIUrl+'getUserGroups',val);
   userLists() {
     var headers_object = new HttpHeaders({
       'Content-Type': 'application/json',
-       'token': "Bearer "+ localStorage.getItem('token')
+      'token': "Bearer " + localStorage.getItem('token')
     });
     const httpOptions = {
       headers: headers_object
     };
-    return this.http.get(this.APIUrl + 'listLocalUsers',httpOptions)
+    return this.http.get(this.APIUrl + 'listLocalUsers', httpOptions)
   }
-  listUsers(){
+  listUsers() {
     return this.http.get(this.APIUrl + 'listUsers');
   }
 
-  listGroups(){
-    return this.http.get(this.APIUrl+'getAllGroups');
-   }
- 
-   listGroupUsers(val:any){
- return this.http.post(this.APIUrl+'listGroupUsers',val);
-   }
- 
+  listGroups() {
+    return this.http.get(this.APIUrl + 'getAllGroups');
+  }
+
+  listGroupUsers(val: any) {
+    return this.http.post(this.APIUrl + 'listGroupUsers', val);
+  }
+
   addUserFields(val: any) {
     return this.http.post(this.APIUrl + 'createLocalUsers', val)
   }
@@ -81,21 +85,21 @@ return this.http.post(this.APIUrl+'getUserGroups',val);
   objectPermission(val: any) {
     return this.http.post(this.APIUrl + 'getAccessControlList', val)
   }
-  totalfolder(val:any){
-    return this.http.post(this.APIUrl + 'totalfolder',val)
+  totalfolder(val: any) {
+    return this.http.post(this.APIUrl + 'totalfolder', val)
   }
 
-  totalobjects(val:any){
-    return this.http.post(this.APIUrl +'totalobject',val)
+  totalobjects(val: any) {
+    return this.http.post(this.APIUrl + 'totalobject', val)
   }
 
-  totalfilesize(val:any){
-    return this.http.post(this.APIUrl +'totalfilesize',val)
-   }
-   storage(val:any){
-    return this.http.post(this.APIUrl +'storageclass',val)
+  totalfilesize(val: any) {
+    return this.http.post(this.APIUrl + 'totalfilesize', val)
   }
-  
+  storage(val: any) {
+    return this.http.post(this.APIUrl + 'storageclass', val)
+  }
+
 
 
 
@@ -135,14 +139,14 @@ return this.http.post(this.APIUrl+'getUserGroups',val);
   bucketmanagement(val: any) {
     return this.http.post(this.APIUrl + 'bucketreplication', val)
   }
-  bucketlifecyle(val:any){
-    return this.http.post(this.APIUrl +'BucketLifecycle',val)
+  bucketlifecyle(val: any) {
+    return this.http.post(this.APIUrl + 'BucketLifecycle', val)
   }
-  bucketinventroy(val:any){
-    return this.http.post(this.APIUrl+"BucketInventory",val)
+  bucketinventroy(val: any) {
+    return this.http.post(this.APIUrl + "BucketInventory", val)
   }
-  
+
   moveObject(val: any) {
-    return this.http.post(this.APIUrl + 'moveObject',val)
+    return this.http.post(this.APIUrl + 'moveObject', val)
   }
 }

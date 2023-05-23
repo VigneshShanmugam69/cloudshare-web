@@ -5,7 +5,7 @@
     <div class="tables">
         <div class="add-btn-div">
             <!-- <button class="add-button" *ngIf="!tableName">Sync</button> -->
-            <button class="add-button" *ngIf="!tableName" (click)="remove(removepop)">Remove</button>
+            <button class="add-button" *ngIf="!tableName" [disabled]="remov != true"(click)="remove(removepop)">Remove</button>
             <button class="add-button" (click)="tableName ? adduser(localpop):adduser(importpop)">Add</button>
         </div>
         <!-- tableName ? importuserpop(localpop): localuserpop(importpop) -->
@@ -53,7 +53,7 @@
                     </thead>
                     <tbody *ngFor="let item of directoryuser">
                         <tr>
-                            <td><input type=checkbox class="check" (click)="userId=item.id">{{item.firstname}}
+                            <td><input type=checkbox class="check" (click)="removeEnable($event,item.id)">{{item.firstname}}
                                 {{item.lastname}}</td>
                             <td>{{item.id}}</td>
                             <td>{{item.email}}</td>
@@ -117,7 +117,7 @@
                     </div> -->
                     <div class="slt-opt">
                         <input type="checkbox" formControlName="checkUser" (click)="onCheck()" class="chk-stl">
-                        <label class="chk-stl">set own password</label>
+                        <label class="chk-stl">set password</label>
                     </div>
                 </div>
                 <div class="add-btn">
@@ -172,8 +172,7 @@
                         </thead>
                         <tbody *ngFor="let item of users">
                             <tr>
-                                <td><input type=checkbox class="check"
-                                        (click)="imoprtlistuser($event,item.userId)">{{item.firstName}}
+                                <td><input type=checkbox class="check" (click)="importlistuser($event,item.userId)">{{item.firstName}}
                                     {{item.lastName}}</td>
                                 <td>{{item.userId}}</td>
                             </tr>
@@ -181,8 +180,9 @@
                     </table>
                 </mat-card>
             </div>
-            <div>
-                <button class="import" (click)="importuser()">Import</button>
+            <div class="btn-spc">
+                <button class="import" [disabled]="importall != true" (click)="importalluser()">Importall</button>
+                <button class="import" [disabled]="imports != true" (click)="importuser()">Import</button>
                 <button class="import" (click)="modal.close()">Cancel</button>
             </div>
         </mat-card>
@@ -214,7 +214,7 @@
                         </table>
                     </mat-card>
                 </div>
-                <div>
+                <div class="btn-spc">
                     <button class="import" (click)="removeuser()">Ok</button>
                     <button class="import" (click)="modal.close()">Cancel</button>
                 </div>
