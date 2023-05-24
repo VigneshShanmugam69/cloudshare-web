@@ -1,6 +1,6 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, importProvidersFrom } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/dashboard/dashboard.service';
 import { DatatransferService } from 'src/app/datatransfer.service';
 import Swal from 'sweetalert2';
@@ -11,9 +11,30 @@ import Swal from 'sweetalert2';
   styleUrls: ['./useraccessmanagement.component.css']
 })
 export class UseraccessmanagementComponent {
+  constructor(private auth: AuthService, private datatransfer: DatatransferService, private modalService: NgbModal) { }
+
+  ngOnInit(): void {
+
+    this.datatransfer.tableValue.subscribe((res: any) => {
+
+      this.tableName = res;
+    })
+    this.listlocaluser();
+    this.directoryUser();
+    this.adduserform.controls.passwrd.disable();
+  }
+  importall: boolean = false;
+  imports: boolean = false;
+  remov: boolean = false;
+  public showPassword: boolean = false;
   @Input() parentvalue: any;
+  loading = false;
+  eye = true;
+  grouploading = false;
+  userloading = false;
   openPopup = false;
-  tableName: boolean | undefined;
+  tableName: boolean = false;
+  // this.datatransfer.tableValue.subscribe((res: any) => {this.tableName=res;});
   groups: any;
   users: any;
   groupName: any[] = [];
@@ -21,25 +42,12 @@ export class UseraccessmanagementComponent {
   removepopup: boolean = false;
   // saveCheckbox:boolean;
   closeResult: string | undefined;
-  userId: any;
-  groupId: any;
+  userId: any[] = [];
+  groupId: any[] = [];
   usergroups: any;
 
 
-  constructor(private auth: AuthService, private datatransfer: DatatransferService, private modalService: NgbModal) { }
 
-  ngOnInit(): void {
-    this.listlocaluser();
-    this.directoryUser();
-    this.datatransfer.tableValue.subscribe((res: any) => {
-      if (res == 'local') {
-        this.tableName = true;
-      } else {
-        this.tableName = false;
-      }
-    })
-    this.adduserform.controls.passwrd.disable();
-  }
 
   displayedColumns: string[] = ['uname', 'ID', 'email', 'role'];  //,'Action'
   directoryuser: any;
@@ -48,23 +56,40 @@ export class UseraccessmanagementComponent {
   adduserform = new FormGroup({
     fname: new FormControl(""),
     lname: new FormControl(""),
-    uname: new FormControl(""),
+    // uname: new FormControl(""),
     gmail: new FormControl(""),
     passwrd: new FormControl(""),
-    roles: new FormControl(""),
+    // roles: new FormControl(""),
     checkUser: new FormControl("")
   })
 
-  removePopup() {
-    this.removepopup = !this.removepopup;
+  remove(content: any) {
+    // this.removepopup = !this.removepopup;
     let payload = {
       "userId": this.userId
     }
     this.auth.usergroups(payload).subscribe((res: any) => {
       this.usergroups = res;
     })
+    this.removePopup(content);
   }
+  removeEnable(event: any, id: any) {
+    if (event.target.checked) {
+      this.userId = id;
+      this.remov = true;
+    }
+    else {
+      this.remov = false;
+    }
+  }
+  removePopup(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
 
+  }
   //Remove user from group
   removeuser() {
     let payload = {
@@ -72,11 +97,31 @@ export class UseraccessmanagementComponent {
       "userId": this.userId
     }
     this.auth.removeuser(payload).subscribe((res: any) => {
-      Swal.fire(res['message']).then((result) => { this.removepopup = !this.removepopup });
+      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() });
     })
-
   }
-
+  // const a=document.getElementbyId("removepop")
+  //import user from directory to local database
+  importuser() {
+    let payload = {
+      "groupId": this.groupId,
+      "userId": this.userId
+    }
+    this.auth.importuser(payload).subscribe((res: any) => {
+      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() })
+      this.directoryUser();
+    })
+  }
+  importalluser() {
+    let payload = {
+      "groupId": this.groupId
+    }
+    this.auth.importallusers(payload).subscribe((res: any) => {
+      console.log(res);
+      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() })
+      this.directoryUser();
+    })
+  }
   //listing the local users
   listlocaluser() {
     this.auth.listlocaluser().subscribe((res: any) => {
@@ -85,7 +130,9 @@ export class UseraccessmanagementComponent {
   }
 
   directoryUser() {
+    this.loading = true;
     this.auth.directoryuser().subscribe((res: any) => {
+      this.loading = false;
       this.directoryuser = res.users;
     })
   }
@@ -102,14 +149,16 @@ export class UseraccessmanagementComponent {
     let payload = {
       firstname: this.adduserform.controls.fname.value,
       lastname: this.adduserform.controls.lname.value,
-      username: this.adduserform.controls.uname.value,
+      // username: this.adduserform.controls.uname.value,
       email: this.adduserform.controls.gmail.value,
-      roleID: this.adduserform.controls.roles.value
+      // roleID: this.adduserform.controls.roles.value
+      password: this.adduserform.controls.passwrd.value
     }
     this.auth.addUserFields(payload).subscribe((res: any) => {
 
       this.adduserform.reset();
       Swal.fire(res['message']).then((result) => {
+        this.modalService.dismissAll();
         this.listlocaluser()
       });
 
@@ -119,44 +168,114 @@ export class UseraccessmanagementComponent {
 
   onCheck() {
     const isChecked = this.adduserform.controls.checkUser.value;
+    // console.log(isChecked);
     if (isChecked) {
+      this.eye = true;
       this.adduserform.controls.passwrd.disable();
     } else {
+      this.eye = false;
       this.adduserform.controls.passwrd.enable();
     }
   }
-  adduser() {
+  importuserpop(content: any) {
+    this.auth.listGroups().subscribe((res: any) => {
+      this.groups = res;
+      // console.log('groupname.....', this.groups);
+    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.imports = false;
+      this.importall = false;
+      delete this.groups;
+      delete this.users;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.imports = false;
+      this.importall = false;
+      delete this.groups;
+      delete this.users;
+    });
+
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  localuserpop(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.adduserform.reset();
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.adduserform.reset();
+    });
+  }
+
+  adduser(content: any) {
+    this.grouploading = true;
     if (!this.tableName) {
       this.auth.listGroups().subscribe((res: any) => {
+        this.grouploading = false;
         this.groups = res;
       })
-      this.addpopup = !this.addpopup;
+      // this.addpopup = !this.addpopup;
+      this.importuserpop(content);
 
     }
     else {
-      this.openPopup = !this.openPopup;
+      // this.openPopup = !this.openPopup;
+      this.localuserpop(content);
     }
   }
 
-  groupusers(event: any, name: any) {
+  groupusers(event: any, name: any, id: any) {
+    this.userloading = true;
 
     if (event.target.checked) {
+      this.importall = true;
       this.groupName.push(name);
+      this.groupId.push(id);
     }
     else {
+      this.importall = false;
       let index = this.groupName.indexOf(name);
       this.groupName.splice(index, 1)
+      let idIndex = this.groupName.indexOf(id);
+      this.groupId.splice(idIndex, 1)
     }
     let payload = {
       groupName: this.groupName
     }
-
     this.auth.listGroupUsers(payload).subscribe((res: any) => {
+      this.userloading = false;
       this.users = res.response;
 
     })
 
   }
+
+  importlistuser(event: any, id: any) {
+    if (event.target.checked) {
+      // this.remov=true;
+      this.imports = true;
+      this.userId.push(id);
+    }
+    else {
+      // this.remov=false;
+      this.imports = false;
+      let index = this.groupName.indexOf(name);
+      this.userId.splice(index, 1)
+    }
+    console.log(this.userId);
+  }
+
+
   //when click add user that time hide and show the form
   showForm() {
     this.hideform = true;

@@ -15,7 +15,7 @@ import { OktaAuthModule, OktaAuthService } from '@okta/okta-angular';
 export class LoginComponent implements OnInit {
   public isAuthenticated: boolean | undefined;
 
- 
+  public showPassword: boolean =false;
   hide = true;
   roles: any[] = [];
   constructor(private shared: ServiceService, private route: Router, private datatransfer:DatatransferService, private oktaAuth: OktaAuthService) {
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   loginform = new FormGroup({
     uname: new FormControl("", [Validators.required]),
     passwd: new FormControl("", [Validators.required]),
-    mode: new FormControl("", [Validators.required])
+    // mode: new FormControl("", [Validators.required])
 
   })
 
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       let payload = {
         Username: this.loginform.controls.uname.value,
         Password: this.loginform.controls.passwd.value,
-        RoleID: this.loginform.controls.mode.value
+        // RoleID: this.loginform.controls.mode.value
       }
 
       this.shared.login(payload).subscribe((res: any) => {

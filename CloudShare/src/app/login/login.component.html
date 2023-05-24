@@ -14,15 +14,18 @@
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Password </mat-label>
-                        <input formControlName="passwd" matInput placeholder="Enter your password"
+                        <input formControlName="passwd" [type]="showPassword ? 'text' : 'password'" matInput placeholder="Enter your password"
                             [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button  matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
+                                <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
                     </mat-form-field>
 
-                    <select formControlName="mode" class="form-select" aria-label="Default select example">
+                    <!-- <select formControlName="mode" class="form-select" aria-label="Default select example">
                         <option selected>Select role</option>
                         <option value="1">user</option>
                         <option value="2">admin</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div>
                     <button class="submit-button" (click)="submit()">submit</button>
