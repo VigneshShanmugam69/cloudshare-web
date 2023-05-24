@@ -105,9 +105,11 @@
     font-size: 16px;
     margin-left: 20px;
 }
+
 .add-button:disabled {
     background-color: #88c1fa;
 }
+
 .slt-opt {
     display: flex;
     margin-top: 4px;
@@ -139,10 +141,12 @@
     border-radius: 10px;
     height: 45px;
 }
-.btn-spc{
+
+.btn-spc {
     display: flex;
     justify-content: space-evenly;
 }
+
 .import {
     background-color: #0885ff;
     border: none;
@@ -157,7 +161,8 @@
     border-radius: 10px;
     height: 45px;
 }
-.import:disabled{
+
+.import:disabled {
     background-color: #88c1fa;
 }
 

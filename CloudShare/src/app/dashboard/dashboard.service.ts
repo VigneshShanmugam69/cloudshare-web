@@ -7,9 +7,9 @@ import { Observable, observable } from 'rxjs';
 })
 
 export class AuthService {
-  
+
   importallusers(val: any) {
-    return this.http.post(this.APIUrl + 'importAllUsers',val);
+    return this.http.post(this.APIUrl + 'importAllUsers', val);
   }
 
   importuser(val: any) {

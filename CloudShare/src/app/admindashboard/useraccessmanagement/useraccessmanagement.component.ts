@@ -23,13 +23,13 @@ export class UseraccessmanagementComponent {
     this.directoryUser();
     this.adduserform.controls.passwrd.disable();
   }
-  importall:boolean=false;
-  imports:boolean=false;
-  remov:boolean=false;
-  public showPassword: boolean =false;
+  importall: boolean = false;
+  imports: boolean = false;
+  remov: boolean = false;
+  public showPassword: boolean = false;
   @Input() parentvalue: any;
   loading = false;
-  eye=true;
+  eye = true;
   grouploading = false;
   userloading = false;
   openPopup = false;
@@ -73,15 +73,15 @@ export class UseraccessmanagementComponent {
     })
     this.removePopup(content);
   }
-removeEnable(event:any ,id:any){
-  if (event.target.checked) {
-    this.userId= id;
-    this.remov=true;
+  removeEnable(event: any, id: any) {
+    if (event.target.checked) {
+      this.userId = id;
+      this.remov = true;
+    }
+    else {
+      this.remov = false;
+    }
   }
-  else {
-    this.remov=false;
-  }
-}
   removePopup(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -112,11 +112,11 @@ removeEnable(event:any ,id:any){
       this.directoryUser();
     })
   }
-  importalluser(){
+  importalluser() {
     let payload = {
       "groupId": this.groupId
     }
-    this.auth.importallusers(payload).subscribe((res:any)=>{
+    this.auth.importallusers(payload).subscribe((res: any) => {
       console.log(res);
       Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() })
       this.directoryUser();
@@ -152,7 +152,7 @@ removeEnable(event:any ,id:any){
       // username: this.adduserform.controls.uname.value,
       email: this.adduserform.controls.gmail.value,
       // roleID: this.adduserform.controls.roles.value
-      password:this.adduserform.controls.passwrd.value
+      password: this.adduserform.controls.passwrd.value
     }
     this.auth.addUserFields(payload).subscribe((res: any) => {
 
@@ -170,10 +170,10 @@ removeEnable(event:any ,id:any){
     const isChecked = this.adduserform.controls.checkUser.value;
     // console.log(isChecked);
     if (isChecked) {
-      this.eye=true;
+      this.eye = true;
       this.adduserform.controls.passwrd.disable();
     } else {
-      this.eye=false;
+      this.eye = false;
       this.adduserform.controls.passwrd.enable();
     }
   }
@@ -184,10 +184,14 @@ removeEnable(event:any ,id:any){
     });
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      this.imports = false;
+      this.importall = false;
       delete this.groups;
       delete this.users;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.imports = false;
+      this.importall = false;
       delete this.groups;
       delete this.users;
     });
@@ -232,14 +236,14 @@ removeEnable(event:any ,id:any){
 
   groupusers(event: any, name: any, id: any) {
     this.userloading = true;
-    
+
     if (event.target.checked) {
-      this.importall=true;
+      this.importall = true;
       this.groupName.push(name);
       this.groupId.push(id);
     }
     else {
-      this.importall=false;
+      this.importall = false;
       let index = this.groupName.indexOf(name);
       this.groupName.splice(index, 1)
       let idIndex = this.groupName.indexOf(id);
@@ -259,12 +263,12 @@ removeEnable(event:any ,id:any){
   importlistuser(event: any, id: any) {
     if (event.target.checked) {
       // this.remov=true;
-      this.imports=true;
+      this.imports = true;
       this.userId.push(id);
     }
     else {
       // this.remov=false;
-      this.imports=false;
+      this.imports = false;
       let index = this.groupName.indexOf(name);
       this.userId.splice(index, 1)
     }
