@@ -1,5 +1,6 @@
 <div>
   <ng-container>
+    
     <div>
       <div>
         <mat-card class="up">
@@ -19,6 +20,9 @@
             <div>
               <mat-icon class="clearbutton" [mat-dialog-close]>clear</mat-icon>
             </div>
+          </div>
+          <div>
+            <p>S3buckets</p>
           </div>
         </mat-card>
       </div>
@@ -49,10 +53,11 @@
       <div>
         <footer class="footer">
           <button class="cancle-button" [mat-dialog-close] mat-button>Cancel</button>
-          <button *ngIf="showCopyButton" class="copybutton" mat-button (click)="objectCopy()" [disabled]="disabledCopyButton">Copy
+          <button *ngIf="showCopyButton" class="copybutton" mat-button (click)="objectCopy()" [disabled]="disabledCopyButton" [style.background-color]="disabledCopyButton ? 'white' : ' #0085FF'">Copy
           </button>
-          <button *ngIf="showMoveButton" class="copybutton" mat-button (click)="objectCopy()" [disabled]="disabledMoveButton">Move
+          <button *ngIf="showMoveButton" class="copybutton" mat-button (click)="objectCopy()" [disabled]="disabledMoveButton" [style.background-color]="disabledMoveButton ? 'white' : ' #0085FF'">Move
           </button>
+
         </footer>
       </div>
     </div>

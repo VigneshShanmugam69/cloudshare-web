@@ -45,7 +45,7 @@
 }
 
 .canclebutton:hover{
-  background-color: #0085FF;
+  background-color: rgb(252, 42, 42);
   color: white;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .copybutton:hover{
-  background-color: #0085FF;
+  /* background-color: #0085FF; */
   color: white;
 }
 .tabledata{
@@ -65,6 +65,7 @@
   overflow-x: hidden;
   scrollbar-width: light;
   scrollbar-color: #0085ff;
+  cursor: pointer;
 }
 .example-radio-button {
     /* display: flex; */
@@ -106,4 +107,8 @@
     top: 48%;
     right: 49%;
     
+  }
+
+  .crumb{
+    cursor: pointer;
   }

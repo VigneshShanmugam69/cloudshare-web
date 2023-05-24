@@ -1,5 +1,6 @@
 <div>
   <ng-container>
+
     <div>
       <div>
         <mat-card class="top">
@@ -13,6 +14,16 @@
               </div>
             </div>
             <mat-icon class="clear" [mat-dialog-close]>clear</mat-icon>
+          </div>
+          <div class="crumb">
+            <span (click)="listbucket()" >S3Buckets >  </span>
+            <span (click)="ngOnInit()" >{{destinationBucket}}&nbsp; ></span>
+            <label class="crumb" *ngFor="let crumbs of breadcrumbData; let last = last">
+              <span (click)="navigateToCrumb(crumbs)" >{{crumbs.value}}</span> 
+
+              <span *ngIf="!last"> >&nbsp; </span>
+            </label>
+            
           </div>
         </mat-card>
       </div>
@@ -35,11 +46,12 @@
               <tbody *ngFor="let item of objectlists">
                 <tr>
 
-                  <td>                   
+                  <td>
                     <div>
-                      <mat-radio-button (click)="onclick(item.Prefix)" class="example-radio-button" [disabled]="!item?.Prefix?.includes('/')">
+                      <mat-radio-button (click)="onclick(item.Prefix)" class="example-radio-button"
+                        [disabled]="!item?.Prefix?.includes('/')">
                         <label>
-                          <span (click)="onclick(item.Prefix)" (dblclick)="folderObjectslist(item.Prefix)">
+                          <span (click)="showDetails(item.Prefix)" (click)="folderObjectslist(item.Prefix)">
                             {{item.Prefix}}
                           </span>
                         </label>
@@ -58,11 +70,11 @@
                   <td>{{item?.Prefix?.includes('/') ? '-':item.LastModified}}</td>
 
                 </tr>
-                
+
               </tbody>
-              
+
             </table>
-           
+
           </div>
           <div *ngIf="show">
             <h3 class="nofolder">No matches ...</h3>
@@ -83,10 +95,13 @@
     <div>
       <footer class="footer">
         <button class="canclebutton" mat-button [mat-dialog-close]>Cancel</button>
-        <button *ngIf="showCopyButton" mat-button class="copybutton"  (click)="copyto()" [disabled]="disabledCopyButton">Copy</button>
-        <button *ngIf="showMoveButton" mat-button class="copybutton" (click)="copyto()" [disabled]="disabledMoveButton">Move</button>
+        <button *ngIf="showCopyButton" mat-button class="copybutton" (click)="copyto()" [disabled]="disabledCopyButton"
+          [style.background-color]="disabledCopyButton ? 'white' : ' #0085FF'">Copy</button>
+        <button *ngIf="showMoveButton" mat-button class="copybutton" (click)="copyto()" [disabled]="disabledMoveButton"
+          [style.background-color]="disabledMoveButton ? 'white' : ' #0085FF'">Move</button>
       </footer>
     </div>
+
 
   </ng-container>
 </div>
