@@ -9,6 +9,10 @@
     color: #0085ff;
     /* color:darkred; */
 }
+.swal2-popup{
+    width: 400px !important;
+    height: 400px !important;
+}
 
 .resizable-table th {
     position: relative;

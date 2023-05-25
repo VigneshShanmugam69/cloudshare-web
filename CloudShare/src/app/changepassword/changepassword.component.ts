@@ -19,7 +19,7 @@ export class ChangepasswordComponent implements OnInit {
 
   ngOnInit() {
     let userdetails = this.datatransfer.sendUserName();
-    this.uname = userdetails.result['Username']
+    this.uname = userdetails
   }
 
   changeuserpassword = new FormGroup({
@@ -33,14 +33,15 @@ export class ChangepasswordComponent implements OnInit {
       Username: this.uname,
       Password: this.changeuserpassword.controls.npassword.value,
     }
+    console.log(payload);
     this.auth.resetNewPassword(payload).subscribe((res: any) => {
       if(res['status']==1){
-        Swal.fire(res['users']).then((result) => {
+        Swal.fire({width: '400px',text:res['message']}).then((result) => {
           this.route.navigate(['/userdashboard']
           )
         })
       }else{
-        Swal.fire(res['users']).then((result) => {
+        Swal.fire({width: '400px',text:res['message']}).then((result) => {
           this.route.navigate(['']
           )
         })
