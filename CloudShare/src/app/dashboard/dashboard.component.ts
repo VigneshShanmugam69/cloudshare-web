@@ -124,7 +124,7 @@ export class DashboardComponent {
   folderorobjectname: any;
   Key: any;
   objectsname: any;
-  loading :boolean = false;
+  loading: boolean = false;
 
   @ViewChild(MatMenuTrigger)
   contextMenu!: MatMenuTrigger;
@@ -176,6 +176,7 @@ export class DashboardComponent {
   filesizes: any;
   storageclas: any;
   objects: any;
+  breadcrumbData: any[] = [];
 
   constructor(
     private auth: AuthService,
@@ -203,7 +204,9 @@ export class DashboardComponent {
   // list the objects from the selecting bucket
   objectList(val: any) {
     this.foldername = [];
-    this.bucketname = val
+    this.bucketname = val;
+    this.foldername = null;
+    this.breadcrumbData = [];
     let payload = { "Bucket": val }
     this.auth.listObjects(payload).subscribe((res: any) => {
       this.folders = res.commonPrefixes;
@@ -217,7 +220,7 @@ export class DashboardComponent {
     if (this.foldername && this.foldername !== val) {
       // concatenate the previous folder name with the new folder name
       val = `${this.foldername}${val}`;
-     
+
     }
     this.foldername = val;
     if (this.foldername.includes("/")) {
@@ -225,7 +228,7 @@ export class DashboardComponent {
       this.auth.folderObjects(payload).subscribe((res: any) => {
         this.loading = false;
         this.folderPrefix = res?.folderNames ?? [];
-        this.folderObj = res?.objects ?? [];       
+        this.folderObj = res?.objects ?? [];
         this.objectlists = null;
         this.objectlists = this.folderPrefix
         this.objectlists = this.folderPrefix.concat(this.folderObj)
@@ -326,9 +329,8 @@ export class DashboardComponent {
   // open the popup both right use (contextmenu) and left click (click)
 
   copyto(action: string) {
-    // event.preventDefault();
     this.tableObjects = this.rowValue;
-    // console.log(this.rowValue);
+    console.log("row",this.tableObjects)
     this.contextMenu.closeMenu();
 
     this.dialogRef = this.dialog.open(ObjectpopupComponent, {
@@ -337,8 +339,10 @@ export class DashboardComponent {
       data: {
         action: action,
         bucket: this.bucketname,
-        object: this.tableObjects
+        // object: this.foldername + this.tableObjects.Key
+        object:this.tableObjects
       }
+      
     });
 
   }
@@ -611,4 +615,25 @@ export class DashboardComponent {
   }
 
   storage(name: string) { }
+
+  showDetails(item: any) {
+    this.breadcrumbData.push({
+      value: item
+    })
+    console.log(this.breadcrumbData, "das brecrumb")
+
+  }
+  navigateToCrumb(crumb: any) {
+    // Find the index of the clicked breadcrumb
+    const crumbIndex = this.breadcrumbData.findIndex(c => c === crumb);
+
+    // Remove all breadcrumbs after the clicked one
+    this.breadcrumbData.splice(crumbIndex + 1);
+    // Set the corresponding data as the current data
+
+    this.foldername = this.breadcrumbData.map(obj => obj.value).join("")
+
+    this.folderObjectslist(this.foldername);
+
+  }
 }

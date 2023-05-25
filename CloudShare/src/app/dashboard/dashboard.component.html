@@ -160,9 +160,19 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
       </table>
     </div>
+    
 
 
     <div class="tables">
+      <div >
+        <span>Path:&nbsp;</span>
+        <span class="crumb" (click)="objectList(bucketname)">/ >&nbsp;</span>
+        <label class="crumb" *ngFor="let crumbs of breadcrumbData; let last = last">
+          <span (click)="navigateToCrumb(crumbs)">{{crumbs.value}}</span>
+          <span *ngIf="!last"> >&nbsp;</span>
+        </label>
+        
+      </div>
       <div>
         <div class="spinner" *ngIf="loading">
           <mat-spinner color="primary" [diameter]="20"></mat-spinner>
@@ -171,7 +181,7 @@
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td class="col-sm-2" mat-cell *matCellDef="let element"
-              (dblclick)="folderObjectslist(element.Prefix || element.Key)">
+              (click)="folderObjectslist(element.Prefix || element.Key);showDetails(element.Prefix)">
               {{element.Prefix}} {{element.Key}}</td>
           </ng-container>
 
@@ -199,25 +209,19 @@
         <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
           [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
         </div>
-        <mat-menu #contextMenu="matMenu">
-          <!-- <ng-template matMenuContent iet-item="item">
-            <button (contextmenu)="copyto()" (click)="copyto()" mat-menu-item>
-              <mat-icon>file_copy</mat-icon>
-              <span >CopyTo Ctrl+Shift+C</span>
-            </button>
-          </ng-template> -->
+        <mat-menu #contextMenu="matMenu">          
           <ng-container matMenuContent>
-            <div class="menu-row">
+            <div>
               <hr>
-              <div class="menu-column">
+              <div >
                 <button (contextmenu)="copyto('copy')" (click)="copyto('copy')" mat-menu-item>
-                  <mat-icon class="icon">file_copy</mat-icon>
-                  <span class="content">Copy to...</span>
-                  <span class="keyboard">Ctrl+Shift+C</span>
+                  <mat-icon >file_copy</mat-icon>
+                  <span >Copy to...</span>
+                  <span >Ctrl+Shift+C</span>
                 </button>
               </div>
 
-              <div class="menu-column">
+              <div >
                 <button (contextmenu)="copyto('move')" (click)="copyto('move')" mat-menu-item>
                   <mat-icon>move_to_inbox</mat-icon>
                   <span>Move to...</span>
@@ -225,12 +229,7 @@
                 </button>
               </div>
               <hr>
-              <!-- <div class="menu-column">
-                <button>
-                  <span>Ctrl+Shift+C</span>
-                </button>
-
-              </div> -->
+              
             </div>
           </ng-container>
         </mat-menu>

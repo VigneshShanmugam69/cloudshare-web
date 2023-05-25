@@ -372,35 +372,6 @@ table {
   margin-right: 10px
 }
 
-.menu-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.menu-column {
-  display: flex;
-  flex-direction: column;
-  margin-right: 0px;
-} */
-
-/* .icon{
-  display: flex;
-  flex-direction: column;
-  margin-right: 6px;
-  margin-left: -9px;
-}
-.content{
-  /* display: flex;
-  flex-direction: column; */
-/* margin-right:20px;
-}
-
-.keyboard{
-  display: flex;
-  flex-direction: column;
-  margin-left: 42px;
-  margin-right: 15px;
-} */
 /* .row:hover {
 
   background-color: #0085FF;
@@ -414,17 +385,7 @@ table {
 
 
 } */
-/* .mat-mdc-dialog-container .mdc-dialog__surface {
-  border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
-  margin-left: 2035px;
-  margin-bottom: 593px;
-} */
 
-/* ::ng-deep.mat-mdc-dialog-container {
-  position: absolute !important;
-  
-  width: 20px ;
-} */
 ::ng-deep.mat-mdc-dialog-container .mdc-dialog__surface{
 font-family: Verdana, Arial, Helvetica, sans-serif;
 border-style: groove;
@@ -469,4 +430,9 @@ thead[_ngcontent-usl-c72], tr[_ngcontent-usl-c72] {
 	position: absolute;
   margin-left: 2rem; 
   margin-top: 4rem; 
+}
+
+.crumb{
+  cursor: pointer;
+
 }

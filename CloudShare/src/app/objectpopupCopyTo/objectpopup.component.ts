@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { AuthService } from '../dashboard/dashboard.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ListobjectcopyComponent } from '../listobjectcopy/listobjectcopy.component';
 import Swal from 'sweetalert2';
+import { AuthService } from '../dashboard/dashboard.service';
 
 @Component({
   selector: 'app-objectpopup',
@@ -34,6 +34,8 @@ export class ObjectpopupComponent implements OnInit {
   ngOnInit() {
     this.getbuckets();
     this.toggleButtons();
+    console.log("obsource",this.data)
+
 
   }
 
