@@ -97,7 +97,7 @@ export class UseraccessmanagementComponent {
       "userId": this.userId
     }
     this.auth.removeuser(payload).subscribe((res: any) => {
-      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() });
+      Swal.fire({width: '400px', customClass:{ popup:'swal-wide'} ,text:res['message']}).then((result) => { this.modalService.dismissAll() });
     })
   }
   // const a=document.getElementbyId("removepop")
@@ -108,7 +108,7 @@ export class UseraccessmanagementComponent {
       "userId": this.userId
     }
     this.auth.importuser(payload).subscribe((res: any) => {
-      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() })
+      Swal.fire({  width: '400px',customClass:{ popup:'swal2-popup'} ,text:res['message']}).then((result) => { this.modalService.dismissAll() })
       this.directoryUser();
     })
   }
@@ -118,7 +118,7 @@ export class UseraccessmanagementComponent {
     }
     this.auth.importallusers(payload).subscribe((res: any) => {
       console.log(res);
-      Swal.fire(res['message']).then((result) => { this.modalService.dismissAll() })
+      Swal.fire({width: '400px', customClass: 'swal-wide',text:res['message']}).then((result) => { this.modalService.dismissAll() })
       this.directoryUser();
     })
   }
@@ -157,7 +157,7 @@ export class UseraccessmanagementComponent {
     this.auth.addUserFields(payload).subscribe((res: any) => {
 
       this.adduserform.reset();
-      Swal.fire(res['message']).then((result) => {
+      Swal.fire({width: '400px', customClass: 'swal-wide',text:res['message']}).then((result) => {
         this.modalService.dismissAll();
         this.listlocaluser()
       });
