@@ -1,23 +1,40 @@
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+    color: #0085ff;
+    /* color:darkred; */
+}
+.swal2-popup{
+    width: 400px !important;
+    height: 400px !important;
+}
+
 .resizable-table th {
     position: relative;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    /* background-color: #f0f0f0; */
+    border: 1px solid whitesmoke;
     padding: 8px;
-  }
-  
-  .resize-handle {
+}
+
+.resize-handle {
     position: absolute;
     top: 0;
     right: -4px;
     bottom: 0;
     width: 8px;
     cursor: col-resize;
-  }
-  
-  .resizable-table td {
-    border: 1px solid #ccc;
+}
+
+.resizable-table td {
+    border: 1px solid whitesmoke;
     padding: 8px;
-  }
+}
+
 .tables {
     border-radius: 4px;
     position: absolute;
@@ -26,33 +43,35 @@
     left: 20%;
     top: 13%;
     background: #FFFFFF;
-    
+
 
     scrollbar-width: light;
     scrollbar-color: #0085ff;
     overflow-y: scroll;
 }
-.mt-size{
-    height: 500px;
+
+.mt-size {
+    /* height: 500px;
     width: 500px;
     position: relative;
     top: 33%;
-    left: 33%;
+    left: 33%; */
     padding: 5px;
 }
-.mt-size-re{
+
+.mt-size-re {
     height: 300px;
     width: 500px;
     position: absolute;
-    top: 35%;
-    left: 33%;
     padding: 5px;
 }
-.mt-size-in{
+
+.mt-size-in {
     overflow: auto;
     margin-top: 5px;
-    height:200px
+    height: 200px
 }
+
 .mat-toolbar-row,
 .mat-toolbar-single-row {
     display: flex;
@@ -71,13 +90,15 @@
 .profile {
     flex: 1 1 auto;
 }
-.add-btn-div{
+
+.add-btn-div {
     display: flex;
     justify-content: flex-end;
     padding: 10px;
     padding-right: 0px;
 }
-.add-button{
+
+.add-button {
     background-color: #0885ff;
     color: white;
     border: none;
@@ -88,26 +109,34 @@
     font-size: 16px;
     margin-left: 20px;
 }
-.slt-opt{
+
+.add-button:disabled {
+    background-color: #88c1fa;
+}
+
+.slt-opt {
     display: flex;
     margin-top: 4px;
 }
-.chk-stl{
+
+.chk-stl {
     display: inline-block;
     margin-left: 9px;
 }
-.slt-opt-fld{
+
+.slt-opt-fld {
     width: 282px;
     border-radius: 4px;
     height: 50px;
 }
+
 .submit {
     background-color: #0885ff;
     border: none;
     color: white;
     padding: 7px 45px;
     text-align: center;
-    margin-top: 500px;
+    margin-top: 400px;
     margin-right: 25px;
     margin-left: 25px;
     text-decoration: none;
@@ -116,15 +145,20 @@
     border-radius: 10px;
     height: 45px;
 }
+
+.btn-spc {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .import {
     background-color: #0885ff;
     border: none;
     color: white;
-    padding: 7px 67px;
+    padding: 7px 25px;
     text-align: center;
     margin-top: 30px;
-    margin-right: 25px;
-    margin-left: 35px;
+    width: 25%;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -132,10 +166,14 @@
     height: 45px;
 }
 
+.import:disabled {
+    background-color: #88c1fa;
+}
 
-.check{
+.check {
     margin-right: 10px;
 }
+
 /* 
 th,thead,thead,td {
 border-collapse: separate;
@@ -151,11 +189,8 @@ border-collapse: separate;
     overflow: auto;
     position: absolute;
     width: 424px;
-    height: 550px;
-    top: 15%;
-    left: 40%;
-
-    border-radius: 6px 6px 0px 0px;
+    height: 470px;
+    border-radius: 6px 6px 6px 6px;
 
     background: #FfffFF;
     box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
@@ -182,10 +217,12 @@ border-collapse: separate;
 
 
 }
-.add-btn{  
+
+.add-btn {
     display: flex;
     justify-content: center;
 }
+
 .adduser-title {
     font-size: 30px;
     font-weight: 550;
@@ -204,11 +241,14 @@ border-collapse: separate;
 
 
 
-.userlist{white-space: nowrap;}
-.userlist:hover{
+.userlist {
+    white-space: nowrap;
+}
+
+.userlist:hover {
     cursor: pointer;
-    color:#0085ff;
-    
+    color: #0085ff;
+
 }
 
 .example-viewport {
@@ -231,6 +271,8 @@ table {
     width: 100%;
     font-size: 12px;
     box-shadow: none;
+    border-radius: 9px 9px 9px 9px;
+    box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
 
     scrollbar-width: light;
     scrollbar-color: #0085ff;
@@ -243,7 +285,8 @@ table {
     border-bottom-style: solid;
 
 }
-.mdc-data-table{
+
+.mdc-data-table {
     white-space: nowrap;
     background-color: #0085FF;
     color: white;
@@ -264,5 +307,3 @@ table {
 *::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 0 10px;
 }
-
-

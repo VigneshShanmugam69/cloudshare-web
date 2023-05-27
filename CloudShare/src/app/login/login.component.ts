@@ -15,29 +15,29 @@ import { OktaAuthModule, OktaAuthService } from '@okta/okta-angular';
 export class LoginComponent implements OnInit {
   public isAuthenticated: boolean | undefined;
 
- 
+  public showPassword: boolean = false;
   hide = true;
   roles: any[] = [];
-  constructor(private shared: ServiceService, private route: Router, private datatransfer:DatatransferService, private oktaAuth: OktaAuthService) {
+  constructor(private shared: ServiceService, private route: Router, private datatransfer: DatatransferService, private oktaAuth: OktaAuthService) {
     this.oktaAuth.$authenticationState.subscribe(
       (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
     );
-   }
+  }
 
   async ngOnInit(): Promise<void> {
     this.getroles();
-   
+
     this.isAuthenticated = await this.oktaAuth.isAuthenticated();
   }
 
   loginform = new FormGroup({
     uname: new FormControl("", [Validators.required]),
     passwd: new FormControl("", [Validators.required]),
-    mode: new FormControl("", [Validators.required])
+    // mode: new FormControl("", [Validators.required])
 
   })
 
- async oktasign(){
+  async oktasign() {
     await this.oktaAuth.signInWithRedirect();
   }
 
@@ -45,19 +45,25 @@ export class LoginComponent implements OnInit {
     if (this.loginform.valid) {
       let payload = {
         Username: this.loginform.controls.uname.value,
-        Password: this.loginform.controls.passwd.value,
-        RoleID: this.loginform.controls.mode.value
+        Password: this.loginform.controls.passwd.value
       }
 
       this.shared.login(payload).subscribe((res: any) => {
-if(res['status']==1){
-  localStorage.setItem('token',res['token']);
-  this.loginform.reset();
-  this.route.navigate(['/userdashboard']);
-}
-else {
-  Swal.fire(res['message'])
-}
+        console.log(res);
+        if (res['status'] == 1 && res['isFirst'] == 1) {
+          localStorage.setItem('token', res['token']);
+          this.loginform.reset();
+          this.datatransfer.sendUserDetails(res.userName)
+          this.route.navigate(['/changepassword'])
+        }
+        else if (res['status'] == 1 && res['isFirst'] == 0) {
+          localStorage.setItem('token', res['token']);
+          this.loginform.reset();
+          this.route.navigate(['/userdashboard']);
+        }
+        else {
+          Swal.fire({width: '400px',text:res['message']})
+        }
 
         // if (res['IsVerified'] == true && res.result['IsFirst'] == 1) {
 

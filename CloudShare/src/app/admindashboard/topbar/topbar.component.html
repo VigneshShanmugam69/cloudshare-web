@@ -14,12 +14,13 @@
                         <mat-panel-title  class="side-buttons">UserAccessManagement</mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-nav-list>
-                        <a mat-list-item routerLink="/useraccessmanagement">
+                        <a mat-list-item>
                             <span (click)="local()" value="local">Local</span>
                         </a>
-                        <a mat-list-item routerLink="/useraccessmanagement">
+                        <a mat-list-item>
                             <span (click)="directory()" #dir value="directory">Directory</span>
                         </a>
+                        <!-- routerLink="/useraccessmanagement" routerLink="/useraccessmanagement"-->
                     </mat-nav-list>
                 </mat-expansion-panel>
             </mat-nav-list>

@@ -26,7 +26,14 @@ export class DatatransferService {
   // }
 
 tablename(Value:any){
-this._tableVable.next(Value)
+
+  if(Value=='local'){
+this._tableVable.next(true);
+  }
+  else{
+    this._tableVable.next(false);
+  }
+
 }
 
 sendtablename(){
