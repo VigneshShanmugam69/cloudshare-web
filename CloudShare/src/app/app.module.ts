@@ -31,6 +31,9 @@ import { ResizableComponent } from './resizable/resizable.component';
 import { ResizableDirective } from './resizable/resizable.directive';
 
 import { ListobjectcopyComponent } from './listobjectcopy/listobjectcopy.component';
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 const oktaConfig = {
   issuer: 'https://dev-99932483.okta.com/oauth2/default',
@@ -77,7 +80,8 @@ const oktaConfig = {
     AgGridModule,
     OktaAuthModule,
     MatDialogModule,
-    ResizableModule
+    ResizableModule,
+    MatCardModule,MatButtonModule,FlexLayoutModule
   ],
   providers: [ { provide: OKTA_CONFIG, useValue: oktaConfig }],
   bootstrap: [AppComponent]
