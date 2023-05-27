@@ -1,3 +1,4 @@
+<html>
 <div class="topbar">
   <div class="top">
     <button class="topbar-button" mat-button routerLink="/admindashboard">Menu</button>
@@ -10,19 +11,13 @@
     <button class="logout-button" mat-button (click)="logout()">Logout</button>
   </div>
 </div>
-
-
 <div class="container">
   <div class="account">
     <!-- <div *ngFor="let item of items" class="example-item">{{item}}</div> -->
     <div class="top">
       <button class="topbar-button" mat-button (click)="account()">Account-1</button>
-
     </div>
-
   </div>
-
-
   <div class="bucketlist">
     <div *ngFor="let item of buckets" class="example-item">
       <ul>
@@ -107,8 +102,6 @@
       </mat-menu>
     </div>
   </div>
-
-
   <div class="properties">
     <div class="property">
       <div>
@@ -140,12 +133,8 @@
         </div>
       </mat-tree>
     </div>
- 
   </div>
- 
- 
 </div>
-
 
 <div class="viewpanel">
   <div class="preview">
@@ -159,8 +148,6 @@
     <!-- <button class="topbar-button" mat-button (click)=" objecttags()"><b>tagss</b></button> -->
   </div>
 </div>
-
-
 <div class="viewpanels" style="overflow: auto;">
   <div class="spinner-border d-flex justify-content-center" role="status" *ngIf="isLoading">
     <span class="sr-only"></span>
@@ -193,16 +180,11 @@
     <tbody>
       <tr>
         <td class="storage">Totalfolder</td>
-
-
         <td class="storage"> {{ storages?.TotalFolder }}</td>
-
       </tr>
       <tr>
         <td class="storage">Totalobject</td>
         <td class="storage">{{ objects?.TotalObject}} </td>
-
-
       </tr>
       <tr>
         <td class="storage">Totalfilesize</td>
@@ -216,12 +198,6 @@
         <td class="storage"> {{ storageclas?.Storageclass }}</td>
     </tbody>
   </table>
-
-
-
-
-
-
   <!-- <table mat-table [dataSource]="dataSources" class="mat-elevation-z8"> -->
   <table *ngIf="falseTable" class="bucketmanagement">
     <thead>
@@ -241,15 +217,8 @@
     </tbody>
   </table>
 </div>
-
-
-
-
-
 <div class="popups">
-
   <ng-template let-data #myCityDialog class="popup">
-
     <ul *ngFor="let item of dataSource1" class="pop">
       <ng-container *ngIf="showMessage">
         <li>ReplicationRoles: {{item.ReplicationRoles}}</li>
@@ -278,8 +247,6 @@
         <li>BucketLifecycleTransitionsDays: {{item.BucketLifecycleTransitionsDays}}</li>
         <li>BucketLifecycleStorageClass: {{item.BucketLifecycleStorageClass}}</li>
         <li>NoncurrentVersionransitions: {{item.NoncurrentVersionransitions}}</li>
-
-
         <hr>
       </ng-container>
     </ul>
@@ -309,5 +276,6 @@
       <button class="topbar-buttons" mat-button mat-dialog-close>Close</button>
     </div>
   </ng-template>
-
 </div>
+
+</html>
