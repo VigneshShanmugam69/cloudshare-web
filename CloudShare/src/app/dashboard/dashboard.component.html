@@ -165,7 +165,7 @@
 
     <div class="tables">
       <div >
-        <span>Path:&nbsp;</span>
+        <!-- <span>Path:&nbsp;</span> -->
         <span class="crumb" (click)="objectList(bucketname)">/ >&nbsp;</span>
         <label class="crumb" *ngFor="let crumbs of breadcrumbData; let last = last">
           <span (click)="navigateToCrumb(crumbs)">{{crumbs.value}}</span>

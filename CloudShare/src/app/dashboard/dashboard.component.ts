@@ -330,7 +330,6 @@ export class DashboardComponent {
 
   copyto(action: string) {
     this.tableObjects = this.rowValue;
-    console.log("row",this.tableObjects)
     this.contextMenu.closeMenu();
 
     this.dialogRef = this.dialog.open(ObjectpopupComponent, {
@@ -426,8 +425,6 @@ export class DashboardComponent {
     this.auth.totalfolder(payload).subscribe((res: any) => {
       this.res = res;
       this.storages = res;
-      console.log('datasourcessr', this.storages);
-
     });
 
   }

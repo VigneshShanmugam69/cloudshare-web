@@ -34,9 +34,6 @@ export class ObjectpopupComponent implements OnInit {
   ngOnInit() {
     this.getbuckets();
     this.toggleButtons();
-    console.log("obsource",this.data)
-
-
   }
 
   // SearchForm = new FormGroup({
