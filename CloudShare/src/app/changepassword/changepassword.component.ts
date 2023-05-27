@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators,FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../dashboard/dashboard.service';
@@ -12,14 +12,15 @@ import { CustomValidators } from './confirmpasssword';
   styleUrls: ['./changepassword.component.css']
 })
 export class ChangepasswordComponent implements OnInit {
-  
+  public showPassword: boolean = false;
+  public conformPassword: boolean = false;
   hide = true;
   uname: string | undefined;
   constructor(private auth: AuthService, private datatransfer: DatatransferService, private route: Router) { }
 
   ngOnInit() {
     let userdetails = this.datatransfer.sendUserName();
-    this.uname = userdetails.result['Username']
+    this.uname = userdetails
   }
 
   changeuserpassword = new FormGroup({
@@ -33,14 +34,15 @@ export class ChangepasswordComponent implements OnInit {
       Username: this.uname,
       Password: this.changeuserpassword.controls.npassword.value,
     }
+    console.log(payload);
     this.auth.resetNewPassword(payload).subscribe((res: any) => {
-      if(res['status']==1){
-        Swal.fire(res['users']).then((result) => {
+      if (res['status'] == 1) {
+        Swal.fire({ width: '400px', text: res['message'] }).then((result) => {
           this.route.navigate(['/userdashboard']
           )
         })
-      }else{
-        Swal.fire(res['users']).then((result) => {
+      } else {
+        Swal.fire({ width: '400px', text: res['message'] }).then((result) => {
           this.route.navigate(['']
           )
         })
