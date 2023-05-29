@@ -69,9 +69,7 @@
     justify-content: space-between;
     position: absolute;
     width: 100%;
-    height: 60px;
-    left: 0px;
-    top: 0px;
+    height: 12%;
     background: #FFFFFF;
     box-shadow: 0px 0px 25px rgba(200, 204, 212, 0.2);
   }
@@ -83,33 +81,35 @@
   padding: 0;
 }
 
-@media screen and (min-width: 1024px) {
+
   .account {
     overflow: auto;
     position: absolute;
-    width: 350px;
-    height: 150px;
-    left: 6px;
-    top: 90px;
+    width: 25%;
+    /* max-width:355px; */
+  height: 14%;
+    resize: both;
+    overflow: auto;
+    /* left: 6px; */
+    top: 14%;
     border-radius: 6px 6px 0px 0px;
-    margin-top: -23px;
-    margin-left: 2px;
 
     background: #FFFFFF;
     box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
   }
-}
+
 
 .bucketlist {
-  overflow: auto;
   position: absolute;
-  width: 350px;
-  height: 200px;
-  left: 7px;
-  top: 267px;
+  width: 25%;
+  /* max-width: 351px; */
+  height: 35%;
+  /* left: 7px; */
+
+    overflow: auto;
+  top: 29%;
   border-radius: 0px 0px 6px 6px;
-  margin-top: -44px;
-  margin-left: 2px;
+  resize: both;
 
   background: #FFFFFF;
   box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
@@ -118,24 +118,19 @@
 
 .viewpanel {
   position: absolute;
-  width: 1347px;
-  left: 8px;
-  top: 681px;
-  border-radius: 6px 6px 6px 6px;
-  margin-top: -252px;
-  margin-left: 2px;
+  width: 100%;
+  top: 65%;
+  border-radius: 6px 6px 6px 6px;;
   background: #FFFFFF;
   box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
 }
 
 .viewpanels {
   position: absolute;
-  width: 1347px;
+  width: 100%;
   height: 180px;
-  left: 8px;
-  top: 479px;
+  top: 73%;
   border-radius: 6px 6px 6px 6px;
-  margin-left: 2px;
   background: #FFFFFF;
   box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
 }
@@ -161,11 +156,13 @@
 
 .properties {
   overflow: auto;
-  position: relative;
-  width: 350px;
-  height: 358px;
-  left: 1007px;
-  top: 66px;
+  position: absolute;
+  width: 24%;
+  height: 50%;
+  left: 76%;
+
+    overflow: auto;
+  top: 14%;
   background: #FFFFFF;
   box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
 }
@@ -237,15 +234,19 @@ body {
 .tables {
   border-radius: 4px;
   position: absolute;
-  width: 635px;
-  height: 358px;
-  left: 366px;
-  top: 67px;
+  width: 50%;
+  /* max-width:636px; */
+  height: 50%;
+
+  resize: both;
+  left: 25.5%;
+  top: 14%;
   border-radius: 9px 9px 9px 9px;
   background: #FFFFFF;
   box-shadow: 0px 0px 6px rgba(154, 152, 152, 0.17);
 
   scrollbar-width: light;
+
   scrollbar-color: #0085ff;
   overflow-y: scroll;
 }
@@ -268,6 +269,8 @@ body {
 table {
   width: 40px;
   font-size: 12px;
+  width: 100%;
+  height: 30px;
 
 }
 
@@ -294,6 +297,8 @@ tr {
   border-color: inherit;
   border-style: solid;
   border-width: 1.5px;
+  height: 20px;
+  position: relative;
 }
 
 
@@ -302,7 +307,11 @@ th {
 
   border-color: #F1F1F3 !important;
   padding: 2px 20px;
+ 
 
+}
+th,td.bucketmanagement{
+  height:46px;
 }
 
 td:hover {
@@ -328,9 +337,7 @@ td:hover {
 
 }
 
-table {
-  width: 100%;
-}
+
 
 .example-container {
   height: 400px;
@@ -417,13 +424,50 @@ text-decoration: underline;
   height: 10rem;
 }
 
-thead[_ngcontent-usl-c72], tr[_ngcontent-usl-c72] {
-  border-color: inherit;
-  border-style: solid;
-  border-width: 1.5px;
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  height: 34px;
+
+.show:hover{
+  color: #0085FF;
+  text-decoration: underline;
+  
+  }
+  .mattab mat-elevation-z88{
+    background-color: #0085FF;
+  
+  }
+  .Tables{
+    height: 10rem;
+  }
+  
+  thead[_ngcontent-usl-c72], tr[_ngcontent-usl-c72] {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 1.5px;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 34px;
+  }
+  .topbar-button:focus{
+    background-color: #c0d5e9;
+  }
+  .bucketlist-button:focus{
+      background-color:  #c0d5e9;
+      
+    }
+    .mat-mdc-table {
+      table-layout: auto;
+      white-space: normal;
+      height: 100%;
+      
+  }
+  /* table[_ngcontent-neh-c88] {
+    width: 40px;
+    font-size: 12px;
+    width: 100%;
+    height: 150px;
+} */
+.bucketmanagement{
+  height: 50px;
+ 
 }
 
 .spinner{  	
@@ -434,5 +478,36 @@ thead[_ngcontent-usl-c72], tr[_ngcontent-usl-c72] {
 
 .crumb{
   cursor: pointer;
+}
+th.bucketmanagement{
+  height: 50px;
+  position: relative;
+}
+.storage{
+  height:2.5rem;
 
+}
+.resizable-table th {
+  position: relative;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  bottom: 0;
+  width: 8px;
+  cursor: e-resize;
+
+}
+
+.resizable-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+.container{
+  resize: both;
 }

@@ -21,6 +21,7 @@ import {
 } from '@angular/material/dialog';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 export interface PeriodicElements {
   name: string;
@@ -130,11 +131,9 @@ export class DashboardComponent {
   contextMenu!: MatMenuTrigger;
 
   PropertiesdisplayedColumns: string[] = ['Key', 'value'];
-  // displycolumn:string[]=['TotalFolder']
-  PeriodicElements: any;
-  // dataSource1:any;
 
-  //PropertiesdisplayedColumns: string[] = ['Key', 'value'];
+  PeriodicElements: any;
+
   PropertiesdisplayedColumns1: string[] = ['Keys', 'value'];
   dataSource: any[] = [];
   property: any;
@@ -178,6 +177,12 @@ export class DashboardComponent {
   objects: any;
   breadcrumbData: any[] = [];
 
+  key: any;
+  prefix: any;
+  keys: any;
+  selectedobjectlist: any;
+  objtag: any;
+  obj: any;
   constructor(
     private auth: AuthService,
     public dialog: MatDialog,
@@ -212,26 +217,28 @@ export class DashboardComponent {
       this.folders = res.commonPrefixes;
       this.Objects = res.objects;
       this.objectlists = this.folders.concat(this.Objects);
+      //  console.log("list",this.objectlists)
     });
   }
-  //listing objects from the folder 
+  //listing objects from the folder
   folderObjectslist(val: any) {
     this.loading = true;
     if (this.foldername && this.foldername !== val) {
       // concatenate the previous folder name with the new folder name
       val = `${this.foldername}${val}`;
 
+      this.selectedobjectlist = val;
     }
     this.foldername = val;
-    if (this.foldername.includes("/")) {
-      let payload = { "Bucket": this.bucketname, "folderPath": this.foldername }
+    if (this.foldername.includes('/')) {
+      let payload = { Bucket: this.bucketname, folderPath: this.foldername };
       this.auth.folderObjects(payload).subscribe((res: any) => {
         this.loading = false;
         this.folderPrefix = res?.folderNames ?? [];
         this.folderObj = res?.objects ?? [];
         this.objectlists = null;
-        this.objectlists = this.folderPrefix
-        this.objectlists = this.folderPrefix.concat(this.folderObj)
+        this.objectlists = this.folderPrefix;
+        this.objectlists = this.folderPrefix.concat(this.folderObj);
 
         //To list the properties in a object
         //     this.enableTree = false;
@@ -253,7 +260,6 @@ export class DashboardComponent {
         //   TREE_DATA[1].children = out;
         //   this.propertiesinfo.data = TREE_DATA;
         //   this.enableTree = true;
-
       });
     } else {
       let payload = { Bucket: this.bucketname, Key: this.foldername };
@@ -278,7 +284,7 @@ export class DashboardComponent {
     let payload = { Bucket: this.bucketname };
     this.auth.listOfProperties(payload).subscribe((res: any) => {
       var result = Object.entries(res[0]).map(([key, value]) => ({
-        key: String(key) + ': ',
+        key: String(key) + '',
         value: String(value),
       }));
       this.res = result;
@@ -299,10 +305,11 @@ export class DashboardComponent {
     let payload = { Bucket: this.bucketname };
     this.auth.tags(payload).subscribe((res: any) => {
       var result = Object.entries(res.Result[0] || res.TagSet[0]).map(
-        ([key, value]) => ({ key: String(key) + ': ', value: String(value) })
+        ([key, value]) => ({ key: String(key) + '', value: String(value) })
       );
       this.res = result;
       this.dataSource = this.res;
+      //console.log("tag==>",this.dataSource)
       this.isLoading = false;
     });
   }
@@ -315,7 +322,6 @@ export class DashboardComponent {
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.openMenu();
-
   }
 
   // menuClose() {
@@ -343,7 +349,6 @@ export class DashboardComponent {
       }
       
     });
-
   }
 
   @HostListener('document:keydown.control.shift.c', ['$event'])
@@ -359,7 +364,7 @@ export class DashboardComponent {
       },
     });
 
-    dialog.afterClosed().subscribe((result) => { });
+    dialog.afterClosed().subscribe((result) => {});
   }
 
   logout() {
@@ -386,7 +391,7 @@ export class DashboardComponent {
     let payload = { Bucket: this.bucketname };
     this.auth.headers(payload).subscribe((res: any) => {
       var result = Object.entries(res.Result).map(([key, value]) => ({
-        key: String(key) + ': ',
+        key: String(key) + '',
         value: String(value),
       }));
       this.res = result;
@@ -403,7 +408,7 @@ export class DashboardComponent {
     let payload = { Bucket: this.bucketname };
     this.auth.permission(payload).subscribe((res: any) => {
       var result = Object.entries(res.Result).map(([key, value]) => ({
-        key: String(key) + ': ',
+        key: String(key) + '',
         value: String(value),
       }));
       this.res = result;
@@ -412,7 +417,6 @@ export class DashboardComponent {
       this.isLoading = false;
     });
   }
-
 
   //To list the all permission in a bucket
 
@@ -426,7 +430,6 @@ export class DashboardComponent {
       this.res = res;
       this.storages = res;
     });
-
   }
 
   totalfilesize() {
@@ -434,9 +437,8 @@ export class DashboardComponent {
     this.auth.totalfilesize(payload).subscribe((res: any) => {
       this.res = res;
       this.filesizes = res;
-      console.log('filesizes', this.filesizes);
+      // console.log('filesizes', this.filesizes);
     });
-
   }
   storageclass() {
     this.storagetable = true;
@@ -445,10 +447,8 @@ export class DashboardComponent {
 
     let payload = { Bucket: this.bucketname };
     this.auth.storage(payload).subscribe((res: any) => {
-
       this.res = res;
       this.storageclas = res;
-      console.log('datasource', this.storageclas);
     });
   }
   totalobjects() {
@@ -460,30 +460,23 @@ export class DashboardComponent {
     this.auth.totalobjects(payload).subscribe((res: any) => {
       this.res = res;
       this.objects = res;
-      console.log('object', this.object);
 
       //this.refresh= this.object=[]=[]
     });
   }
   bucketstoragess() {
-
     this.storagetable = true;
     this.falseTable = false;
     this.hideTable = false;
-    this.bucketstorages()
-    this.totalobjects()
-    this.storageclass()
-
+    this.bucketstorages();
+    this.totalobjects();
+    this.storageclass();
   }
 
   //----------------
   totalobject(name: string) {
-
     {
-
       if (name == 'Totalobject') {
-
-
         this.storagetable = true;
         this.falseTable = false;
         this.hideTable = false;
@@ -492,12 +485,10 @@ export class DashboardComponent {
         this.auth.totalobjects(payload).subscribe((res: any) => {
           this.res = res;
           this.object = res;
-          console.log('object', this.object);
 
           //this.refresh= this.object=[]=[]
         });
-
-      };
+      }
 
       if (name == 'Totalfolder') {
         this.storagetable = true;
@@ -507,11 +498,8 @@ export class DashboardComponent {
         this.auth.totalfolder(payload).subscribe((res: any) => {
           this.res = res;
           this.folder = res;
-
-
-          console.log('folder', this.folder);
         });
-      };
+      }
 
       if (name == 'Totalfilesize') {
         this.storagetable = true;
@@ -522,9 +510,8 @@ export class DashboardComponent {
         this.auth.totalfilesize(payload).subscribe((res: any) => {
           this.res = res;
           this.filesize = res;
-          console.log('filesize', this.filesize);
         });
-      };
+      }
       if (name == 'storageclass') {
         this.storagetable = true;
         this.falseTable = false;
@@ -534,14 +521,9 @@ export class DashboardComponent {
         this.auth.storage(payload).subscribe((res?: any) => {
           this.res = res;
           this.class = res;
-          console.log('class', this.class);
-
         });
-      };
-
+      }
     }
-
-
   }
 
   bucketmanagements() {
@@ -556,11 +538,10 @@ export class DashboardComponent {
       this.msgs = this.dataSource1;
       this.value = this.dataSource1.Message;
 
-
       this.msgs = this.dataSource1;
 
       this.value = this.dataSource1[0].Message;
-      console.log('value', this.value);
+      //console.log('value', this.value);
 
       if (this.value) {
         this.showMessage = false;
@@ -573,9 +554,9 @@ export class DashboardComponent {
     let payload = { Bucket: this.bucketname };
     this.auth.bucketlifecyle(payload).subscribe((res: any) => {
       this.response1 = res.BucketLifecycle;
-      this.val = res.BucketLifecycle.message;
-      this.msg = this.val;
-      if (this.msg) {
+      this.val = this.response1[0].message;
+
+      if (this.val) {
         this.showMessage = false;
       } else {
         this.showMessage = true;
@@ -587,7 +568,7 @@ export class DashboardComponent {
     this.auth.bucketinventroy(payload).subscribe((res: any) => {
       this.results = res.BucketInventory;
       this.message = this.results[0].Message;
-      console.log('buc', this.message);
+      // console.log('buc', this.message);
       if (this.message) {
         this.showMessage = false;
       } else {
@@ -631,6 +612,79 @@ export class DashboardComponent {
     this.foldername = this.breadcrumbData.map(obj => obj.value).join("")
 
     this.folderObjectslist(this.foldername);
+  }
+  onResizeStart(event: MouseEvent): void {
+    const handle = event.target as HTMLElement;
+    const th = this.findParentTh(handle);
+    if (th) {
+      const initialWidth = th.offsetWidth;
+      const startX = event.pageX;
 
+      const onMouseMove = (e: MouseEvent) => {
+        const width = initialWidth + (e.pageX - startX);
+        th.style.width = width + 'px';
+      };
+      //console.log('move......',onMouseMove);
+      const onMouseUp = () => {
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+      };
+
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    }
+  }
+  private findParentTh(
+    element: HTMLElement
+  ): HTMLTableHeaderCellElement | null {
+    while (element && element.tagName !== 'TH') {
+      element = element.parentElement as HTMLElement;
+    }
+
+    return element as HTMLTableHeaderCellElement;
+  }
+  foldersobj() {
+    let payload = { Bucket: this.bucketname, folderPath: this.foldername };
+    this.auth.getFolderProperties(payload).subscribe((res: any) => {
+      //  console.log("folder",res)
+    });
+  }
+
+  objecttags() {
+    this.dataSource = [];
+    if (this.selectedobjectlist) {
+      this.isLoading = true;
+      this.hideTable = true;
+      this.falseTable = false;
+      this.storagetable = false;
+      let payload = { Bucket: this.bucketname, Key: this.selectedobjectlist };
+      this.auth.getObjectTag(payload).subscribe((res: any) => {
+        var result = Object.entries(res.Result[0] || res.Result).map(
+          ([key, value]) => ({ key: String(key) + '', value: String(value) })
+        );
+        this.obj = result;
+        this.dataSource = this.obj;
+        this.isLoading = false;
+      });
+    } else {
+      this.isLoading = true;
+      this.hideTable = true;
+      this.falseTable = false;
+      this.storagetable = false;
+      let payload = { Bucket: this.bucketname };
+      this.auth.tags(payload).subscribe((res: any) => {
+        var result = Object.entries(res.Result[0] || res.TagSet[0]).map(
+          ([key, value]) => ({ key: String(key) + '', value: String(value) })
+        );
+        this.res = result;
+        this.dataSource = this.res;
+
+        this.isLoading = false;
+      });
+    }
+  }
+  onClick(prefix: string, key: string) {
+    this.prefix = prefix;
+    this.keys = key;
   }
 }
