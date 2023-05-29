@@ -175,6 +175,8 @@ export class DashboardComponent {
   filesizes: any;
   storageclas: any;
   objects: any;
+  breadcrumbData: any[] = [];
+
   key: any;
   prefix: any;
   keys: any;
@@ -208,8 +210,9 @@ export class DashboardComponent {
   objectList(val: any) {
     this.foldername = [];
     this.bucketname = val;
-    this.selectedobjectlist = '';
-    let payload = { Bucket: val };
+    this.foldername = null;
+    this.breadcrumbData = [];
+    let payload = { "Bucket": val }
     this.auth.listObjects(payload).subscribe((res: any) => {
       this.folders = res.commonPrefixes;
       this.Objects = res.objects;
@@ -223,6 +226,7 @@ export class DashboardComponent {
     if (this.foldername && this.foldername !== val) {
       // concatenate the previous folder name with the new folder name
       val = `${this.foldername}${val}`;
+
       this.selectedobjectlist = val;
     }
     this.foldername = val;
@@ -331,9 +335,7 @@ export class DashboardComponent {
   // open the popup both right use (contextmenu) and left click (click)
 
   copyto(action: string) {
-    // event.preventDefault();
     this.tableObjects = this.rowValue;
-    //console.log(this.rowValue);
     this.contextMenu.closeMenu();
 
     this.dialogRef = this.dialog.open(ObjectpopupComponent, {
@@ -342,8 +344,10 @@ export class DashboardComponent {
       data: {
         action: action,
         bucket: this.bucketname,
-        object: this.tableObjects,
-      },
+        // object: this.foldername + this.tableObjects.Key
+        object:this.tableObjects
+      }
+      
     });
   }
 
@@ -588,6 +592,27 @@ export class DashboardComponent {
     }
   }
 
+  storage(name: string) { }
+
+  showDetails(item: any) {
+    this.breadcrumbData.push({
+      value: item
+    })
+    console.log(this.breadcrumbData, "das brecrumb")
+
+  }
+  navigateToCrumb(crumb: any) {
+    // Find the index of the clicked breadcrumb
+    const crumbIndex = this.breadcrumbData.findIndex(c => c === crumb);
+
+    // Remove all breadcrumbs after the clicked one
+    this.breadcrumbData.splice(crumbIndex + 1);
+    // Set the corresponding data as the current data
+
+    this.foldername = this.breadcrumbData.map(obj => obj.value).join("")
+
+    this.folderObjectslist(this.foldername);
+  }
   onResizeStart(event: MouseEvent): void {
     const handle = event.target as HTMLElement;
     const th = this.findParentTh(handle);

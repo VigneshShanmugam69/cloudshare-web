@@ -25,12 +25,14 @@ export class ListobjectcopyComponent implements OnInit {
   objKey: any;
   isLoading: boolean = false;
   hideTable: boolean = false;
-  disabledCopyButton: boolean = true;
-  disabledMoveButton: boolean = true;
+ 
+
   breadcrumbData: any[] = [];
   currentData: any;
   destinationBucket = this.data.destinationBucket
   dialogRef: any;
+  folder: any;
+
   // bucket: any[] = [];
 
 
@@ -46,7 +48,7 @@ export class ListobjectcopyComponent implements OnInit {
     this.breadcrumbData = [];
     this.foldername = null;
     let payload = { "Bucket": this.data.destinationBucket }
-    this.auth.listObjects(payload).subscribe((res: any) => {      
+    this.auth.listObjects(payload).subscribe((res: any) => {
       this.folders = res.commonPrefixes;
       this.objects = res.objects;
       this.objectlists = this.folders.concat(this.objects);
@@ -72,7 +74,7 @@ export class ListobjectcopyComponent implements OnInit {
       val = `${this.foldername}${val}`;
     }
     this.foldername = val;
-   
+
     if (this.foldername.includes("/")) {
       let payload = { "Bucket": this.data.destinationBucket, "folderPath": this.foldername }
       this.auth.folderObjects(payload).subscribe((res: any) => {
@@ -92,17 +94,20 @@ export class ListobjectcopyComponent implements OnInit {
   onclick(row: any) {
     this.destinationKeyName = row;
     this.keyName = this.destinationKeyName.split('/')
-    this.disabledCopyButton = false;
-    this.disabledMoveButton = false;
-
   }
+
 
   // coping or moving the object from one to another bucket
 
   copyto() {
     this.isLoading = true;
     this.hideTable = true;
-    let destinationKeyName = this.keyName[0];
+    if (this.foldername) {
+      this.folder = this.foldername.replace(/\/$/, '');
+    } else {
+      this.folder = null;
+    }
+
     if (this.data.action == 'copy') {
       this.objKey = this.data.sourceKeyName.Key ? this.data.sourceKeyName.Key : this.data.sourceKeyName.Prefix;
 
@@ -110,16 +115,16 @@ export class ListobjectcopyComponent implements OnInit {
         "destinationBucket": this.data.destinationBucket,
         "sourceBucket": this.data.sourceBucket,
         "sourceKeyName": this.objKey,
-        "destinationKeyName": destinationKeyName,
-        // "destinationKeyName": this.foldername
+       "destinationKeyName": this.folder
 
       }
+      console.log("Copy",payload);
 
       this.auth.copyObject(payload).subscribe((res: any) => {
         Swal.fire(res['Result'])
         this.isLoading = false;
         this.dialogs.closeAll();
-        
+
       })
     } else {
       this.objKey = this.data.sourceKeyName.Key ? this.data.sourceKeyName.Key : this.data.sourceKeyName.Prefix;
@@ -128,15 +133,16 @@ export class ListobjectcopyComponent implements OnInit {
         "destinationBucket": this.data.destinationBucket,
         "sourceBucket": this.data.sourceBucket,
         "sourceKeyName": this.objKey,
-        "destinationKeyName": destinationKeyName,
+        "destinationKeyName":this.folder
 
       }
+      console.log("Move",payload);
 
       this.auth.moveObject(payload).subscribe((res: any) => {
         Swal.fire(res['Result'])
         this.isLoading = false;
         this.dialogs.closeAll();
-        
+
       })
     }
   }
@@ -170,13 +176,13 @@ export class ListobjectcopyComponent implements OnInit {
 
   showDetails(item: any) {
     this.breadcrumbData.push({
-            value: item,
+      value: item,
 
     });
-    
+
   }
 
-  
+
   navigateToCrumb(crumb: any) {
     // Find the index of the clicked breadcrumb
     const crumbIndex = this.breadcrumbData.findIndex(c => c === crumb);
@@ -186,14 +192,13 @@ export class ListobjectcopyComponent implements OnInit {
     // Set the corresponding data as the current data
 
     this.foldername = this.breadcrumbData.map(obj => obj.value).join("")
-
     this.folderObjectslist(this.foldername);
 
   }
 
-  
 
-  listbucket(){
+
+  listbucket() {
     this.dialogs.closeAll();
     this.dialogRef = this.dialogs.open(ObjectpopupComponent, {
       width: '420px',
@@ -203,7 +208,7 @@ export class ListobjectcopyComponent implements OnInit {
         bucket: this.data.sourceBucket,
         object: this.data.sourceKeyName
       }
-      
+
     })
 
 

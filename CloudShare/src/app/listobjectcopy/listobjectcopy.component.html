@@ -16,16 +16,17 @@
             <mat-icon class="clear" [mat-dialog-close]>clear</mat-icon>
           </div>
           <div class="crumb">
-            <span (click)="listbucket()" >S3Buckets >  </span>
-            <span (click)="ngOnInit()" >{{destinationBucket}}&nbsp; ></span>
+            <span (click)="listbucket()">Buckets > </span>
+            <span (click)="ngOnInit()">{{destinationBucket}}&nbsp; ></span>
             <label class="crumb" *ngFor="let crumbs of breadcrumbData; let last = last">
-              <span (click)="navigateToCrumb(crumbs)" >{{crumbs.value}}</span> 
+              <span (click)="navigateToCrumb(crumbs)">{{crumbs.value}}</span>
 
               <span *ngIf="!last"> >&nbsp; </span>
             </label>
-            
+
           </div>
         </mat-card>
+        
       </div>
     </div>
 
@@ -48,10 +49,9 @@
 
                   <td>
                     <div>
-                      <mat-radio-button (click)="onclick(item.Prefix)" class="example-radio-button"
-                        [disabled]="!item?.Prefix?.includes('/')">
+                      <mat-radio-button class="example-radio-button" [disabled]="!item?.Prefix?.includes('/')">
                         <label>
-                          <span (click)="showDetails(item.Prefix)" (click)="folderObjectslist(item.Prefix)">
+                          <span (click)="showDetails(item.Prefix);folderObjectslist(item.Prefix);onclick(item.Prefix)">
                             {{item.Prefix}}
                           </span>
                         </label>
@@ -84,10 +84,6 @@
               <span class="sr-only"></span>
             </div>
           </div>
-
-          <!-- <div *ngIf="!item.Prefix.includes('/')">
-            <h3 class="nofolder">Choose any folder</h3>
-          </div> -->
         </mat-card>
       </div>
 
@@ -95,42 +91,10 @@
     <div>
       <footer class="footer">
         <button class="canclebutton" mat-button [mat-dialog-close]>Cancel</button>
-        <button *ngIf="showCopyButton" mat-button class="copybutton" (click)="copyto()" [disabled]="disabledCopyButton"
-          [style.background-color]="disabledCopyButton ? 'white' : ' #0085FF'">Copy</button>
-        <button *ngIf="showMoveButton" mat-button class="copybutton" (click)="copyto()" [disabled]="disabledMoveButton"
-          [style.background-color]="disabledMoveButton ? 'white' : ' #0085FF'">Move</button>
+        <button *ngIf="showCopyButton" mat-button class="copybutton" (click)="copyto()">Copy</button>
+        <button *ngIf="showMoveButton" mat-button class="copybutton" (click)="copyto()">Move</button>
       </footer>
     </div>
 
-
   </ng-container>
 </div>
-
-
-
-
-<!-- <div>
-  <mat-radio-group >
-    <mat-radio-button class="example-radio-button" *ngFor="let item of objectlists" (dblclick)="folderObjectslist(item.Prefix )" >
-      {{item.Prefix}} 
-         </mat-radio-button>
-        <fieldset>   
-        <mat-radio-button [disabled]="true" name="test" class="example-radio-button" *ngFor="let item of objectlists" (dblclick)="folderObjectslist( item.Key)" >
-          {{item.Key}}
-        </mat-radio-button>
-      </fieldset>
-      </mat-radio-group>
-</div> -->
-<!-- <div>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Storage class</th>
-      <th>Size</th>
-      <th>Last modified</th>
-    </tr>
-    <tr>
-      <td type="radio">ht</td>
-    </tr>
-  </table>
-</div> -->
