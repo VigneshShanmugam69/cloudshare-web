@@ -1,0 +1,100 @@
+<div>
+  <ng-container>
+
+    <div>
+      <div>
+        <mat-card class="top">
+          <div class="topbutton">
+            <div>
+              <div>
+                <input (keyup)="filterObjects($event)" class="filter" placeholder="Search">
+                <div class="search">
+                  <mat-icon>search</mat-icon>
+                </div>
+              </div>
+            </div>
+            <mat-icon class="clear" [mat-dialog-close]>clear</mat-icon>
+          </div>
+          <div class="crumb">
+            <span (click)="listbucket()">Buckets > </span>
+            <span (click)="ngOnInit()">{{destinationBucket}}&nbsp; ></span>
+            <label class="crumb" *ngFor="let crumbs of breadcrumbData; let last = last">
+              <span (click)="navigateToCrumb(crumbs)">{{crumbs.value}}</span>
+
+              <span *ngIf="!last"> >&nbsp; </span>
+            </label>
+
+          </div>
+        </mat-card>
+        
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <mat-card class="centerdata">
+          <!-- <table mat-table [dataSource]="objectlists"> -->
+          <div class="tabledata" *ngIf="objectlists && !hideTable">
+            <table>
+              <thead>
+                <tr>
+                  <th class="name">Name</th>
+                  <th>Storage class</th>
+                  <th>Size</th>
+                  <th>Last modified</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of objectlists">
+                <tr>
+
+                  <td>
+                    <div>
+                      <mat-radio-button class="example-radio-button" [disabled]="!item?.Prefix?.includes('/')">
+                        <label>
+                          <span (click)="showDetails(item.Prefix);folderObjectslist(item.Prefix);onclick(item.Prefix)">
+                            {{item.Prefix}}
+                          </span>
+                        </label>
+
+                        <label>
+                          <span>
+                            {{item.Key}}
+                          </span>
+                        </label>
+                      </mat-radio-button>
+                    </div>
+                  </td>
+
+                  <td>{{item?.Prefix?.includes('/') ? '-':item.StorageClass}}</td>
+                  <td>{{item?.Prefix?.includes('/') ? '-':item.Size}} </td>
+                  <td>{{item?.Prefix?.includes('/') ? '-':item.LastModified}}</td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+          <div *ngIf="show">
+            <h3 class="nofolder">No matches ...</h3>
+          </div>
+          <div class="spinner">
+            <div class="spinner-border" role="status" *ngIf="isLoading">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+    <div>
+      <footer class="footer">
+        <button class="canclebutton" mat-button [mat-dialog-close]>Cancel</button>
+        <button *ngIf="showCopyButton" mat-button class="copybutton" (click)="copyto()">Copy</button>
+        <button *ngIf="showMoveButton" mat-button class="copybutton" (click)="copyto()">Move</button>
+      </footer>
+    </div>
+
+  </ng-container>
+</div>

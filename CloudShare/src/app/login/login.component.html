@@ -1,0 +1,42 @@
+<body class="background-color">
+    <div>
+        <form class="loginform" [formGroup]="loginform">
+            <div class="loginfield">
+                <div class="login-title">
+                    <span>Log in</span>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>User name</mat-label>
+                        <input formControlName="uname" matInput placeholder="Enter your user name">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password </mat-label>
+                        <input formControlName="passwd" [type]="showPassword ? 'text' : 'password'" matInput placeholder="Enter your password"
+                            [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button  matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
+                                <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                    </mat-form-field>
+
+                    <!-- <select formControlName="mode" class="form-select" aria-label="Default select example">
+                        <option selected>Select role</option>
+                        <option value="1">user</option>
+                        <option value="2">admin</option>
+                    </select> -->
+                </div>
+                <div>
+                    <button class="submit-button" (click)="submit()">submit</button>
+                </div>
+
+            </div>
+            <div>
+                <button class="okta-sign-button" *ngIf="!isAuthenticated" (click)="oktasign()">Sign in with
+                    OKTA</button>
+            </div>
+        </form>
+
+    </div>
+</body>
